@@ -3,7 +3,7 @@
 general:
   branches:
     only:
-      - ci_trial
+      - ci_deploy
 
 notify:
   webhooks:
