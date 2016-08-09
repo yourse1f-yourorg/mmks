@@ -4,6 +4,8 @@ const cukeFrmSubmit = '//form[@data-cuke="login"]';
 
 const urlLogout = 'http://localhost:3000/logout';
 const cukeLogin = '//x-cuke[@id="login"]';
+
+const cukeHrefLogin = '//a[@data-cuke="user-control-login"]';
 const cukeInpEmail = '//input[@data-cuke="email"]';
 const cukeInpPwd = '//input[@data-cuke="password"]';
 
@@ -41,6 +43,8 @@ module.exports = function () {
 
     server.call('_users.removeByEmail', 'jj@gmail.com');
 
+    browser.waitForVisible(cukeHrefLogin);
+    
   });
 
   this.When(/^I provide my email "([^"]*)" and password "([^"]*)"$/, function (_email, _pwd) {

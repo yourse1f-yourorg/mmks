@@ -117,7 +117,6 @@ module.exports = function () {
   // });
 
   this.Then(/^I see the message, "([^"]*)"\.$/, function (rude) {
-    let t = true;
     browser.waitUntil(function () {
       return browser.getText(cukeBadContent).length > 0;
     }, 5000, 'expected text to be there after 5s');
