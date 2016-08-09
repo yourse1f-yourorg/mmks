@@ -3,12 +3,12 @@
 var nodemailer = require('nodemailer');
 var mg = require('nodemailer-mailgun-transport');
 import _lgr from '/lib/logging/server/serverLogger';
-const Lgr = new _lgr( __filename, 'verbose' );
+const Lgr = new _lgr( __filename, 'info' );
 
 var auth = {
 /* eslint-disable camelcase   */
   auth: {
-    api_key: Meteor.settings.MAILGUN_KEY,
+    api_key: process.env.MAILGUN_KEY || Meteor.settings.MAILGUN_KEY,
     domain: Meteor.settings.MAILGUN_DOMAIN
   }
 /* eslint-enable camelcase   */

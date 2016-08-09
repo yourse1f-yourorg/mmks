@@ -169,11 +169,10 @@ module.exports = function () {
   });
 
   this.Then(/^I no longer see that user record\.$/, function () {
-    let t = true;
     browser.waitUntil(function () {
-      t = !t;
-      return t;
-    }, 2000, ' what the?');
+      console.log('still there?');
+      return !browser.isExisting(selector);
+    }, 10000, ' what the?');
     expect(browser.isExisting(selector) ? email : 'Gone').toBe('Gone');
 
   });
