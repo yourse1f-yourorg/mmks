@@ -172,7 +172,7 @@ module.exports = function () {
     browser.waitUntil(function () {
       console.log('still there?');
       return !browser.isExisting(selector);
-    }, 10000, ' what the?');
+    }, 10000, ' what the?', 2000);
     expect(browser.isExisting(selector) ? email : 'Gone').toBe('Gone');
 
   });
