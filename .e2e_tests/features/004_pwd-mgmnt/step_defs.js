@@ -69,9 +69,11 @@ module.exports = function () {
   this.Then(/^I see the confirmation: "([^"]*)"\.$/,
     function (_confirmation) {
 
+      console.log(' >>> isVisible ');
       browser.waitUntil(function () {
         return browser.isVisible('//h3[@class="box-title"]');
       }, 10000, 2000);
+      console.log(' isVisible >>> ');
 
       expect(browser.isVisible(cukeAlertGood) ? _confirmation : 'confirmation message')
                                           .toBe(_confirmation);
