@@ -70,16 +70,10 @@ module.exports = function () {
     function (_confirmation) {
 
       console.log(' >>> isVisible ');
-      let tst = -1;
-      browser.waitUntil(function () {
-        console.log(' stall ', !tst);
-        tst = !tst;
-        return tst;
-      }, 10000, 'done stalling', 2500);
       browser.waitUntil(function () {
         console.log(' try ... ');
         return browser.isVisible(cukeAlertGood);
-      }, 10000, 'done trying', 2500);
+      }, 90000, 'done trying', 2500);
       console.log(' isVisible >>> ');
 
       expect(browser.isVisible(cukeAlertGood) ? _confirmation : 'confirmation message')
