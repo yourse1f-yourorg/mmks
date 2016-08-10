@@ -71,8 +71,8 @@ module.exports = function () {
 
       console.log(' >>> isVisible ');
       browser.waitUntil(function () {
-        return browser.isVisible('//h3[@class="box-title"]');
-      }, 10000, 2000);
+        return browser.isVisible(cukeAlertGood);
+      }, 10000, 2500);
       console.log(' isVisible >>> ');
 
       expect(browser.isVisible(cukeAlertGood) ? _confirmation : 'confirmation message')

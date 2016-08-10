@@ -26,7 +26,7 @@ dependencies:
   pre:
     - mkdir -p ~/.meteor
     - if [ ! -e ${METEOR_CMD} ]; then curl https://install.meteor.com | /bin/sh 2>&1 | cat; fi
-    - if [ ! -e ${CHIMP_PATH} ]; then npm install -g chimp --no-progress;  fi
+    - if [ ! -d ${CHIMP_PATH} ]; then npm install -g chimp --no-progress;  fi
 
   override:
     - pwd
