@@ -44,7 +44,7 @@ module.exports = function () {
     server.call('_users.removeByEmail', 'jj@gmail.com');
 
     browser.waitForVisible(cukeHrefLogin);
-    
+
   });
 
   this.When(/^I provide my email "([^"]*)" and password "([^"]*)"$/, function (_email, _pwd) {

@@ -13,7 +13,8 @@ machine:
   environment:
     _JAVA_OPTIONS: "-Xms512m -Xmx1024m"
     METEOR_CMD: ${HOME}/.meteor/meteor 
-    CHIMP_PATH: ${HOME}/nvm/versions/node/v4.4.7/lib/node_modules/chimp
+    CHIMP_PATH: /opt/circleci/nodejs/v4.4.7/lib/node_modules/chimp
+
   node:
     version: 4.4.7
 
@@ -34,13 +35,13 @@ dependencies:
     - .workarounds/fix.sh
 
   post:
-    - date > meteor.log
-    - ${METEOR_CMD} --settings=settings.json >> meteor.log 2>&1 & :
+    - date > ${CIRCLE_ARTIFACTS}/meteor.log
+    - ${METEOR_CMD} --settings=settings.json >> ${CIRCLE_ARTIFACTS}/meteor.log 2>&1 & :
         background: true
 
 test:
   post:
-    - node --version; npm --version; java -version;
+    - node --version; npm --version; java -version; ${METEOR_CMD} --version;
     - sleep 3m
 #    - chimp .e2e_tests/chimp-config.js --browser=phantomjs --ddp=http://localhost:3000 --debug --path=.e2e_tests
     - chimp .e2e_tests/chimp-config.js --ddp=http://localhost:3000 --path=.e2e_tests
