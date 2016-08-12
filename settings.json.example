@@ -2,6 +2,8 @@
   "HOST_URI": "localhost:3000",
   "MAILGUN_DOMAIN": "yourpublic.work",
   "MAILGUN_KEY": "(As if I'm gonna to leave THAT lying around.)  A valid key has 36 characters and begins with 'key-'.",
+  "LOGGLY_SUBDOMAIN": "yourwork",
+  "LOGGLY_TOKEN": " ( not this either ) ",
   "public": {
     "PASSWORD_RESET": {
       "Route": "/prrq/",
@@ -11,8 +13,6 @@
       "Text_2": " in order to reset your password.",
       "Subject": "Your Mantra Kickstarter password reset request",
       "From": "yourself@yourpublic.work"
-    },
-  },
-  "LOGGLY_SUBDOMAIN": "yourwork",
-  "LOGGLY_TOKEN": " ( not this either ) "
+    }
+  }
 }
