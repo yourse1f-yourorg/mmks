@@ -27,6 +27,7 @@
     "eslint": "^3.2.2",
     "eslint-plugin-react": "^6.0.0",
     "mocha": "3.0.2",
+    "mup": "^1.0.2",
     "react-addons-test-utils": "~15.3.0",
     "sinon": "1.17.x",
     "jsdom": "9.x.x",
