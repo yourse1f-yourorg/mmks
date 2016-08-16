@@ -1,0 +1,5 @@
+export HOST_SERVER_NAME=yourhost.yourpublic.work
+export REPO_PROJECT_NAME=mmks
+export HOST_USER_NAME=mup
+export MUP_CMD=../node_modules/mup/index.js
+export PURGE_AND_RECREATE=true
