@@ -51,3 +51,10 @@ test:
 #    - chimp .e2e_tests/chimp-config.js --ddp=http://localhost:3000 --path=.e2e_tests
     - ${CHIMP_CMD} .e2e_tests/chimp-config.js --ddp=http://localhost:3000 --path=.e2e_tests
 
+deployment:
+  staging:
+    branch: ci_deploy
+    commands:
+      - ./deploy/staging.sh
+
+#  
