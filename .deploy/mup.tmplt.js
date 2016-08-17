@@ -23,9 +23,8 @@ module.exports = {
       PORT: 80,
       ROOT_URL: 'http://${HOST_SERVER_NAME}',
       MONGO_URL: 'mongodb://localhost:27017/${REPO_PROJECT_NAME}',
-      LOGGLY_TOKEN: '78472f82-5dc9-4537-bee8-9399c1b5d82e',
-      MAILGUN_KEY: 'key-a853f54d456d70ff0f8ccb8b2b250f92',
-      VARS_TEST_VAR: '${CIRCLE_PROJECT_USERNAME}'
+      LOGGLY_TOKEN: '${LOGGLY_TOKEN}',
+      MAILGUN_KEY: '${MAILGUN_KEY}'
 
     },
 

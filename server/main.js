@@ -5,10 +5,6 @@ import { initPosts, initAccessPoints } from './configs/initial_adds.js';
 
 Meteor.startup(function () {
 
-  console.log( '||||||||||||||||||||||||||||||||||||||||||||||||||||||| ' );
-  console.log( ' settings', process.env );
-  console.log( '_______________________________________________________ ' );
-
   if ( process.env.LOGGLY_TOKEN &&
        process.env.LOGGLY_TOKEN.length &&
        process.env.LOGGLY_TOKEN.length === 36 ) {
