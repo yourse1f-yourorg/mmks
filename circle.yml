@@ -57,5 +57,7 @@ deployment:
   staging:
     branch: ci_deploy
     commands:
+      - ls -l
+      - ls -l ./deploy
       - ./deploy/ci_deploy.sh
  
