@@ -1,7 +1,12 @@
 #!/bin/bash
 #
-echo ">>>>>>>>>>>>>>> staging.sh <<<<<<<<<<<<<<<";
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+pushd ${DIR} > /dev/null;
+
+echo "IN  : >>>>>>>>>>>>>>> staging.sh <<<<<<<<<<<<<<<";
 echo -e " * * * Begin deploying ${REPO_PROJECT_NAME} to ${HOST_SERVER_NAME}."
+
 
 if [[ -f .profile_staging ]]; then source .profile_staging; fi;
 
@@ -32,3 +37,6 @@ rm -f mup.js
 rm -f postSetup.sh
 
 echo -e " * * * Done deploying ${REPO_PROJECT_NAME} to ${HOST_SERVER_NAME}."
+
+echo "OUT : >>>>>>>>>>>>>>> staging.sh <<<<<<<<<<<<<<<";
+popd > /dev/null
