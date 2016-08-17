@@ -1,10 +1,9 @@
 #!/bin/bash
 #
 
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-pushd ${DIR} > /dev/null;
+pushd `dirname $0` > /dev/null
 
-echo "IN  : >>>>>>>>>>>>>>> staging.sh <<<<<<<<<<<<<<<";
+echo "IN  : >>>>>>>>>>>>>>> ci_deploy.sh <<<<<<<<<<<<<<<";
 echo -e " * * * Begin deploying ${REPO_PROJECT_NAME} to ${HOST_SERVER_NAME}."
 
 
@@ -38,5 +37,5 @@ rm -f postSetup.sh
 
 echo -e " * * * Done deploying ${REPO_PROJECT_NAME} to ${HOST_SERVER_NAME}."
 
-echo "OUT : >>>>>>>>>>>>>>> staging.sh <<<<<<<<<<<<<<<";
+echo "OUT : >>>>>>>>>>>>>>> ci_deploy.sh <<<<<<<<<<<<<<<";
 popd > /dev/null
