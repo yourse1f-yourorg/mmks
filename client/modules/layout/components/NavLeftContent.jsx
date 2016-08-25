@@ -32,6 +32,7 @@ export default class extends React.Component {
     linksAccounts.push({ url: '/Logout', name: 'Logout', enabled: true } );
     linksAccounts.push({ url: '/account', name: 'Account', enabled: true } );
     linksAccounts.push({ url: '/profile', name: 'Profile', enabled: true } );
+    linksAccounts.push({ url: '/mobile', name: 'Mobile Apps', enabled: true } );
 
     var linksColors = [];
     linksColors.push({ url: '/colors', name: '/colors', enabled: true } );
