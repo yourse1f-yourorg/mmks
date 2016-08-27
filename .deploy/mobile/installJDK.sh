@@ -1,10 +1,10 @@
-#!/bin/bash
+#!/usr/bin/env bash
 #
 
 export PWD="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )";
 pushd ${PWD};
 
-source ./util.sh;
+source ../utils.sh;
 
 function getWebupd8_PPA() {
 
