@@ -12,6 +12,7 @@ isMissing KEYSTORE_PWD;
 isMissing ANDROID_PLACE "${HOME}/.android";
 isMissing ANDROID_SDK "android-sdk-linux";
 isMissing HOST_SERVER_NAME;
+isMissing ZIPALIGN_BOUNDARY;
 
 areMissing  "\n* * * Suggested values were inferred. They will have to be manually appended to '${HOME}/.profile'.";
 
@@ -24,6 +25,12 @@ areMissing  "\n* * * Suggested values were inferred. They will have to be manual
 # exit;
 export JQ=$(jq --version 2>/dev/null);
 if [ ${#JQ} -lt 1 ]; then echo -e "\n\n* * * You need to run: \n\n     sudo apt install -y jq \n\n"; exit; fi;
+
+export STDC6=$(dpkg -s  lib32stdc++6 | grep "Status:" | grep -c "ok installed");
+if [ ${STDC6} -lt 1 ]; then echo -e "\n\n* * * You need to run: \n\n     sudo apt install -y lib32stdc++6 \n\n"; exit; fi;
+
+export Z1=$(dpkg -s lib32z1 | grep "Status:" | grep -c "ok installed")
+if [ ${Z1} -lt 1 ]; then echo -e "\n\n* * * You need to run: \n\n     sudo apt install -y lib32z1 \n\n"; exit; fi;
 
 export ORCL_JDK=$(java -version 2>&1 | grep -ic hotspot);
 if [ ${ORCL_JDK} -lt 1 ]; then echo -e "\n\n* * * You need to run: \n\n   $(pwd)/installJDK.sh \n\n"; exit; fi;

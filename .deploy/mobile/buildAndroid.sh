@@ -15,29 +15,24 @@ export ANDROID_HOME=${ANDROID_PLACE}/${ANDROID_SDK};
 # echo ${ANDROID_HOME};
 export BUILD_DIRECTORY="${HOME}/${PARENT_DIR}/${PROJECT_NAME}";
 # echo ${BUILD_DIRECTORY};
-export ZIPALIGN_PATH=${ANDROID_HOME}/build-tools/23.0.1
+export ZIPALIGN_PATH=${ANDROID_HOME}/build-tools/23.0.3
 # echo ${ZIPALIGN_PATH};
 
 
 if [[ ${CIRCLECI} ]]; then
   echo -e "We are running in a CircleCI virtual machine";
+#  echo -e "   * * * WARNING THIS IS SUPPOSED TO BE TEMPORARY  * * * ";
 else
   echo -e "Preparing CircleCI with environment variables . . . ";
   source ../pushDeploySecretsToCircleCI.sh;
   echo -e ". . . environment variables uploaded to CircleCI";
 fi;
-exit;
-
 
 source ./android/AutomatedDeployment_functions.sh;
-exit;
 
-if [ "${RUN_RULE}" != "n" ]; then PrepareAndroidSDK_B; fi;
-if [ "${RUN_RULE}" != "n" ]; then BuildAndroidAPK_A; fi;
-
-
-popd
-if [ "${RUN_RULE}" != "n" ]; then BuildAndroidAPK_B; fi;
+if [ "${RUN_RULE}" != "n" ]; then PrepareAndroidSDK; fi;
+if [ "${RUN_RULE}" != "n" ]; then PrepareToBuildAndroidAPK; fi;
+if [ "${RUN_RULE}" != "n" ]; then BuildAndroidAPK; fi;
 
 export RUN_RULE="n";
 if [ "${RUN_RULE}" != "n" ]; then DeployToMeteorServers; fi;
