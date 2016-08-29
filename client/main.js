@@ -9,6 +9,7 @@ import _usersModule from './modules/_users';
 import _colorsModule from './modules/_colors';
 
 import _layoutModule from './modules/layout';
+import mobileModule from './modules/mobile';
 
 // import logging from '/lib/log_control';
 
@@ -19,6 +20,7 @@ const context = initContext();
 const app = createApp(context);
 app.loadModule(coreModule);
 app.loadModule(commentsModule);
+app.loadModule(mobileModule);
 app.loadModule(_usersModule);
 app.loadModule(_colorsModule);
 app.loadModule(_layoutModule);

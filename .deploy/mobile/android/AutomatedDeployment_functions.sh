@@ -128,7 +128,7 @@ function BuildAndroidAPK_A() {
   checkKeyToolPassword;
 
   echo "### Configuration for your '"${PROJECT_NAME}"' project is :"
-  echo "   ~                                      Target Server is  : " ${TARGET_SERVER_URL}
+  echo "   ~                                      Target Server is  : " ${HOST_SERVER_NAME}
   echo "   ~ Align android-sdk bundle on "$ZIPALIGN_BOUNDARY"-byte boundary when using : " $ZIPALIGN_PATH//zipalign
   echo "   ~                              Temporary build directory : " ${TMP_DIRECTORY}
   echo "### ~   ~   ~    "
@@ -180,12 +180,12 @@ function BuildAndroidAPK_B() {
 
   pushd ${BUILD_DIRECTORY} >/dev/null;
 
-    echo -e "Building project : meteor build ${TARGET_DIRECTORY}         --server=${TARGET_SERVER_URL};\n\n\n";
-    meteor build ${TARGET_DIRECTORY}         --server=${TARGET_SERVER_URL};
-    echo "Built project : ${BUILD_DIRECTORY} in ${TARGET_DIRECTORY} for server ${TARGET_SERVER_URL}";
+    echo -e "Building project : meteor build ${TARGET_DIRECTORY}         --server=${HOST_SERVER_NAME};\n\n\n";
+    meteor build ${TARGET_DIRECTORY}         --server=${HOST_SERVER_NAME};
+    echo "Built project : ${BUILD_DIRECTORY} in ${TARGET_DIRECTORY} for server ${HOST_SERVER_NAME}";
     mv ${TARGET_DIRECTORY}/android/release-unsigned.apk ${TARGET_DIRECTORY}/android/${PROJECT_NAME}_unaligned.apk
     echo "Stashed plain version.";
-    meteor build ${TARGET_DIRECTORY} --debug --server=${TARGET_SERVER_URL}
+    meteor build ${TARGET_DIRECTORY} --debug --server=${HOST_SERVER_NAME}
     echo "Built debug version.";
 
   popd >/dev/null;
@@ -429,7 +429,7 @@ function PrepareCIwithAndroidBuilder() {
 }
 
 
-export TARGET_SERVER_PHRASE="    TARGET_SERVER_URL: \${CIRCLE_PROJECT_REPONAME}-\${CIRCLE_PROJECT_USERNAME}.meteor.com";
+export TARGET_SERVER_PHRASE="    HOST_SERVER_NAME: \${CIRCLE_PROJECT_REPONAME}-\${CIRCLE_PROJECT_USERNAME}.meteor.com";
 export METEOR_DEPLOY_SCRIPT="deploy-to-server.sh";
 export DPLY_CMNT="      # Deploying to meteor.com";
 export  DPLY_CMD="      - source .\/tools\/meteor\/deploy-to-server.sh \&\& DeployToMeteorServer";

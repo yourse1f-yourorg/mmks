@@ -11,7 +11,7 @@ source ${ENV_FILE};
 isMissing KEYSTORE_PWD;
 isMissing ANDROID_PLACE "${HOME}/.android";
 isMissing ANDROID_SDK "android-sdk-linux";
-isMissing TARGET_SERVER_URL;
+isMissing HOST_SERVER_NAME;
 
 areMissing  "\n* * * Suggested values were inferred. They will have to be manually appended to '${HOME}/.profile'.";
 

@@ -40,6 +40,6 @@ pushEnvVarToCircleCI TMP_DIRECTORY;
 pushEnvVarToCircleCI GITHUB_ORGANIZATION_NAME;
 pushEnvVarToCircleCI ANDROID_PLACE;
 pushEnvVarToCircleCI ANDROID_SDK;
-pushEnvVarToCircleCI TARGET_SERVER_URL;
+pushEnvVarToCircleCI HOST_SERVER_NAME;
 pushEnvVarToCircleCI KEYSTORE_PWD;
 
