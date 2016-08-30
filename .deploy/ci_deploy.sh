@@ -29,7 +29,8 @@ fi;
 
 echo -e "     * Deploy the ${REPO_PROJECT_NAME} to the host ${HOST_SERVER_NAME} using 'mup deploy'";
 export PATH=${HOME}/.meteor:${PATH};
-DEBUG=* ${MUP_CMD} deploy --settings=../settings.json;
+# DEBUG=* ${MUP_CMD} deploy --settings=../settings.json;
+${MUP_CMD} deploy --settings=../settings.json;
 
 echo -e "     * Cleaning up.";
 rm -f preClean.sh
