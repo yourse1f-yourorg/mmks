@@ -27,10 +27,10 @@ if [  "${PURGE_AND_RECREATE}" == "true" ]; then
 
 fi;
 
-echo -e "     * Deploy the ${REPO_PROJECT_NAME} to the host ${HOST_SERVER_NAME} using 'mup deploy'";
+echo -e "     * Deploy ${REPO_PROJECT_NAME} to the host ${HOST_SERVER_NAME} using 'mup deploy'";
 export PATH=${HOME}/.meteor:${PATH};
 # DEBUG=* ${MUP_CMD} deploy --settings=../settings.json;
-${MUP_CMD} deploy --settings=../settings.json;
+${MUP_CMD} deploy --settings=../settings.json > ${CIRCLE_ARTIFACTS}/mup_deployment.log;
 
 echo -e "     * Cleaning up.";
 rm -f preClean.sh
