@@ -21,6 +21,7 @@ function refreshApt()
 	sudo apt-get -y autoremove;
 
 	sudo apt-get -y install curl git;
+  sudo apt-get -y install build-essential g++;
 
 	touch ${FLAG};
   echo "### APT Updated";
@@ -79,20 +80,24 @@ function installChimp()
 
 function installMeteor()
 {
-#  declare METEORVERSION=$(meteor --version 2>&1 >/dev/null) >/dev/null;
-  declare METEORVERSION=$(meteor --version );
-  if [[ "${METEORVERSION#*$NOCOMMAND}" != "$METEORVERSION" ]]; then
+  local INSTALL_METEOR="yes";
+  if [[ -d "${HOME}/.meteor/packages/meteor-tool" ]]; then
+	  declare METEORVERSION=$(meteor --version  2>&1);
+	  if [[ "${METEORVERSION#*$NOCOMMAND}" == "$METEORVERSION" ]]; then
+      INSTALL_METEOR="no";
+	  fi
+  fi
 
+  if [[ "${INSTALL_METEOR}" == "yes" ]]; then
     echo "### Installing Meteor";
     curl https://install.meteor.com/ | sh;
-    echo " The 'meteor-tool' installation sometimes hangs up.  Give it 10 minutes or so, then cancel and retry ...";
-
   fi
+
   echo "### Meteor Installed";
   meteor --version;
 
   echo "### Installing npm packages for Meteor";
-  npm -y install;
+  meteor npm -y install;
 
 }
 
@@ -101,3 +106,12 @@ installJava;
 installNodeJs;
 installChimp;
 installMeteor;
+
+echo -e "
+
+  Next steps :
+     1) cp settings.json.example settings.json
+     2) # Correctly configure 'settings.json'
+     3) meteor --settings=settings.json
+     ";
+
