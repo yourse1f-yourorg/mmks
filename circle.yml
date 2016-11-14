@@ -3,7 +3,7 @@
 general:
   branches:
     only:
-      - ci_deploy
+      - apollo
 
 notify:
   webhooks:
@@ -12,7 +12,7 @@ notify:
 machine:
   environment:
     _JAVA_OPTIONS: "-Xms512m -Xmx1024m"
-    METEOR_CMD: ${HOME}/.meteor/meteor 
+    METEOR_CMD: ${HOME}/.meteor/meteor
     CHIMP_PATH: ./node_modules/.bin/
     CHIMP_CMD: ./node_modules/.bin/chimp
 
