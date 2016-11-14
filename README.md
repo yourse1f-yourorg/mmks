@@ -78,3 +78,5 @@ The goal is to bring some simple yet valuable to most apps features:
 
 ☐  scripts to assist working with Android and iPhone
 
+-----
+
