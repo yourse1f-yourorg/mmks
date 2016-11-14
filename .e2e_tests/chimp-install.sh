@@ -7,7 +7,7 @@ function refreshApt()
 {
   if [[ -f ${FLAG} ]]; then
     declare -i LAPSE=$(expr $(date +%s) - $(date +%s -r /tmp/updatedApt ));
-    if (( LAPSE < 90000 )); then 
+    if (( LAPSE < 90000 )); then
       echo "### APT is up to date.";
       return;
     fi;
@@ -19,9 +19,9 @@ function refreshApt()
 	sudo apt-get -y dist-upgrade && \
 	sudo apt-get -y clean && \
 	sudo apt-get -y autoremove;
-	
+
 	sudo apt-get -y install curl git;
-	
+
 	touch ${FLAG};
   echo "### APT Updated";
 }
@@ -49,10 +49,10 @@ function installNodeJs()
     curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
     sudo apt-get install -y nodejs;
 
-    
+
   fi
 
-  mkdir -p ~/.npm-global; 
+  mkdir -p ~/.npm-global;
   ADD2PROFILE=$(cat ~/.profile | grep -c ".npm-global");
   if [[ "${ADD2PROFILE}" -lt "1" ]]; then
      echo -e "export PATH=~/.npm-global/bin:\$PATH\n" >> ~/.profile
@@ -79,7 +79,8 @@ function installChimp()
 
 function installMeteor()
 {
-  declare METEORVERSION=$(meteor --version 2>&1 >/dev/null) >/dev/null;
+#  declare METEORVERSION=$(meteor --version 2>&1 >/dev/null) >/dev/null;
+  declare METEORVERSION=$(meteor --version );
   if [[ "${METEORVERSION#*$NOCOMMAND}" != "$METEORVERSION" ]]; then
 
     echo "### Installing Meteor";
