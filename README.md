@@ -7,6 +7,9 @@ Please make sure you read [Mantra Specification](https://kadirahq.github.io/mant
 
 [![CircleCI](https://circleci.com/gh/yourse1f-yourorg/mmks/tree/apollo.svg?style=svg)](https://circleci.com/gh/yourse1f-yourorg/mmks/tree/apollo)  [![Dependency Status](https://david-dm.org/yourse1f-yourorg/mmks/apollo/status.svg)](https://david-dm.org/yourse1f-yourorg/mmks/apollo)  [![devDependency Status](https://david-dm.org/yourse1f-yourorg/mmks/apollo/dev-status.svg)](https://david-dm.org/yourse1f-yourorg/mmks/apollo?type=dev)  [![Join the chat at https://gitter.im/meteor-mantra-kickstarter/MeteorMantraKickStarter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/meteor-mantra-kickstarter/MeteorMantraKickStarter)  [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 
+
+[![Code Climate](https://codeclimate.com/github/yourse1f-yourorg/mmks/badges/gpa.svg)](https://codeclimate.com/github/yourse1f-yourorg/mmks)
+
 ### Features
 
 * follows mantra feature specific modules approach, if interested please join an [ongoing discussion here](https://github.com/kadirahq/mantra/issues/3)
