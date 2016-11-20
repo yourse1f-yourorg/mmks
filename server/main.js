@@ -36,4 +36,3 @@ methods();
 initPosts();
 initAccessPoints();
 addInitialUsers();
-
