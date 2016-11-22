@@ -1,4 +1,3 @@
-// import ColorSingle from '../components/ColorsSingle/index.jsx';
 import {useDeps} from 'react-simple-di';
 import {composeAll} from 'react-komposer';
 import composeWithTracker from '../../../../../lib/compose-with-tracker.js';

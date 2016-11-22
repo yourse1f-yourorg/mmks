@@ -30,17 +30,17 @@ export default class extends React.Component {
 
   render() {
 
-    // console.log( 'color component _form.jsx', this.props );
+    // console.log( 'widget component _form.jsx', this.props );
     const {record, exception} = this.props;
 
-    const ctx = {poolParty: { age: 21 }};
-    const Age = t.refinement(t.Number, (n) => n >= ctx.poolParty.age);
-    Age.getValidationErrorMessage = (value, path, context) =>
-         'Nope. ' + value + ' is too young, Pool Party Age : ' + context.poolParty.age;
+    const ctx = {someWidget: { size: 21 }};
+    const Size = t.refinement(t.Number, (n) => n >= ctx.someWidget.size);
+    Size.getValidationErrorMessage = (value, path, context) =>
+         'Nope. ' + value + ' is too small, Bronze Minimum : ' + context.someWidget.size;
 
     const formModel = t.struct({
       title: t.String,
-      age: Age,
+      size: Size,
       content: t.maybe(t.String)
     });
 
@@ -58,9 +58,9 @@ export default class extends React.Component {
             'data-cuke': 'title'
           }
         },
-        age: {
+        size: {
           attrs: {
-            'data-cuke': 'age'
+            'data-cuke': 'size'
           }
         },
         content: {

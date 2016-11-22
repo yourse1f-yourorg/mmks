@@ -7,6 +7,7 @@ import commentsModule from './modules/comments';
 
 import _usersModule from './modules/_users';
 import _colorsModule from './modules/_colors';
+import _widgetsModule from './modules/_widgets';
 
 import _layoutModule from './modules/layout';
 
@@ -21,6 +22,7 @@ app.loadModule(coreModule);
 app.loadModule(commentsModule);
 app.loadModule(_usersModule);
 app.loadModule(_colorsModule);
+app.loadModule(_widgetsModule);
 app.loadModule(_layoutModule);
 // app.loadModule(logging);
 

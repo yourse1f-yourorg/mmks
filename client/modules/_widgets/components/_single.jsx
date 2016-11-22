@@ -15,27 +15,29 @@ export default class extends React.Component {
     const { _id, record, permissions } = this.props;
     // console.log('  props ', this.props);
 
-    const enableColorsUpdate = permissions['colors:update'];
-    const enableColorsDelete = permissions['colors:delete'];
+    const enableWidgetsUpdate = permissions['widgets:update'];
+    const enableWidgetsDelete = permissions['widgets:delete'];
 
 
-    Lgr.verbose(`enableColorsAdd permitted? : ${enableColorsUpdate}`);
-    Lgr.verbose(`enableColorsDelete permitted? : ${enableColorsDelete}`);
+    Lgr.verbose(`enableWidgetsAdd permitted? : ${enableWidgetsUpdate}`);
+    Lgr.verbose(`enableWidgetsDelete permitted? : ${enableWidgetsDelete}`);
 
-    let editAllowed = `btn btn-large ${enableColorsUpdate ? 'enabled' : 'disabled'}`;
-    let deleteAllowed = `btn btn-large ${enableColorsDelete ? 'enabled' : 'disabled'}`;
+    let editAllowed = `btn btn-large ${enableWidgetsUpdate ? 'enabled' : 'disabled'}`;
+    let deleteAllowed = `btn btn-large ${enableWidgetsDelete ? 'enabled' : 'disabled'}`;
 
     return (
       <div>
         {record.saving ? <p>Saving...</p> : null}
         <h2><x-cuke id="title">{record.title}</x-cuke></h2>
         <p>
-          <x-cuke id="age">{record.age} {record.age === 1 ? 'year' : 'years'} old.</x-cuke>
+          <x-cuke id="size">
+            {record.size} {record.size === 1 ? 'millimetre' : 'millimetres'}.
+          </x-cuke>
         </p>
         <p>
           <x-cuke id="content">{record.content}</x-cuke>
           <br />
-          <a data-cuke='edit-item' href={'/colors/' + _id + '/edit'}
+          <a data-cuke='edit-item' href={'/widgets/' + _id + '/edit'}
                                                         className={ editAllowed }>
             edit
           </a>
@@ -47,5 +49,6 @@ export default class extends React.Component {
         </p>
       </div>
     );
+
   }
 }
