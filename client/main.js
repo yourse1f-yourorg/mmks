@@ -11,7 +11,7 @@ import _widgetsModule from './modules/_widgets';
 
 import _layoutModule from './modules/layout';
 
-// import logging from '/lib/log_control';
+import { Client as Widget } from 'mmks_widget';
 
 // init context
 const context = initContext();
@@ -24,6 +24,6 @@ app.loadModule(_usersModule);
 app.loadModule(_colorsModule);
 app.loadModule(_widgetsModule);
 app.loadModule(_layoutModule);
-// app.loadModule(logging);
+app.loadModule(Widget);
 
 app.init();

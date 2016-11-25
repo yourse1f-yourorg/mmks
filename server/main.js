@@ -3,6 +3,7 @@ import methods from './methods';
 import addInitialUsers from './configs/initial_users.js';
 import { initPosts, initColors, initWidgets } from './configs/initial_adds.js';
 
+
 Meteor.startup(function () {
 
 //  console.log( ' settings', process.env );
@@ -37,3 +38,4 @@ initPosts();
 initColors();
 initWidgets();
 addInitialUsers();
+

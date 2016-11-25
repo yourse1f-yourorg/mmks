@@ -1,6 +1,7 @@
-import {Widgets} from '../../lib/collections';
-import {Meteor} from 'meteor/meteor';
-import {check} from 'meteor/check';
+/*
+import { Widgets } from '../../lib/collections';
+import { Meteor } from 'meteor/meteor';
+import { check } from 'meteor/check';
 
 export default function () {
   Meteor.publish('_widgets.list', function () {
@@ -23,3 +24,4 @@ export default function () {
     return response;
   });
 }
+*/
