@@ -36,7 +36,7 @@ dependencies:
     - pwd
     - cp settings.json.example settings.json
     - ${METEOR_CMD} npm install
-    - .workarounds/fix.sh
+    - .pkgs/install_local_packages.sh
 
   post:
     - date > ${CIRCLE_ARTIFACTS}/meteor.log
@@ -46,7 +46,7 @@ dependencies:
 test:
   post:
     - node --version; npm --version; java -version; ${METEOR_CMD} --version;
-    - sleep 3m
+    - sleep 4m
 #    - chimp .e2e_tests/chimp-config.js --ddp=http://localhost:3000 --path=.e2e_tests
     - ${CHIMP_CMD} .e2e_tests/chimp-config.js --ddp=http://localhost:3000 --path=.e2e_tests
 
