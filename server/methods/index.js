@@ -14,11 +14,10 @@ import _lgr from '/lib/logging/server/serverLogger';
 
 const ctx = { AccessControl, App, Meteor, check, _lgr };
 
-/* eslint-disable no-console   */
-console.log('........ Methods .........');
-console.log(mthdsWidget);
+// console.log('........ Methods .........');
+// console.log(mthdsWidget);
 let _widgets = mthdsWidget.new(Widgets, _Widgets, ctx);
-console.log('-------- Methods ----------');
+// console.log('-------- Methods ----------');
 
 export default function () {
   posts();

@@ -2,12 +2,20 @@ import React from 'react';
 
 import dataComposer from '../composers/sidebar.jsx';
 import Component from '../components/_sidebar.jsx';
-const Container = dataComposer(Component);
+
+import authComposer from '/client/access_control/acComposer';
+
+// let Container = class extends React.Component { render() { return ( <div></div> ); } };
+let Container = function dummy() { return <div></div>; };
 
 export default class extends React.Component {
 
   constructor(props) {
     super(props);
+    console.log('......... containers/sidebar ........');
+    console.log(authComposer);
+    console.log('.....................................');
+    Container = dataComposer(Component, authComposer);
   }
 
   render() {

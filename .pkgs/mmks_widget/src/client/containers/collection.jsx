@@ -1,11 +1,11 @@
 import React from 'react';
 
-import Sidebar from '../containers/sidebar.jsx';
+import Sidebar from '../containers/sidebar.js';
 
 
 
-import dataComposer from '../composers/collection.jsx';
-import Component from '../components/_collection.jsx';
+import dataComposer from '../composers/collection.js';
+import Component from '../components/_collection.js';
 const Container = dataComposer(Component);
 
 export default class extends React.Component {

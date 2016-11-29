@@ -1,14 +1,14 @@
 /* eslint-disable no-console   */
 function init( _clsWidgets, _dbWidgets, _context) {
   let { AccessControl, App, Meteor, check, _lgr } = _context;
-  console.log('MMKS Widget :: server/methods/init.js');
+  // console.log('MMKS Widget :: server/methods/init.js');
 
   const Lgr = new _lgr( __filename, 'warn' );
 
   const module = 'widgets';
 
   return function () {
-    console.log('MMKS Widget :: server/methods/init.js  RETURNED');
+    // console.log('MMKS Widget :: server/methods/init.js  RETURNED');
     Meteor.methods({
 
       '_widgets.add'(data, _id) {
@@ -125,7 +125,6 @@ function init( _clsWidgets, _dbWidgets, _context) {
         return result;
       }
     });
-    console.log('MMKS Widget :: server/methods/init.js  FUNCTION');
   };
 }
 

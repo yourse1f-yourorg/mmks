@@ -1,17 +1,25 @@
 import React from 'react';
 
-import Sidebar from '../containers/sidebar.jsx';
+import Sidebar from '../containers/sidebar.js';
 
-import Authorized from '/client/access_control/acContainer.js';
+import { Authorized } from '../index';
+// import Authorized from '/client/access_control/acContainer.js';
 
-import dataComposer from '../composers/add.jsx';
-import Component from '../components/_form.jsx';
+import dataComposer from '../composers/add.js';
+import Component from '../components/_form.js';
+
 const Container = dataComposer(Component);
+console.log('......... client/container/add .............');
+console.log(Component);
+console.log('.....................................');
 
 export default class extends React.Component {
 
   render() {
 
+    console.log('......... client/container/add .............');
+    console.log(Container);
+    console.log('.................>  <....................');
     const apAdd = {module: 'widgets', action: 'add'};
     const accPnts = [ apAdd ];
 //    console.log(' ad cont - -   apAdd : ', apAdd);

@@ -27,18 +27,28 @@ export default function (injectDeps, {FlowRouter}) {
   FlowRouter.route('/colors/add', {
     name: '_colors.colorsAdd',
     action() {
+      console.log('........ colors/routes - add ....I...');
+      console.log( LayoutDefaultCtx );
+      console.log('................................');
+      console.log( ColorsAdd );
       mount(LayoutDefaultCtx, {
         content: () => (<ColorsAdd />)
       });
+      console.log('........ colors/routes - add ....O....');
     }
   });
 
   FlowRouter.route('/colors/:_id', {
     name: '_colors.colorsView',
     action({_id}) {
+      console.log('........ colors/routes - view ....I...');
+      console.log( LayoutDefaultCtx );
+      console.log('................................');
+      console.log( ColorsView );
       mount(LayoutDefaultCtx, {
         content: () => (<ColorsView _id={_id}/>)
       });
+      console.log('........ colors/routes - view ....O....');
     }
   });
 

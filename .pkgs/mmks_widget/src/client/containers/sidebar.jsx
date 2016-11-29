@@ -1,14 +1,23 @@
 import React from 'react';
 
-import dataComposer from '../composers/sidebar.jsx';
-import Component from '../components/_sidebar.jsx';
-const Container = dataComposer(Component);
+import dataComposer from '../composers/sidebar.js';
+import Component from '../components/_sidebar.js';
+
+import Utils from '../../utils';
+
+let Container = function dummy() { return <div></div>; };
 
 export default class extends React.Component {
 
+  /* eslint-disable no-console */
   constructor(props) {
     super(props);
+    console.log('......... containers/sidebar ........');
+    console.log(Utils.AccessControlComposer);
+    console.log('.....................................');
+    Container = dataComposer(Component, Utils.AccessControlComposer);
   }
+  /* eslint-enable no-console */
 
   render() {
 

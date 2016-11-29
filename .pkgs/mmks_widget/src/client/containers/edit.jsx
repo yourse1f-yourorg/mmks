@@ -1,11 +1,12 @@
 import React from 'react';
 
-import Sidebar from '../containers/sidebar.jsx';
+import Sidebar from '../containers/sidebar.js';
 
-import Authorized from '/client/access_control/acContainer.js';
+import { Authorized } from '../index';
+// import Authorized from '/client/access_control/acContainer.js';
 
-import dataComposer from '../composers/edit.jsx';
-import Component from '../components/_form.jsx';
+import dataComposer from '../composers/edit.js';
+import Component from '../components/_form.js';
 const Container = dataComposer(Component);
 
 export default class extends React.Component {

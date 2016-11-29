@@ -1,18 +1,20 @@
 import React from 'react';
+import { Utils } from '../index';
 
-import _lgr from '/lib/logging/client/clientLogger.js';
-const Lgr = new _lgr(__filename, 'info', true);
+let Lgr = null;
+
+// import _lgr from '/lib/logging/client/clientLogger.js';
+// const Lgr = new _lgr(__filename, 'info', true);
 
 export default class extends React.Component {
 
   constructor(props) {
     super(props);
+    Lgr = new Utils.Logger(__filename, 'info', true);
   }
 
   render() {
     Lgr.a = 'render ';
-
-    // console.log( ' side bar component : permissions ', this.props.permissions );
 
     const enableWidgetsAdd = this.props.permissions['widgets:add'];
 

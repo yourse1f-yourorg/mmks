@@ -1,7 +1,8 @@
 import {useDeps} from 'react-simple-di';
 import { composeAll, composeWithTracker } from 'mantra-core';
 
-import authComposer from '/client/access_control/acComposer';
+// import authComposer from '/client/access_control/acComposer';
+import { AccessControlComposer as authComposer } from '../index';
 
 export const singleComposer = ({context, _id, accesspoints, clearErrors}, onData) => {
   // console.log( ' composer/single.jsx', accesspoints );

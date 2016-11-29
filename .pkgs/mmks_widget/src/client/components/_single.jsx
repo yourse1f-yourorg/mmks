@@ -1,9 +1,16 @@
 import React from 'react';
-import _lgr from '/lib/logging/client/clientLogger';
-const Lgr = new _lgr( __filename, 'warn', true );
+import { Utils } from '../index';
 
+let Lgr = null;
+// import _lgr from '/lib/logging/client/clientLogger.js';
+// const Lgr = new _lgr(__filename, 'info', true);
 
 export default class extends React.Component {
+
+  constructor(props) {
+    super(props);
+    Lgr = new Utils.Logger(__filename, 'warn', true);
+  }
 
   hideRecord() {
     this.props.hideAction(this.props._id);
