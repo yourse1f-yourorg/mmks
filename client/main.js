@@ -7,7 +7,7 @@ import commentsModule from './modules/comments';
 
 import _usersModule from './modules/_users';
 import _colorsModule from './modules/_colors';
-//import _widgetsModule from './modules/_widgets';
+// import _widgetsModule from './modules/_widgets';
 
 import _layoutModule from './modules/layout';
 
@@ -44,9 +44,9 @@ if ( PLUGIN ) {
   });
   app.loadModule(Widget);
   console.log('MMKS :: ... made a plugin widget ...');
-} else {
-  app.loadModule(_widgetsModule);
-  console.log('MMKS :: ... made a builtin widget ...');
+// } else {
+//   app.loadModule(_widgetsModule);
+//   console.log('MMKS :: ... made a builtin widget ...');
 }
 console.log('.........................');
 
