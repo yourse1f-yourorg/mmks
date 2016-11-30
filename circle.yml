@@ -34,6 +34,7 @@ dependencies:
 
   override:
     - pwd
+    - ls -la ${HOME}
     - cp settings.json.example settings.json
     - ${METEOR_CMD} npm install
     - .pkgs/install_local_packages.sh

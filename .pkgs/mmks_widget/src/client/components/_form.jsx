@@ -7,16 +7,14 @@ export default class extends React.Component {
   constructor(props) {
     super(props);
 
-    this.onChange = () => {
-//      let vals = this.refs.form.getValue(); // <- validate on every change
-//      this.info( ' @ onChange ', JSON.stringify(vals) );
-    };
+//     this.onChange = () => {
+// //      let vals = this.refs.form.getValue(); // <- validate on every change
+// //      this.info( ' @ onChange ', JSON.stringify(vals) );
+//     };
 
-    // this.submitForm = this.submitForm.bind(this);
     this.submitForm = (event) => {
       event.preventDefault();
       var values = this.refs.form.getValue();
-//      this.debug('submitForm', JSON.stringify(values));
       if (values) {
         this.props.clearErrors();
         if (this.props._id) {
@@ -30,7 +28,6 @@ export default class extends React.Component {
 
   render() {
 
-    // console.log( 'widget component _form.jsx', this.props );
     const {record, exception} = this.props;
 
     const ctx = {someWidget: { size: 21 }};

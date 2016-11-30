@@ -9,11 +9,6 @@ export const editComposer = ({context, clearErrors}, onData) => {
   const exception = LocalState.get('_widgets.UPDATE_ERROR');
 
   onData(null, {exception});
-
-  //    returns clearErrors when unmounting the component
-  //    Caution : actions always unmount the component,
-  //           so clearErrors will wipe action errors before than can be seen
-  // return clearErrors;
 };
 
 export const depsMapper = (context, actions) => ({

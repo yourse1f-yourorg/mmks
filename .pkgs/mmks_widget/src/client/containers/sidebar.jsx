@@ -12,9 +12,6 @@ export default class extends React.Component {
   /* eslint-disable no-console */
   constructor(props) {
     super(props);
-    console.log('......... containers/sidebar ........');
-    console.log(Utils.AccessControlComposer);
-    console.log('.....................................');
     Container = dataComposer(Component, Utils.AccessControlComposer);
   }
   /* eslint-enable no-console */

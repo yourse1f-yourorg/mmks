@@ -1,7 +1,7 @@
 let Astronomy = null;
 let Mongo = null;
 function init(_mongo, _astronomy) {
-  // console.log('MMKS Widget :: initializing');
+
   Astronomy = _astronomy;
   Mongo = _mongo;
 

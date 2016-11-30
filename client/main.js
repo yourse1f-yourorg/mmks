@@ -7,7 +7,6 @@ import commentsModule from './modules/comments';
 
 import _usersModule from './modules/_users';
 import _colorsModule from './modules/_colors';
-// import _widgetsModule from './modules/_widgets';
 
 import _layoutModule from './modules/layout';
 
@@ -32,22 +31,12 @@ app.loadModule(_usersModule);
 app.loadModule(_colorsModule);
 app.loadModule(_layoutModule);
 
-console.log('MMKS :: client/main.js ----- Make new Widget');
-let PLUGIN = true;
-// PLUGIN = false;
-if ( PLUGIN ) {
-  let Widget = _widget.new({
-    Logger,
-    LayoutDefault,
-    AccessControlComposer,
-    Authorized
-  });
-  app.loadModule(Widget);
-  console.log('MMKS :: ... made a plugin widget ...');
-// } else {
-//   app.loadModule(_widgetsModule);
-//   console.log('MMKS :: ... made a builtin widget ...');
-}
-console.log('.........................');
+let Widget = _widget.new({
+  Logger,
+  LayoutDefault,
+  AccessControlComposer,
+  Authorized
+});
+app.loadModule(Widget);
 
 app.init();

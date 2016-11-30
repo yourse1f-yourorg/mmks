@@ -2,14 +2,21 @@ import React from 'react';
 
 import Sidebar from '../containers/sidebar.js';
 
-import { Authorized } from '../index';
-// import Authorized from '/client/access_control/acContainer.js';
-
 import dataComposer from '../composers/edit.js';
 import Component from '../components/_form.js';
-const Container = dataComposer(Component);
+
+import Utils from '../../utils';
+
+let Container = function dummy() { return <div></div>; };
+let Authorized = function dummy() { return <div></div>; };
 
 export default class extends React.Component {
+
+  constructor(props) {
+    super(props);
+    Container = dataComposer(Component);
+    Authorized = Utils.Authorized;
+  }
 
   render() {
 
@@ -34,9 +41,3 @@ export default class extends React.Component {
 
   }
 }
-
-/*
-            <Authorized accesspoint='widgets.update' warn='true'>
-              <Container _id={_id}/>
-            </Authorized>
-*/

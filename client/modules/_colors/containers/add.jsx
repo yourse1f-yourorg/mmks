@@ -2,15 +2,28 @@ import React from 'react';
 
 import Sidebar from '../containers/sidebar.jsx';
 
-import Authorized from '/client/access_control/acContainer.js';
+import AcCont from '/client/access_control/acContainer.js';
 
 import dataComposer from '../composers/add.jsx';
 import Component from '../components/_form.jsx';
-const Container = dataComposer(Component);
+// const Container = dataComposer(Component);
+
+let Container = function dummy() { return <div></div>; };
+let Authorized = function dummy() { return <div></div>; };
 
 export default class extends React.Component {
 
+  constructor(props) {
+    super(props);
+    Container = dataComposer(Component);
+    Authorized = AcCont;
+  }
+
   render() {
+
+    console.log('......... client/container/add .............');
+    console.log(Container);
+    console.log('.................>  <....................');
 
     const apAdd = {module: 'colors', action: 'add'};
     const accPnts = [ apAdd ];

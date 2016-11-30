@@ -22,8 +22,8 @@ function AccessControlComposer(_ref, onData) {
 function Authorized(props, context, updater) {
   let properties = props;
 }
-/* eslint-enable no-unused-vars, no-console */
 
 let Utils = { Logger, LayoutDefault, AccessControlComposer, Authorized };
 
 export default Utils;
+/* eslint-enable no-unused-vars, no-console */

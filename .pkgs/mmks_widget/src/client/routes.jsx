@@ -24,28 +24,18 @@ export default function (injectDeps, {FlowRouter}) {
   FlowRouter.route('/widgets/add', {
     name: '_widgets.widgetsAdd',
     action() {
-      console.log('........ widget/routes ....I...');
-      console.log( LayoutDefaultCtx );
-      console.log('................................');
-      console.log( WidgetsAdd );
       mount(LayoutDefaultCtx, {
         content: () => (<WidgetsAdd />)
       });
-      console.log('........ widget/routes ....O....');
     }
   });
 
   FlowRouter.route('/widgets/:_id', {
     name: '_widgets.widgetsView',
     action({_id}) {
-      console.log('........ widget/routes ....I...');
-      console.log( LayoutDefaultCtx );
-      console.log('................................');
-      console.log( WidgetsView );
       mount(LayoutDefaultCtx, {
         content: () => (<WidgetsView _id={_id}/>)
       });
-      console.log('........ widget/routes ....O....');
     }
   });
 

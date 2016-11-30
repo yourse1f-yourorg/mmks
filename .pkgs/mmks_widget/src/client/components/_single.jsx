@@ -2,8 +2,6 @@ import React from 'react';
 import { Utils } from '../index';
 
 let Lgr = null;
-// import _lgr from '/lib/logging/client/clientLogger.js';
-// const Lgr = new _lgr(__filename, 'info', true);
 
 export default class extends React.Component {
 
@@ -20,7 +18,6 @@ export default class extends React.Component {
     Lgr.a = 'render ';
 
     const { _id, record, permissions } = this.props;
-    // console.log('  props ', this.props);
 
     const enableWidgetsUpdate = permissions['widgets:update'];
     const enableWidgetsDelete = permissions['widgets:delete'];

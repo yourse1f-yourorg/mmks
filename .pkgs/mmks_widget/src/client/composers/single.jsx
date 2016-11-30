@@ -1,11 +1,7 @@
 import {useDeps} from 'react-simple-di';
 import { composeAll, composeWithTracker } from 'mantra-core';
 
-// import authComposer from '/client/access_control/acComposer';
-import { AccessControlComposer as authComposer } from '../index';
-
 export const singleComposer = ({context, _id, accesspoints, clearErrors}, onData) => {
-  // console.log( ' composer/single.jsx', accesspoints );
 
   const {Meteor, Collections, LocalState} = context();
   const error = LocalState.get('_widgets.DELETE_ERROR');
@@ -15,11 +11,6 @@ export const singleComposer = ({context, _id, accesspoints, clearErrors}, onData
       onData(null, {record, error});
     }
   }
-  //    returns clearErrors when unmounting the component
-  //    Caution : actions always unmount the component,
-  //           so clearErrors will wipe action errors before than can be seen
-  // return clearErrors;
-
 };
 
 export const depsMapper = (context, actions) => ({
@@ -29,8 +20,8 @@ export const depsMapper = (context, actions) => ({
   context: () => context
 });
 
-export default (component) => composeAll(
-    composeWithTracker(authComposer),
+export default (component, _authComposer) => composeAll(
+    composeWithTracker(_authComposer),
     composeWithTracker(singleComposer),
     useDeps(depsMapper)
   )(component);

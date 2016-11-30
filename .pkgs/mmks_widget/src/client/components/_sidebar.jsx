@@ -3,9 +3,6 @@ import { Utils } from '../index';
 
 let Lgr = null;
 
-// import _lgr from '/lib/logging/client/clientLogger.js';
-// const Lgr = new _lgr(__filename, 'info', true);
-
 export default class extends React.Component {
 
   constructor(props) {
@@ -39,9 +36,3 @@ export default class extends React.Component {
     );
   }
 }
-
-/*
-
-        <li key={Math.random()} className={addEnabled}>
-*/
-

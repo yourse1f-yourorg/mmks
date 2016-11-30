@@ -1,22 +1,15 @@
 import { Utils } from '../index';
 
 let Lgr = null;
-let noLoggerYet = true;
 
-/* eslint-disable no-console */
 export default {
 
   initialize() {
-    // -------- grandchild.initialize();
-    console.log('MMKS Widget -- client :: child.js');
-    console.log(Utils);
-    console.log('MMKS Widget -- client :: child.js ++++++<');
     Lgr = new Utils.Logger( __filename, 'warn' );
     Lgr.a = 'getLogger';
   },
 
   log() {
-    if ( noLoggerYet ) { this.initialize(); }
     Lgr.a = 'getLogger';
     Lgr.error(' Yay!   Yay!   Yay!   Yay!   Yay!   Yay!   Yay!   Yay!  ');
     return 'Logger initialized in child';
@@ -24,7 +17,6 @@ export default {
 
   // create
   add({Meteor, LocalState, FlowRouter}, data) {
-    if ( noLoggerYet ) { this.initialize(); }
     Lgr.a = 'add';
     const _id = Meteor.uuid();
     Meteor.call('_widgets.add', data, _id, (err) => {
@@ -39,7 +31,6 @@ export default {
 
   // update
   update({Meteor, LocalState, FlowRouter}, data, _id) {
-    if ( noLoggerYet ) { this.initialize(); }
     Lgr.a = 'update';
     Meteor.call('_widgets.update', data, _id, (err) => {
       if (err) {
@@ -52,7 +43,6 @@ export default {
   },
 
   hide({Meteor, LocalState, FlowRouter}, _id) {
-    if ( noLoggerYet ) { this.initialize(); }
     Lgr.a = 'hide';
     Meteor.call('_widgets.hide', _id, (err) => {
       if (err) {

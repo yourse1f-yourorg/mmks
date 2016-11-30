@@ -2,27 +2,26 @@ import React from 'react';
 
 import Sidebar from '../containers/sidebar.js';
 
-import { Authorized } from '../index';
-// import Authorized from '/client/access_control/acContainer.js';
-
 import dataComposer from '../composers/add.js';
 import Component from '../components/_form.js';
 
-const Container = dataComposer(Component);
-console.log('......... client/container/add .............');
-console.log(Component);
-console.log('.....................................');
+import Utils from '../../utils';
+
+let Container = function dummy() { return <div></div>; };
+let Authorized = function dummy() { return <div></div>; };
 
 export default class extends React.Component {
 
+  constructor(props) {
+    super(props);
+    Container = dataComposer(Component);
+    Authorized = Utils.Authorized;
+  }
+
   render() {
 
-    console.log('......... client/container/add .............');
-    console.log(Container);
-    console.log('.................>  <....................');
     const apAdd = {module: 'widgets', action: 'add'};
     const accPnts = [ apAdd ];
-//    console.log(' ad cont - -   apAdd : ', apAdd);
 
     return (
       <div className="bs-docs-section clearfix">
@@ -41,9 +40,3 @@ export default class extends React.Component {
 
   }
 }
-
-/*
-            <Authorized accesspoints={accPnts} warn='true'>
-              <Container />
-            </Authorized>
-*/

@@ -2,13 +2,20 @@ import React from 'react';
 
 import Sidebar from '../containers/sidebar.js';
 
-
-
 import dataComposer from '../composers/single.js';
 import Component from '../components/_single.js';
-const Container = dataComposer(Component);
+// const Container = dataComposer(Component);
+
+import Utils from '../../utils';
+
+let Container = function dummy() { return <div></div>; };
 
 export default class extends React.Component {
+
+  constructor(props) {
+    super(props);
+    Container = dataComposer(Component, Utils.AccessControlComposer);
+  }
 
   render() {
 
