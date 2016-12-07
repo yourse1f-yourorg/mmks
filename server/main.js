@@ -38,4 +38,3 @@ initPosts();
 initColors();
 initWidgets();
 addInitialUsers();
-
