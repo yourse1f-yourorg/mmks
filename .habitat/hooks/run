@@ -6,21 +6,23 @@ cd {{pkg.svc_var_path}}
 export MONGO_URL={{cfg.mongo_url}};
 export ROOT_URL={{cfg.root_url}};
 export PORT={{cfg.port}};
+export MSG={{cfg.message}};
 
-export METEOR_SETTINGS="settings.json";
+export METEOR_SETTINGS="{{pkg.svc_config_path}}/settings.json";
 
-export MSG=$(echo ${MONGO_URL} | sed -e "s|\(mongodb://.*:\).*\(@\)|\1***********\2|");
+export MONG_CONN=$(echo ${MONGO_URL} | sed -e "s|\(mongodb://.*:\).*\(@\)|\1***********\2|");
 
 echo "###########################################################";
-echo "########## Mongo connector    ${MSG} ";
+echo "########## Base directory     {{pkg.svc_path}} ";
+echo "########## Current directory  {{pkg.svc_var_path}} ";
+echo "########## Config directory   {{pkg.svc_config_path}} ";
+echo "########## Message            ${MSG} ";
+echo "########## Mongo connector    ${MONG_CONN} ";
 echo "########## Meteor app URL     {{cfg.root_url}} ";
 echo "########## Meteor app port    {{cfg.port}} ";
-echo "########## Current directory  {{pkg.svc_var_path}} ";
+echo "########## Meteor settings    ${METEOR_SETTINGS} ";
 echo "###########################################################";
-cat ${METEOR_SETTINGS};
-echo "###########################################################";
-ls -l;
-echo "###########################################################";
+
 # `exec` makes it so the process that the Habitat supervisor uses is 
 # 'node main.js`, rather than the run hook itself.
 
