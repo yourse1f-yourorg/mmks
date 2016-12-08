@@ -1,4 +1,4 @@
-0.2.1_note.txt
-This is release 0.2.1
-It's a first attempt at release managment by Habitat4Meteor
+0.2.2_note.txt
+This is release 0.2.2
+Trying to add settings.json to the build
 

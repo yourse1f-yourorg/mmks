@@ -18,7 +18,7 @@ pkg_origin=yourse1f-yourorg
 pkg_name=mmks
 
 #       Package formal release version.  E.g. --  pkg_version=0.1.1
-pkg_version=0.2.1
+pkg_version=0.2.2
 
 #        How you wish to be identified.  E.g. --  pkg_maintainer="Yourself <yourse1f.yourorg@gmail.com>"
 pkg_maintainer="Yourself <yourse1f.yourorg@gmail.com>"
