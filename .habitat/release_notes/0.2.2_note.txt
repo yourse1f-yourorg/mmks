@@ -1,0 +1,4 @@
+0.2.2_note.txt
+This is release 0.2.2
+Trying to add settings.json to the build
+
