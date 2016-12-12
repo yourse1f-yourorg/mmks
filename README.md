@@ -143,6 +143,11 @@ If you are in a disposable virtual machine with a recent fresh Ubuntu installati
 1. See the `scripts` section of `package.json` for details of other testing and setup commands.
 
 
+### Roadmap
+
+
+[Apollo](https://projectricochet.com/blog/create-simple-hello-world-app-meteor-and-apollo#.V-RP5ZMrLMU)
+
 ### Other Notes
 
 For my own use, I keep open at least 4 terminal windows, with these commands, ready to run :
