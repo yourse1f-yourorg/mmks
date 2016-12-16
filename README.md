@@ -9,27 +9,27 @@ This a starter app for Meteor developers who want to structure their work accord
 
 Please feel welcome to comment on any experience you have with it [here](https://talk.mantrajs.com/) ( and previously [ongoing discussion here](https://github.com/kadirahq/mantra/issues/3) )
 
-[![CircleCI](https://circleci.com/gh/warehouseman/meteor-mantra-kickstarter/tree/trunk.svg?style=svg)](https://circleci.com/gh/warehouseman/meteor-mantra-kickstarter/tree/trunk)  [![Dependency Status](https://david-dm.org/warehouseman/meteor-mantra-kickstarter/trunk/status.svg)](https://david-dm.org/warehouseman/meteor-mantra-kickstarter/trunk)  [![devDependency Status](https://david-dm.org/warehouseman/meteor-mantra-kickstarter/trunk/dev-status.svg)](https://david-dm.org/warehouseman/meteor-mantra-kickstarter/trunk?type=dev)  [![Join the chat at https://gitter.im/meteor-mantra-kickstarter/MeteorMantraKickStarter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/meteor-mantra-kickstarter/MeteorMantraKickStarter)  [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
+[![CircleCI](https://circleci.com/gh/yourse1f-yourorg/mmks/tree/apollo.svg?style=svg)](https://circleci.com/gh/yourse1f-yourorg/mmks/tree/apollo)  [![Dependency Status](https://david-dm.org/yourse1f-yourorg/mmks/apollo/status.svg)](https://david-dm.org/yourse1f-yourorg/mmks/apollo)  [![devDependency Status](https://david-dm.org/yourse1f-yourorg/mmks/apollo/dev-status.svg)](https://david-dm.org/yourse1f-yourorg/mmks/apollo?type=dev)  [![Join the chat at https://gitter.im/meteor-mantra-kickstarter/MeteorMantraKickStarter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/meteor-mantra-kickstarter/MeteorMantraKickStarter)  [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 
 ### Features
 
 You get :
 
 * a thoroughly tested application from which to launch your apllication development
-* [single command installation](https://github.com/warehouseman/meteor-mantra-kickstarter/blob/trunk/install_all.sh) of all dependencies and support services
-* full [end to end, functional testing](https://github.com/warehouseman/meteor-mantra-kickstarter/blob/trunk/.e2e_tests/features/002_colors/addColor.feature) with [Chimp](https://chimp.readme.io/) and [Cucumber](https://cucumber.io/)
-* continuous integration and test in [CircleCI](https://circleci.com/gh/warehouseman/meteor-mantra-kickstarter) Latest build result :: [![CircleCI](https://circleci.com/gh/warehouseman/meteor-mantra-kickstarter/tree/trunk.svg?style=svg)](https://circleci.com/gh/warehouseman/meteor-mantra-kickstarter/tree/trunk)
-* [unit testing](https://github.com/warehouseman/meteor-mantra-kickstarter/blob/trunk/client/modules/core/containers/tests/post.js) with Mocha, Chai, Sinon
-* client side **and** server side [logging](https://github.com/warehouseman/meteor-mantra-kickstarter/tree/trunk/lib/logging) to Loggly:
+* [single command installation](https://github.com/yourse1f-yourorg/mmks/blob/apollo/install_all.sh) of all dependencies and support services
+* full [end to end, functional testing](https://github.com/yourse1f-yourorg/mmks/blob/apollo/.e2e_tests/features/002_colors/addColor.feature) with [Chimp](https://chimp.readme.io/) and [Cucumber](https://cucumber.io/)
+* continuous integration and test in [CircleCI](https://circleci.com/gh/yourse1f-yourorg/mmks) Latest build result :: [![CircleCI](https://circleci.com/gh/yourse1f-yourorg/mmks/tree/apollo.svg?style=svg)](https://circleci.com/gh/yourse1f-yourorg/mmks/tree/apollo)
+* [unit testing](https://github.com/yourse1f-yourorg/mmks/blob/apollo/client/modules/core/containers/tests/post.js) with Mocha, Chai, Sinon
+* client side **and** server side [logging](https://github.com/yourse1f-yourorg/mmks/tree/apollo/lib/logging) to Loggly:
     * [logatim](https://github.com/sospedra/logatim): isomorphic multilevel logging, that feeds into
     * [winston](https://github.com/winstonjs/winston) server side transports
-* [Mailgun ready](https://github.com/warehouseman/meteor-mantra-kickstarter/blob/trunk/server/methods/mail.js) password reset example
+* [Mailgun ready](https://github.com/yourse1f-yourorg/mmks/blob/apollo/server/methods/mail.js) password reset example
 * several different CRUD examples, including
-    * an isomorphic CRUD [module in a single NPM package](https://github.com/warehouseman/meteor-mantra-kickstarter/tree/trunk/.pkgs/mmks_widget), which contains all client **and** server elements
+    * an isomorphic CRUD [module in a single NPM package](https://github.com/yourse1f-yourorg/mmks/tree/apollo/.pkgs/mmks_widget), which contains all client **and** server elements
     * user management CRUD module: user registration, password reset, login, logout
-* full [multi-level access control](https://github.com/warehouseman/meteor-mantra-kickstarter/blob/trunk/lib/access_control.js) authorizations:
+* full [multi-level access control](https://github.com/yourse1f-yourorg/mmks/blob/apollo/lib/access_control.js) authorizations:
     * levels: Owner, Administrator, Staff, Member, Customer, Registered
-    * acts on: [menu items](https://github.com/warehouseman/meteor-mantra-kickstarter/blob/trunk/client/modules/layout/components/NavLeftContent.jsx#L40), React [components](https://github.com/warehouseman/meteor-mantra-kickstarter/blob/trunk/client/modules/_colors/components/_sidebar.jsx#L24) and server side [methods](https://github.com/warehouseman/meteor-mantra-kickstarter/blob/trunk/server/methods/_colors.js#L23)
+    * acts on: [menu items](https://github.com/yourse1f-yourorg/mmks/blob/apollo/client/modules/layout/components/NavLeftContent.jsx#L40), React [components](https://github.com/yourse1f-yourorg/mmks/blob/apollo/client/modules/_colors/components/_sidebar.jsx#L24) and server side [methods](https://github.com/yourse1f-yourorg/mmks/blob/apollo/server/methods/_colors.js#L23)
 * uses [mantra-core](https://github.com/mantrajs/mantra-core) modularization, with application wide state, composed in pure React JS components with [react-komposer](https://github.com/kadirahq/react-komposer) (Blaze is not used at all)
 * [Astronomy v2](https://github.com/jagi/meteor-astronomy) model schema
 * forms based development examples with:
@@ -78,7 +78,7 @@ If you are in a disposable virtual machine with a recent fresh Ubuntu installati
 1. Clone our repository and step into it :
 
     ```
-    git clone git@github.com:warehouseman/meteor-mantra-kickstarter.git
+    git clone git@github.com:yourse1f-yourorg/mmks.git
     cd meteor-mantra-kickstarter
     ```
 
