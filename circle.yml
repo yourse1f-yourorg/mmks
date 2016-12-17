@@ -31,7 +31,7 @@ dependencies:
 
   override:
     - cp settings.json.example settings.json
-    - .pkgs/install_local_packages.sh
+    - source .pkgs/install_local_packages.sh; install_local_packages;
     - ${METEOR_CMD} npm install
 
   post:
