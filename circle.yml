@@ -42,10 +42,10 @@ dependencies:
 test:
 
   pre:
-    - sed -i 's|.*presets.*|  "presets": ["es2015", "stage-2", "react"],|' .babelrc;
+    - cp .babelrc_tst .babelrc;
 
   post:
-    - sed -i 's|.*presets.*|  "presets": ["es2015", "stage-2"],|' .babelrc;
+    - cp .babelrc_bld .babelrc;
     - node --version; npm --version; java -version; ${METEOR_CMD} --version;
     - sleep 4m
     - ${CHIMP_CMD} .e2e_tests/chimp-config.js --ddp=http://localhost:3000 --path=.e2e_tests
