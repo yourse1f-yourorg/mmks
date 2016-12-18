@@ -1,15 +1,27 @@
 {
   "name": "meteor-mantra-kickstarter",
-  "version": "0.2.1",
+  "version": "0.2.5",
+  "name": "mmks",
+  "version": "0.2.5",
+  "license": "MIT",
+  "repository": "https://github.com/yourse1f-yourorg/mmks",
   "scripts": {
     "lint": "eslint . --ext .js --ext .jsx",
     "lintfix": "npm run lint -- --fix",
-    "testonly": "mocha .scripts/mocha_boot.js client/**/tests/**/*.js --compilers js:babel-core/register",
+  "name": "mmks",
+  "version": "0.2.5",
+  "license": "MIT",
+  "repository": "https://github.com/yourse1f-yourorg/mmks",
+  "scripts": {
     "test": "npm run lint && npm run testonly",
     "test-watch": "npm run testonly -- --watch --watch-extensions js,jsx",
     "acceptance": "./node_modules/.bin/chimp .e2e_tests/chimp-config.js --ddp=http://localhost:3000 --watch --path=.e2e_tests",
     "workarounds": ".workarounds/fix.sh",
-    "qtst": "mocha .scripts/mocha_boot.js client/access_control/tests/**/*.js --compilers js:babel-core/register",
+  "name": "mmks",
+  "version": "0.2.5",
+  "license": "MIT",
+  "repository": "https://github.com/yourse1f-yourorg/mmks",
+  "scripts": {
     "qtw": "npm run qtst -- --watch --watch-extensions js,jsx",
     "dsstore": "find . -name '*.DS_Store' -type f -delete"
   },
