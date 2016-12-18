@@ -7,7 +7,7 @@
 
 This a starter app for Meteor developers who want to structure their work according to the [Mantra Specification](https://kadirahq.github.io/mantra/).
 
-Please feel welcome to comment on any experience you have with it [here](https://talk.mantrajs.com/) ( and previously [ongoing discussion here](https://github.com/kadirahq/mantra/issues/3) )
+Please feel welcome to comment on any experience you have with it in the on going discussion [here](https://talk.mantrajs.com/) ( for reference, prior discussion venues are available [here](https://talk.mantrajs.com/) and, even earlier, [here](https://github.com/kadirahq/mantra/issues/3) )
 
 [![CircleCI](https://circleci.com/gh/yourse1f-yourorg/mmks/tree/apollo.svg?style=svg)](https://circleci.com/gh/yourse1f-yourorg/mmks/tree/apollo)  [![Dependency Status](https://david-dm.org/yourse1f-yourorg/mmks/apollo/status.svg)](https://david-dm.org/yourse1f-yourorg/mmks/apollo)  [![devDependency Status](https://david-dm.org/yourse1f-yourorg/mmks/apollo/dev-status.svg)](https://david-dm.org/yourse1f-yourorg/mmks/apollo?type=dev)  [![Join the chat at https://gitter.im/meteor-mantra-kickstarter/MeteorMantraKickStarter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/meteor-mantra-kickstarter/MeteorMantraKickStarter)  [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 
