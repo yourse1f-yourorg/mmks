@@ -4,6 +4,7 @@ declare APP_NAME="mmks";
 
 function buildMeteor()
 {
+  echo -e "Install Meteor if not installed.";
   local INSTALL_METEOR="yes";
   if [[ -d "${HOME}/.meteor/packages/meteor-tool" ]]; then
     declare METEORVERSION=$(meteor --version  2>&1);
