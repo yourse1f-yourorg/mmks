@@ -4,9 +4,9 @@ SCRIPT=$(readlink -f "$0");
 SCRIPTPATH=$(dirname "$SCRIPT");
 
 declare HABITAT_DIR="$(pwd)/.habitat";
-
-echo -e "Path == ${SCRIPTPATH}";
-echo -e "Habi == ${HABITAT_DIR}";
+declare PRTY="insHab :: ";
+# echo -e "Path == ${SCRIPTPATH}";
+# echo -e "Habi == ${HABITAT_DIR}";
 
 
 declare GITHUB_RAW="https://raw.githubusercontent.com";
@@ -115,8 +115,10 @@ function installHabitat() {
   # set +e; HABITAT_VERSION=$(hab --version 2>/dev/null);set -e;
   # echo -e "\n${PRTY}Detected Habitat version : '${HABITAT_VERSION}'";
   HAB_ALREADY="";
+  LNX="Refreshing";
   if [[ -z "$(hab --version 2>/dev/null)" ]]; then
     HAB_ALREADY="now ";
+    LNX="Making";
     echo -e "\n${PRTY}Installing Habitat for ${TARGET_OPERATING_SYSTEM} ...";
 #    . ./DownloadHabitatToPathDir.sh  
     downloadHabToPathDir ${TARGET_OPERATING_SYSTEM};
@@ -124,12 +126,14 @@ function installHabitat() {
     echo -e "\n${PRTY}Found Habitat installed already..";
   fi;
 
+  echo -e "\n${PRTY}${LNX} symlinks...";
+
   sudo hab install core/hab-sup;
   sudo hab pkg binlink core/hab-sup hab-sup;
 
-  echo -e "'Habitat' version '$(hab --version 2>/dev/null)' is ${HAB_ALREADY}installed and ready.
+  echo -e "\n${PRTY}'Habitat' version '$(hab --version 2>/dev/null)' is ${HAB_ALREADY}installed and ready.
 
-  Getting 
+  Getting Habitat user scripts....
   ";
 
   pullHabitatForMeteorScripts;
