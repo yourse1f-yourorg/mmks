@@ -21,5 +21,12 @@ function refreshApt()
   sudo apt-get -y install build-essential g++;
 
   touch ${FLAG};
+  
+  if ! grep "fs.inotify.max_user_watches=524288" /etc/sysctl.conf; then
+    echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p >/dev/null;
+  else
+    echo -e "Done already.";
+  fi;
+
   echo "### APT Updated";
 }
