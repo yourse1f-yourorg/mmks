@@ -7,8 +7,10 @@ source .scripts/installMeteor.sh;
 source .scripts/installJava.sh;
 source .scripts/installNodeJs.sh;
 source .scripts/refreshApt.sh;
+source .habitat/installHabitat.sh;
 
 refreshApt;
+installHabitat;
 installJava;
 installNodeJs;
 installChimp;

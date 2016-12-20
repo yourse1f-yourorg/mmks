@@ -17,7 +17,7 @@ function refreshApt()
   sudo apt-get -y clean && \
   sudo apt-get -y autoremove;
 
-  sudo apt-get -y install curl git;
+  sudo apt-get -y install curl git jq;
   sudo apt-get -y install build-essential g++;
 
   touch ${FLAG};

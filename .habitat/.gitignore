@@ -1,5 +1,6 @@
 results
 scripts
 BuildAndUpload.sh
+pullHabitatTools.sh
 semver.sh
 *.example
