@@ -8,6 +8,13 @@ import {FlowRouter} from 'meteor/kadira:flow-router';
 import {ReactiveDict} from 'meteor/reactive-dict';
 import {Tracker} from 'meteor/tracker';
 
+
+import apolloClient from 'apollo-client';
+import GQL from 'graphql-tag';
+import { meteorClientConfig as MeteorClientConfig } from 'meteor/apollo';
+
+const ApolloClient = new apolloClient(MeteorClientConfig());
+
 export default function () {
   return {
     Meteor,
@@ -16,6 +23,9 @@ export default function () {
     LocalState: new ReactiveDict(),
     Tracker,
     App,
+    ApolloClient,
+    GQL,
+    MeteorClientConfig,
     ACL
   };
 }
