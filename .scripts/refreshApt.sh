@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+#
 declare FLAG="/tmp/updatedApt";
 set -e;
 function refreshApt()
@@ -11,22 +13,22 @@ function refreshApt()
   fi
 
   echo "### Update APT";
-  sudo apt-get -y update && \
-  sudo apt-get -y upgrade && \
-  sudo apt-get -y dist-upgrade && \
-  sudo apt-get -y clean && \
-  sudo apt-get -y autoremove;
+  sudo apt -y update && \
+  sudo apt -y upgrade && \
+  sudo apt -y dist-upgrade && \
+  sudo apt -y clean && \
+  sudo apt -y autoremove;
 
-  sudo apt-get -y install curl git jq;
-  sudo apt-get -y install build-essential g++;
+  sudo apt -y install jq;
+  sudo apt -y install curl git;
+  sudo apt -y install build-essential g++;
+
+#  sudo apt -y install yarn;
 
   touch ${FLAG};
-  
-  if ! grep "fs.inotify.max_user_watches=524288" /etc/sysctl.conf; then
-    echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p >/dev/null;
-  else
-    echo -e "Done already.";
-  fi;
-
   echo "### APT Updated";
 }
+
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
+  refreshApt;
+fi;
