@@ -8,7 +8,7 @@ function installJava()
   if [[ "${JAVAVERSION#*$NOCOMMAND}" = "$JAVAVERSION" ]]; then
     declare VER=${JAVAVERSION#javac 1.}; VER=${VER:0:1};
     if [[  ${VER} -ge  ${MINIMUM_JAVA_VERSION}  ]]; then
-      echo "Jave version ${VER} is installed already.";
+      echo "### Jave version ${VER} is installed already.";
       return 0;
     else
         echo -e "Installed Jave version ${VER} is too old; Java ${MINIMUM_JAVA_VERSION} required.
