@@ -1,49 +1,56 @@
 const typeDefinitions = `
+
   type Author {
-    id: Int
+    _id: Int
     firstName: String
     lastName: String
-    posts: [Post]
+    books: [Book]
   }
-  type Post {
+
+  type Book {
     _id: Int
     title: String
     content: String
     views: Int
     author: Author
   }
+
   type Query {
-    posts(_id: Int): [Post]
-    author(firstName: String, lastName: String): Author
+    book(_id: Int): [Book]
+    author(_id: Int, firstName: String, lastName: String): [Author]
   }
+
   type RootMutation {
     createAuthor(
       firstName: String!
       lastName: String!
     ): Author
-    createPost(
+    createBook(
       tags: [String!]!
       title: String!
       content: String!
-      authorId: Int!
-    ): Post
+      authorIdentification: Int!
+    ): Book
   }
+
   schema {
     query: Query,
     mutation: RootMutation
   }
+
 `;
 
 export default [ typeDefinitions ];
 
 /*
+
 type Author {
-  id: Int
+  _id: Int
   firstName: String
   lastName: String
-  posts: [Post]
+  posts: [Book]
 }
-type Post {
+type Book {
   _id: Int
   title: String
   content: String
@@ -58,12 +65,12 @@ type RootMutation {
     firstName: String!
     lastName: String!
   ): Author
-  createPost(
+  createBook(
     tags: [String!]!
     title: String!
     content: String!
     authorId: Int!
-  ): Post
+  ): Book
 }
 schema {
   query: Query,

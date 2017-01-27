@@ -5,12 +5,21 @@ const apoComposer = ({context}, onData) => {
   const {ApolloClient, GQL} = context();
 
   const MyQuery = GQL`query MyQuery {
-      posts {
+      book
+      {
         _id
         title
         content
+        views
+        author {
+          _id
+          firstName
+          lastName
+        }
       }
     }`;
+
+//         author { lastName }
 
 /* eslint-disable no-console */
   ApolloClient.query({
@@ -20,9 +29,10 @@ const apoComposer = ({context}, onData) => {
     const { errors, data } = graphQLResult;
 
     if (data) {
-      let posts = data.posts;
-      console.log('ApoList: Query data', data.posts);
-      onData(null, {posts});
+      let book = data.book;
+      console.log('BookList: Query data', data.book);
+      console.log('Book 1: ', data.book[0].id);
+      onData(null, {book});
     }
     if (errors) {
       console.log('got some GraphQL execution errors', errors);

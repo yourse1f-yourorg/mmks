@@ -46,6 +46,7 @@
     "mantra-core": "^1.7.0",
     "meteor-node-stubs": "^0.2.4",
     "mkdirp": "^0.5.1",
+    "mmks_book": "0.0.1",
     "mmks_widget": "0.0.1",
     "nodemailer": "^2.6.4",
     "nodemailer-mailgun-transport": "^1.2.2",

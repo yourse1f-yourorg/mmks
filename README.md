@@ -26,7 +26,8 @@ You get :
     * [winston](https://github.com/winstonjs/winston) server side transports
 * [Mailgun ready](https://github.com/warehouseman/meteor-mantra-kickstarter/blob/try_apollo/server/methods/mail.js) password reset example
 * several different CRUD examples, including
-    * an isomorphic CRUD [module in a single NPM package](https://github.com/warehouseman/meteor-mantra-kickstarter/tree/try_apollo/.pkgs/mmks_widget), which contains all client **and** server elements
+    * an isomorphic MongoDB CRUD [module in a single NPM package](https://github.com/warehouseman/meteor-mantra-kickstarter/tree/try_apollo/.pkgs/mmks_widget), which contains all client **and** server elements, as well as all Chimp tests
+    * a isomorphic Apollo CRUD [module in a single NPM package](https://github.com/warehouseman/meteor-mantra-kickstarter/tree/try_apollo/.pkgs/mmks_book), which contains all client **and** server elements, as well as all Chimp tests
     * user management CRUD module: user registration, password reset, login, logout
 * full [multi-level access control](https://github.com/warehouseman/meteor-mantra-kickstarter/blob/try_apollo/lib/access_control.js) authorizations:
     * levels: Owner, Administrator, Staff, Member, Customer, Registered

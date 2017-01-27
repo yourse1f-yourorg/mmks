@@ -8,6 +8,8 @@ function CleanAllInstalledPackages() {
   rm -fr .habitat/results;
   rm -fr .pkgs/mmks_widget/node_modules;
   rm -fr .pkgs/mmks_widget/dist;
+  rm -fr .pkgs/mmks_book/node_modules;
+  rm -fr .pkgs/mmks_book/dist;
   rm -fr npm-debug.log;
 
   echo "Cleaned.";

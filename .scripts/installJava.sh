@@ -11,8 +11,7 @@ function installJava()
       echo "### Jave version ${VER} is installed already.";
       return 0;
     else
-        echo -e "Installed Jave version ${VER} is too old; Java ${MINIMUM_JAVA_VERSION} required.
-                 Giving up." >&2;
+        echo -e "Installed Jave version ${VER} is too old; Java ${MINIMUM_JAVA_VERSION} required. Giving up." >&2;
         exit 1;
     fi;
   fi;

@@ -3,6 +3,7 @@
 RUN_IT=${1:-null};
 
 source .scripts/trap.sh;
+source .scripts/free.sh;
 
 source .scripts/refreshApt.sh;
 source .scripts/installJava.sh;
@@ -13,13 +14,14 @@ source .scripts/android/installAndBuildTools.sh;
 source .scripts/installMeteorApp.sh;
 # source .pkgs/install_local_packages.sh;
 
-export FREESPACE=$(($(stat -f --format="%a*%S" ${HOME})/1000000));
+storage;
 export MINFREE=7000
+# export FREESPACE=$(($(stat -f --format="%a*%S" ${HOME})/1000000));
 if [ ${FREESPACE} -lt ${MINFREE} ]; then
   echo -e "
              * * *   WARNING * * *
     Your free disk space is: '${FREESPACE}MB'.
-    You must have at least:  '${MINFREE}MB' free!
+     You must have at least: '${MINFREE}MB' free!
 
 ------------------------------------------------
   ";
@@ -27,8 +29,9 @@ else
   echo "Found '${FREESPACE}MB' of free disk space.";
 fi;
 
-FREEMEM=$(awk '/MemFree/ { printf "%.3f \n", $2/1024/1024 }' /proc/meminfo);
+memory;
 NEEDMEM=1.0;
+# FREEMEM=$(awk '/MemFree/ { printf "%.3f \n", $2/1024/1024 }' /proc/meminfo);
 # echo "Fail if free:${FREEMEM} -lt  needed:${NEEDMEM}";
 if echo ${FREEMEM} ${NEEDMEM} | awk '{exit $1 < $2 ? 0 : 1}'; then
   echo -e "

@@ -1,7 +1,7 @@
 import publications from './publications';
 import methods from './methods';
 import addInitialUsers from './configs/initial_users.js';
-import { initPosts, initColors, initWidgets } from './configs/initial_adds.js';
+import { initPosts, initColors, initWidgets, initBooks } from './configs/initial_adds.js';
 
 import { WebApp } from 'meteor/webapp';
 import { createApolloServer } from 'meteor/apollo';
@@ -78,4 +78,5 @@ methods();
 initPosts();
 initColors();
 initWidgets();
+initBooks();
 addInitialUsers();

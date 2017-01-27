@@ -9,7 +9,7 @@ import {
 import PostList from './containers/postlist';
 import Post from './containers/post';
 import NewPost from './containers/newpost';
-import ApolloList from './containers/apolist';
+import BookList from './containers/booklist';
 import ApolloPost from './containers/apopost';
 
 export default function (injectDeps, {FlowRouter}) {
@@ -42,11 +42,11 @@ export default function (injectDeps, {FlowRouter}) {
     }
   });
 
-  FlowRouter.route('/apo', {
-    name: 'apollolist',
+  FlowRouter.route('/booklist', {
+    name: 'booklist',
     action() {
       mount(MainLayoutCtx, {
-        content: () => (<ApolloList/>)
+        content: () => (<BookList/>)
       });
     }
   });
