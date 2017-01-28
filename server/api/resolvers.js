@@ -7,7 +7,7 @@ const resolvers = {
       return res;
     },
     author(_, args) {
-      let res = Author.findAll();
+      let res = Author.findAll({ where: args });
       return res;
     },
   },

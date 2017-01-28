@@ -45,11 +45,9 @@ BookModel.belongsTo(AuthorModel, { as: 'author' });
 const Author = db.models.author;
 const Book = db.models.book;
 
-console.log("Book <<< ");
-let book = Book.findAll();
-book.then(function(result){ console.log("-------------------------", result[0]); });
-// book.then(function(result){ console.log("-------------------------", result[1]._id, result[1].title, result[1].author); });
-
-console.log("Book >>> ");
+// let book = Book.findAll();
+// book.then(function(result) {
+//   console.log("-------------------------", result[0]);
+// });
 
 export { Author, Book };
