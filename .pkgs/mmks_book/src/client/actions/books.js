@@ -18,16 +18,16 @@ export default {
   // create
   create({Meteor, LocalState, FlowRouter}, book, mutate) {
     Lgr.a = 'create';
-    Lgr.info("Create book with :: ", book.title);
-    console.log("Book.create.  With : ", book);
+    Lgr.info('Create book with :: ', book.title);
+    console.log('Book.create.  With : ', book);        // eslint-disable-line no-console
     mutate({
       variables: {
-        title : book.title,
+        title: book.title,
         content: book.content,
         pages: book.pages,
         authorId: book.author
       }
-    }).then(function(result) {
+    }).then(function (result) {
       FlowRouter.go('/book/' + result.data.createBook._id);
     });
   },
@@ -49,7 +49,8 @@ export default {
   // update
   update({Meteor, LocalState, FlowRouter}, data, _id) {
     Lgr.a = 'update';
-    console.log("Update book : ", data);
+    console.log('Update book (data) : ', data);        // eslint-disable-line no-console
+    console.log('Update book (_id) : ', _id);        // eslint-disable-line no-console
     // Meteor.call('_books.update', data, _id, (err) => {
     //   if (err) {
     //     Lgr.error(err.message);

@@ -7,7 +7,7 @@ export const singleComposer = ({context, _id, accesspoints, clearErrors}, onData
   const {ApolloClient, GQL, LocalState} = context();
   const error = LocalState.get('_books.DELETE_ERROR');
 
-  console.log('Composing book data : ', _id);
+  console.log('Composing book data : ', _id);  // eslint-disable-line no-console
 
   const aBookQuery = GQL`
     query aBookQuery ($idBook: Int!) {
@@ -44,8 +44,8 @@ export const singleComposer = ({context, _id, accesspoints, clearErrors}, onData
     if (errors) {
       console.log('got some GraphQL execution errors', errors);
     }
-  }).catch((error) => {
-    console.log('There was an error sending the query', error);
+  }).catch((err) => {
+    console.log('There was an error sending the query', err);
   });
 /* eslint-enable no-console */
 

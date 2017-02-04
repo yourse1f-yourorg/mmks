@@ -23,12 +23,12 @@ export default class extends React.Component {
     const apAdd = {module: 'colors', action: 'add'};
     const accPnts = [ apAdd ];
     return (
-      <div className="bs-docs-section clearfix">
-        <div className="row">
-          <div className="col-md-3">
+      <div className='bs-docs-section clearfix'>
+        <div className='row'>
+          <div className='col-md-3'>
             <Sidebar />
           </div>
-          <div className="col-md-9">
+          <div className='col-md-9'>
             <Authorized accesspoints={accPnts} warn='true'>
               <Container />
             </Authorized>

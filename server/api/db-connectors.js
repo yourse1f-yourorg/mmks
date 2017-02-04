@@ -46,8 +46,8 @@ const Author = db.models.author;
 const Book = db.models.book;
 
 let book = Book.findAll();
-book.then(function(result) {
-  console.log(" We got the first book -- ", result[0].title);
+book.then(function (result) {
+  console.log(' We got the first book -- ', result[0].title); // eslint-disable-line no-console
 });
 
 export { Author, Book };

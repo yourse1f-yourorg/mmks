@@ -3,7 +3,7 @@ import React from 'react';
 import Sidebar from '../containers/sidebar';
 
 import Composer from '../composers/edit';
-import Component from '../components/form';
+import Component from '../components/uniform';
 
 import Utils from '../../utils';
 
@@ -16,7 +16,7 @@ export default class extends React.Component {
     super(props);
 
     const { API_AST } = props.context();
-    console.log("API_AST : ", API_AST.getType('Book'));
+    console.log('API_AST : ', API_AST.getType('Book'));  // eslint-disable-line no-console
 
     Container = Composer(Component);
     Authorized = Utils.Authorized;

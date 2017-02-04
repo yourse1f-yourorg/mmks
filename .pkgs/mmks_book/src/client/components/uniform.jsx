@@ -1,29 +1,15 @@
 import React from 'react';
 
-import t from 'tcomb-form';
-
-import {buildASTSchema, parse} from 'graphql';
-// import { graphql } from 'react-apollo';
-// import gql from 'graphql-tag';
-
-import GraphQLBridge    from 'uniforms/GraphQLBridge';
+import GraphQLBridge from 'uniforms/GraphQLBridge';
 
 import {
          AutoForm,
-         ValidatedQuickForm,
          TextField,
          SelectField,
          LongTextField,
          SubmitField,
-         ErrorsField,
          NumField
        } from 'uniforms-bootstrap3';
-
-// import AutoForm from 'uniforms/AutoForm'; // Or from the theme package.
-// import BaseField from 'uniforms/BaseField';
-
-// const
-//                                                 = bootstrap3;
 
 const BookForm = class extends React.Component {
 
@@ -35,13 +21,12 @@ const BookForm = class extends React.Component {
 //      this.info( ' @ onChange ', JSON.stringify(vals) );
     };
 
-    // this.submitForm = this.submitForm.bind(this);
     this.submitForm = (values) => {
-      console.log("--------- Submit Action : props", props);
-      console.log("--------- Submit Action : doc ", values);
-//       event.preventDefault();
-//       var values = this.refs.form.getValue();
-// //      this.debug('submitForm', JSON.stringify(doc));
+      /* eslint-disable no-console */
+      console.log('--------- Submit Action : props', props);
+      console.log('--------- Submit Action : doc ', values);
+      /* eslint-enable no-console */
+
       if (values) {
         this.props.clearErrors();
         if (this.props._id) {
@@ -53,13 +38,13 @@ const BookForm = class extends React.Component {
     };
 
     const { API_AST } = this.props.context();
-    console.log("API_AST : ", API_AST);
+    console.log('API_AST : ', API_AST);        // eslint-disable-line no-console
     this.schemaType = API_AST.getType('Book');
 
-    this.schemaValidator = model => {
-      const details = [];
+    this.schemaValidator = () => {
+//      const details = [];
 
-      console.log("Validator");
+      console.log('Validator');        // eslint-disable-line no-console
 
       // if ( ! model.title) {
       //   details.push({name: 'title', message: '"title" is required!'});
@@ -74,31 +59,33 @@ const BookForm = class extends React.Component {
     this.schemaData = {
 
       author: {
-        initialValue: "Bob",
+        initialValue: 'Bob',
         options: [
-            {label: "Abe", value: 1},
-            {label: "Bob", value: 2},
-            {label: "Cal", value: 3}
+            {label: 'Abe', value: 1},
+            {label: 'Bob', value: 2},
+            {label: 'Cal', value: 3}
         ]
       },
       // content: {
-      //   allowedValues: ["A", "B", "C", ]
+      //   allowedValues: ['A', 'B', 'C', ]
       // },
       pages: {
-        label : "# of pages",
-        initialValue : 7,
-        allowedValues: [1, 2, 3, 4, 5, 6, 7, 8]
+        label: '# of pages',
+        initialValue: 7,
+        allowedValues: [ 1, 2, 3, 4, 5, 6, 7, 8 ]
 
       },
       title: {
-        initialValue : "Fuck You",
+        initialValue: 'Fuck You',
       }
 
     };
 
-    console.log("Book schema : ", this.schemaType);
-    console.log("Schema validator : ", this.schemaValidator);
-    console.log("Schema data : ", this.schemaData);
+    /* eslint-disable no-console */
+    console.log('Book schema : ', this.schemaType);
+    console.log('Schema validator : ', this.schemaValidator);
+    console.log('Schema data : ', this.schemaData);
+    /* eslint-enable no-console */
     this.bridge = new GraphQLBridge(
                            this.schemaType
                          , this.schemaValidator
@@ -106,7 +93,7 @@ const BookForm = class extends React.Component {
     );
 
 
-    console.log("The bridge : ", this.bridge);
+    console.log('The bridge : ', this.bridge);        // eslint-disable-line no-console
 
     // this.submitAction
     this.state = {model: undefined};
@@ -116,9 +103,9 @@ const BookForm = class extends React.Component {
   }
 
 
-  onModel (model) {
-      this.setState({model: JSON.stringify(model, null, 4)});
-      console.log("Model is : ", model);
+  onModel(model) {
+    this.setState({model: JSON.stringify(model, null, 4)});
+    console.log('Model is : ', model);        // eslint-disable-line no-console
   }
 
   render() {
@@ -135,7 +122,7 @@ const BookForm = class extends React.Component {
                 <TextField name="title" label="Title" placeholder="The title of the book"/>
               </div>
               <div className="col-md-6">
-                <SelectField name="author"  label="Author" />
+                <SelectField name="author" label="Author" />
               </div>
               <div className="col-md-2">
                 <NumField name="pages" />
@@ -153,7 +140,7 @@ const BookForm = class extends React.Component {
 
   }
 
-}
+};
 
 // const bookMutation = gql`
 //   mutation createBook( $title: String! $content: String! $pages: Int! $authorId: Int! )

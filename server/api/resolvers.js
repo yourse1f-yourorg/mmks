@@ -26,12 +26,12 @@ const resolvers = {
 
   Mutations: {
 
+/* eslint-disable no-console */
     createAuthor: (_, args) => {
-      console.log("Creating an Author ?", args);
+      console.log('Creating an Author ?', args);
       return Author.create(
         { firstName: args.firstName, lastName: args.lastName }
-      ).then ( (sequelizeResult) => {
-//        console.log('After mutation ', sequelizeResult);
+      ).then( (sequelizeResult) => {
         const { errors, dataValues } = sequelizeResult;
         if (dataValues) {
           console.log('got some GraphQL results', dataValues);
@@ -40,40 +40,40 @@ const resolvers = {
         if (errors) {
           console.log('got some GraphQL execution errors', errors);
         }
-      }).catch ( (error) => {
+      }).catch( (error) => {
         console.log('There was an error sending the query', error);
       });
     },
 
     createBook: (_, args) => {
-      console.log("Creating a Book :: ", args);
-      console.log("... having Author :: ", args.authorId);
+      console.log('Creating a Book :: ', args);
+      console.log('... having Author :: ', args.authorId);
       let aBook = Book.build(
-      {
-        title: args.title,
-        content: args.content,
-        pages: args.pages,
-        authorId: args.authorId
-      });
+        {
+          title: args.title,
+          content: args.content,
+          pages: args.pages,
+          authorId: args.authorId
+        });
 
-      console.log("An Author looks like : ", Author);
+      console.log('An Author looks like : ', Author);
 
-      return aBook.save().then (
+      return aBook.save().then(
         (sequelizeResult) => {
-//        console.log('After mutation ', sequelizeResult);
-        const { errors, dataValues } = sequelizeResult;
-        if (dataValues) {
-          console.log('got some GraphQL results', dataValues);
-          return dataValues;
+          const { errors, dataValues } = sequelizeResult;
+          if (dataValues) {
+            console.log('got some GraphQL results', dataValues);
+            return dataValues;
+          }
+          if (errors) {
+            console.log('got some GraphQL execution errors', errors);
+          }
         }
-        if (errors) {
-          console.log('got some GraphQL execution errors', errors);
-        }
-      }).catch ( (error) => {
+      ).catch( (error) => {
         console.log('There was an error sending the query', error);
       });
     },
-
+/* eslint-enable no-console */
   },
 
 };

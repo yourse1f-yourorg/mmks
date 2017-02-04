@@ -3,26 +3,26 @@ import React from 'react';
 import Sidebar from '../containers/sidebar';
 
 // import AcCont from '/client/access_control/acContainer.js';
-import Utils from '../../utils';
+// import Utils from '../../utils';
 
 import Composer from '../composers/add';
 import Component from '../components/uniform';
 
 let Container = function dummy() { return <div></div>; };
-let Authorized = function dummy() { return <div></div>; };
+// let Authorized = function dummy() { return <div></div>; };
 
 export default class extends React.Component {
 
   constructor(props) {
     super(props);
     Container = Composer(Component);
-    Authorized = Utils.Authorized;
+//    Authorized = Utils.Authorized;
   }
 
   render() {
 
-    const apAdd = {module: 'books', action: 'add'};
-    const accPnts = [ apAdd ];
+//    const apAdd = {module: 'books', action: 'add'};
+//    const accPnts = [ apAdd ];
 
 /*
             <Authorized accesspoints={accPnts} warn='true'>
