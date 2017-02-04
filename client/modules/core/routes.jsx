@@ -9,8 +9,6 @@ import {
 import PostList from './containers/postlist';
 import Post from './containers/post';
 import NewPost from './containers/newpost';
-import BookList from './containers/booklist';
-import ApolloPost from './containers/apopost';
 
 export default function (injectDeps, {FlowRouter}) {
   const MainLayoutCtx = injectDeps(LayoutDefault);
@@ -42,21 +40,4 @@ export default function (injectDeps, {FlowRouter}) {
     }
   });
 
-  FlowRouter.route('/booklist', {
-    name: 'booklist',
-    action() {
-      mount(MainLayoutCtx, {
-        content: () => (<BookList/>)
-      });
-    }
-  });
-
-  FlowRouter.route('/apop', {
-    name: 'apollolist',
-    action() {
-      mount(MainLayoutCtx, {
-        content: () => (<ApolloPost/>)
-      });
-    }
-  });
 }

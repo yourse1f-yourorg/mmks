@@ -1,6 +1,18 @@
 import {useDeps} from 'react-simple-di';
 import { composeAll, composeWithTracker } from 'mantra-core';
 
+import { graphql } from 'react-apollo';
+import gql from 'graphql-tag';
+
+const bookMutation = gql`
+  mutation createBook( $title: String! $content: String! $pages: Int! $authorId: Int! )
+  {
+    createBook( title: $title, content: $content, pages: $pages authorId: $authorId )
+    {
+      _id title content pages
+    }
+  }`;
+
 export const addComposer = ({context, clearErrors}, onData) => {
 
   const {LocalState} = context();
@@ -11,12 +23,15 @@ export const addComposer = ({context, clearErrors}, onData) => {
 };
 
 export const depsMapper = (context, actions) => ({
-  submitAction: actions._books.add,
+  submitAction: actions._books.create,
   clearErrors: actions._books.clearErrors,
   context: () => context
 });
 
-export default (component) => composeAll(
+const Component = (component) => composeAll(
+    graphql(bookMutation),
     composeWithTracker(addComposer),
     useDeps(depsMapper)
   )(component);
+
+export default Component;

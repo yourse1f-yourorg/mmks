@@ -16,30 +16,48 @@ export default {
   },
 
   // create
-  add({Meteor, LocalState, FlowRouter}, data) {
-    Lgr.a = 'add';
-    const _id = Meteor.uuid();
-    Meteor.call('_books.add', data, _id, (err) => {
-      if (err) {
-        Lgr.error(err.message);
-        LocalState.set('_books.ADD_ERROR', err.message);
-        return;
+  create({Meteor, LocalState, FlowRouter}, book, mutate) {
+    Lgr.a = 'create';
+    Lgr.info("Create book with :: ", book.title);
+    console.log("Book.create.  With : ", book);
+    mutate({
+      variables: {
+        title : book.title,
+        content: book.content,
+        pages: book.pages,
+        authorId: book.author
       }
-      FlowRouter.go('/books/' + _id);
+    }).then(function(result) {
+      FlowRouter.go('/book/' + result.data.createBook._id);
     });
   },
+
+  // // add
+  // add({Meteor, LocalState, FlowRouter}, data) {
+  //   Lgr.a = 'add';
+  //   const _id = Meteor.uuid();
+  //   Meteor.call('_books.add', data, _id, (err) => {
+  //     if (err) {
+  //       Lgr.error(err.message);
+  //       LocalState.set('_books.ADD_ERROR', err.message);
+  //       return;
+  //     }
+  //     FlowRouter.go('/book/' + _id);
+  //   });
+  // },
 
   // update
   update({Meteor, LocalState, FlowRouter}, data, _id) {
     Lgr.a = 'update';
-    Meteor.call('_books.update', data, _id, (err) => {
-      if (err) {
-        Lgr.error(err.message);
-        LocalState.set('_books.UPDATE_ERROR', err.message);
-        return;
-      }
-      FlowRouter.go('/books/' + _id);
-    });
+    console.log("Update book : ", data);
+    // Meteor.call('_books.update', data, _id, (err) => {
+    //   if (err) {
+    //     Lgr.error(err.message);
+    //     LocalState.set('_books.UPDATE_ERROR', err.message);
+    //     return;
+    //   }
+    //   FlowRouter.go('/books/' + _id);
+    // });
   },
 
   hide({Meteor, LocalState, FlowRouter}, _id) {

@@ -1,7 +1,7 @@
 import React from 'react';
 
-import dataComposer from '../composers/sidebar.js';
-import Component from '../components/_sidebar.js';
+import dataComposer from '../composers/sidebar';
+import Component from '../components/sidebar';
 
 import Utils from '../../utils';
 

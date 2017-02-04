@@ -2,9 +2,8 @@ import React from 'react';
 
 import Sidebar from '../containers/sidebar.js';
 
-import dataComposer from '../composers/single.js';
-import Component from '../components/_single.js';
-// const Container = dataComposer(Component);
+import Composer from '../composers/single.js';
+import Component from '../components/single.js';
 
 import Utils from '../../utils';
 
@@ -14,8 +13,12 @@ export default class extends React.Component {
 
   constructor(props) {
     super(props);
-    Container = dataComposer(Component, Utils.AccessControlComposer);
+    Container = Composer(Component, Utils.AccessControlComposer);
   }
+
+/* ***************************************
+             View A Book Container
+   ***************************************/
 
   render() {
 

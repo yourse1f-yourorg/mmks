@@ -10,11 +10,11 @@ exports.up = function(knex, Promise) {
       table.timestamp('updatedAt').defaultTo(knex.fn.now());
     }),
 
-    knex.schema.createTable('book', function(table){
+    knex.schema.createTable('book', function(table) {
       table.increments('_id').primary();
       table.string('title');
       table.text('content');
-      table.integer('views');
+      table.integer('pages');
       table.timestamp('createdAt').defaultTo(knex.fn.now());
       table.timestamp('updatedAt').defaultTo(knex.fn.now());
       table.integer('authorId')

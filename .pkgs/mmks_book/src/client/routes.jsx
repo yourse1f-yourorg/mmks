@@ -3,20 +3,29 @@ import {mount} from 'react-mounter';
 
 import Utils from '../utils';
 
-import BookList from './containers/collection.js';
-import BooksView from './containers/single.js';
-import BooksAdd from './containers/add.js';
-import BooksEdit from './containers/edit.js';
+import ListBooks from './containers/collection';
+import ViewBook from './containers/single';
+import AddBook from './containers/add';
+import EditBook from './containers/edit';
 
 export default function (injectDeps, {FlowRouter}) {
 
   const LayoutDefaultCtx = injectDeps(Utils.LayoutDefault);
 
+  FlowRouter.route('/book/:_id', {
+    name: '_books.booksView',
+    action({_id}) {
+      mount(LayoutDefaultCtx, {
+        content: () => (<ViewBook _id={_id}/>)
+      });
+    }
+  });
+
   FlowRouter.route('/books', {
     name: '_books.booksList',
     action() {
       mount(LayoutDefaultCtx, {
-        content: () => (<BookList />)
+        content: () => (<ListBooks />)
       });
     }
   });
@@ -25,25 +34,16 @@ export default function (injectDeps, {FlowRouter}) {
     name: '_books.booksAdd',
     action() {
       mount(LayoutDefaultCtx, {
-        content: () => (<BooksAdd />)
+        content: () => (<AddBook />)
       });
     }
   });
 
-  FlowRouter.route('/books/:_id', {
-    name: '_books.booksView',
-    action({_id}) {
-      mount(LayoutDefaultCtx, {
-        content: () => (<BooksView _id={_id}/>)
-      });
-    }
-  });
-
-  FlowRouter.route('/books/:_id/edit', {
+  FlowRouter.route('/book/:_id/edit', {
     name: '_books.booksEdit',
     action({_id}) {
       mount(LayoutDefaultCtx, {
-        content: () => (<BooksEdit _id={_id}/>)
+        content: () => (<EditBook _id={_id}/>)
       });
     }
   });

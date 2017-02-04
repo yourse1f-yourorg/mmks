@@ -11,6 +11,10 @@ export const editComposer = ({context, clearErrors}, onData) => {
   onData(null, {exception});
 };
 
+/* ***************************************
+             Edit A Book Composer
+   ***************************************/
+
 export const depsMapper = (context, actions) => ({
   submitAction: actions._books.update,
   clearErrors: actions._books.clearErrors,

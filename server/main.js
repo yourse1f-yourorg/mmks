@@ -7,18 +7,15 @@ import { WebApp } from 'meteor/webapp';
 import { createApolloServer } from 'meteor/apollo';
 import { makeExecutableSchema } from 'graphql-tools';
 
-import typeDefs from './api/schema';
+import typeDefs from '../lib/api/typeDefs';
 import resolvers from './api/resolvers';
 
-const schema = makeExecutableSchema({
-  typeDefs,
-  resolvers,
-});
+const executableSchema = makeExecutableSchema({ typeDefs, resolvers, });
 
 createApolloServer({
   graphiql: true,
   pretty: true,
-  schema
+  schema: executableSchema
 });
 
 var haveLogglyToken = () => {

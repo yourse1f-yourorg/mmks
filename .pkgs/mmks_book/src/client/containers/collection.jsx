@@ -1,10 +1,15 @@
 import React from 'react';
 
-import Sidebar from '../containers/sidebar.js';
+import Sidebar from '../containers/sidebar';
 
-import dataComposer from '../composers/collection.js';
-import Component from '../components/_collection.js';
-const Container = dataComposer(Component);
+import Composer from '../composers/collection';
+import Component from '../components/collection';
+const Container = Composer(Component);
+
+/* ***************************************
+             Books List Container
+   ***************************************/
+
 
 export default class extends React.Component {
 
@@ -24,5 +29,7 @@ export default class extends React.Component {
         </div>
       </div>
     );
+
   }
+
 }

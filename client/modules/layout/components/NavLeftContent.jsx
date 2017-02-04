@@ -61,9 +61,6 @@ export default class extends React.Component {
     let navAdmin = React.createElement(DropDown, { name: 'Admin', links: linksAdmin });
 
     let linksTasks = [];
-    linksTasks.push({ name: 'List APosts', url: '/apo', enabled: true } );
-    linksTasks.push({ name: 'Add APost', url: '/new-post', enabled: true } );
-    linksTasks.push({ divider: true } );
     linksTasks.push({ name: 'List Posts', url: '/', enabled: true } );
     linksTasks.push({ name: 'Add Post', url: '/new-post', enabled: true } );
     linksTasks.push({ divider: true } );

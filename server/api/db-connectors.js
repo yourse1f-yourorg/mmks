@@ -31,7 +31,7 @@ const BookModel = db.define('book', {
   },
   title: { type: Sequelize.STRING },
   content: { type: Sequelize.STRING },
-  views: { type: Sequelize.STRING },
+  pages: { type: Sequelize.STRING },
 }, {
   freezeTableName: true // Model tableName will be the same as the model name
 });
@@ -45,9 +45,9 @@ BookModel.belongsTo(AuthorModel, { as: 'author' });
 const Author = db.models.author;
 const Book = db.models.book;
 
-// let book = Book.findAll();
-// book.then(function(result) {
-//   console.log("-------------------------", result[0]);
-// });
+let book = Book.findAll();
+book.then(function(result) {
+  console.log(" We got the first book -- ", result[0].title);
+});
 
 export { Author, Book };

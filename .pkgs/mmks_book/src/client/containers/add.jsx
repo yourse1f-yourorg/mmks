@@ -1,11 +1,12 @@
 import React from 'react';
 
-import Sidebar from '../containers/sidebar.js';
+import Sidebar from '../containers/sidebar';
 
-import dataComposer from '../composers/add.js';
-import Component from '../components/_form.js';
-
+// import AcCont from '/client/access_control/acContainer.js';
 import Utils from '../../utils';
+
+import Composer from '../composers/add';
+import Component from '../components/uniform';
 
 let Container = function dummy() { return <div></div>; };
 let Authorized = function dummy() { return <div></div>; };
@@ -14,7 +15,7 @@ export default class extends React.Component {
 
   constructor(props) {
     super(props);
-    Container = dataComposer(Component);
+    Container = Composer(Component);
     Authorized = Utils.Authorized;
   }
 
@@ -23,6 +24,11 @@ export default class extends React.Component {
     const apAdd = {module: 'books', action: 'add'};
     const accPnts = [ apAdd ];
 
+/*
+            <Authorized accesspoints={accPnts} warn='true'>
+              <Container />
+            </Authorized>
+*/
     return (
       <div className="bs-docs-section clearfix">
         <div className="row">
@@ -30,9 +36,7 @@ export default class extends React.Component {
             <Sidebar />
           </div>
           <div className="col-md-9">
-            <Authorized accesspoints={accPnts} warn='true'>
-              <Container />
-            </Authorized>
+            <Container />
           </div>
         </div>
       </div>

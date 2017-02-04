@@ -1,9 +1,9 @@
 import React from 'react';
 
-import Sidebar from '../containers/sidebar.js';
+import Sidebar from '../containers/sidebar';
 
-import dataComposer from '../composers/edit.js';
-import Component from '../components/_form.js';
+import Composer from '../composers/edit';
+import Component from '../components/form';
 
 import Utils from '../../utils';
 
@@ -14,9 +14,18 @@ export default class extends React.Component {
 
   constructor(props) {
     super(props);
-    Container = dataComposer(Component);
+
+    const { API_AST } = props.context();
+    console.log("API_AST : ", API_AST.getType('Book'));
+
+    Container = Composer(Component);
     Authorized = Utils.Authorized;
   }
+
+/* ***************************************
+             Edit A Book Container
+   ***************************************/
+
 
   render() {
 
