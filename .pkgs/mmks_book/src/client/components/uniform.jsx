@@ -60,6 +60,7 @@ const BookForm = class extends React.Component {
 
       author: {
         initialValue: 'Bob',
+        attrs: { 'data-cuke': 'author' },
         options: [
             {label: 'Abe', value: 1},
             {label: 'Bob', value: 2},
@@ -72,11 +73,13 @@ const BookForm = class extends React.Component {
       pages: {
         label: '# of pages',
         initialValue: 7,
+        attrs: { 'data-cuke': 'pages' },
         allowedValues: [ 1, 2, 3, 4, 5, 6, 7, 8 ]
 
       },
       title: {
-        initialValue: 'Demogod',
+        attrs: { 'data-cuke': 'title' },
+        initialValue: 'Demo Book',
       }
 
     };
@@ -119,20 +122,21 @@ const BookForm = class extends React.Component {
           >
             <div className="row-fluid">
               <div className="col-md-4">
-                <TextField name="title" label="Title" placeholder="The title of the book"/>
+                <TextField data-cuke="title" name="title" label="Title"
+                           placeholder="The book's title."/>
               </div>
               <div className="col-md-6">
-                <SelectField name="author" label="Author" />
+                <SelectField data-cuke="author" name="author" label="Author" />
               </div>
               <div className="col-md-2">
-                <NumField name="pages" />
+                <NumField data-cuke="pages" name="pages" />
               </div>
             </div>
             <div className="row-fluid">
               <LongTextField name="content" label="Content"
-                               disabled={false} placeholder="Brief synopsis" />
+                data-cuke="content" placeholder="Brief synopsis" />
             </div>
-            <SubmitField />
+            <SubmitField data-cuke="save-item"/>
           </AutoForm>
 
       </div>
