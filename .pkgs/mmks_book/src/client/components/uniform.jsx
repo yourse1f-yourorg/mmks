@@ -76,7 +76,7 @@ const BookForm = class extends React.Component {
 
       },
       title: {
-        initialValue: 'Fuck You',
+        initialValue: 'Demogod',
       }
 
     };
