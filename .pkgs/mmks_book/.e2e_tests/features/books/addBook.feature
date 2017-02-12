@@ -17,8 +17,8 @@ Feature: Manage books
   @watch
   Scenario: Create a new book
     Given I have opened the 'add books' page : "http://localhost:3000/books/add"
-    When I create a "122" page "SciFi" book with text "Ring World",
-    Then I see a new record with the same title, number of pages and contents.
+    When I create a "122" page book, "Ringworld", by "Niven, Larry" with synopsis "Imagination on a vast scale",
+    Then I see a new record with the same title, author, number of pages and contents.
 
   @~watch
   Scenario: Verify field validation
@@ -80,7 +80,7 @@ Feature: Manage books
   Scenario: Create a new book
     Given I have opened the 'add books' page : "http://localhost:3000/books/add"
     When I create a "232" page "Western" book with text "Lonesome Dove",
-    Then I see a new record with the same title, number of pages and contents.
+    Then I see a new record with the same title, author, number of pages and contents.
 
   @~watch
   Scenario: Unable to update book
@@ -96,7 +96,7 @@ Feature: Manage books
     And I submit the form
     Then I see my user drop-down menu.
 
-  @watch
+  @~watch
   Scenario: Hide book
     Given I have opened the books list page : "http://localhost:3000/books"
     And I have elected to "delete" the "Western" item.

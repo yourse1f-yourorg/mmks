@@ -15,6 +15,7 @@ const API_AST = buildASTSchema(parse(API[0]));
 
 import apolloClient from 'apollo-client';
 import GQL from 'graphql-tag';
+
 import { meteorClientConfig as MeteorClientConfig } from 'meteor/apollo';
 
 const ApolloClient = new apolloClient(MeteorClientConfig());

@@ -1,9 +1,9 @@
 import React from 'react';
 
-import Sidebar from '../containers/sidebar.js';
+import Sidebar from '../containers/sidebar';
 
-import Composer from '../composers/single.js';
-import Component from '../components/single.js';
+import Composer from '../composers/single';
+import Component from '../components/single';
 
 import Utils from '../../utils';
 

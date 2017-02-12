@@ -32,33 +32,27 @@ export default {
     });
   },
 
-  // // add
-  // add({Meteor, LocalState, FlowRouter}, data) {
-  //   Lgr.a = 'add';
-  //   const _id = Meteor.uuid();
-  //   Meteor.call('_books.add', data, _id, (err) => {
-  //     if (err) {
-  //       Lgr.error(err.message);
-  //       LocalState.set('_books.ADD_ERROR', err.message);
-  //       return;
-  //     }
-  //     FlowRouter.go('/book/' + _id);
-  //   });
-  // },
-
   // update
-  update({Meteor, LocalState, FlowRouter}, data, _id) {
+  update({Meteor, LocalState, FlowRouter}, book, _id, mutate) {
     Lgr.a = 'update';
-    console.log('Update book (data) : ', data);        // eslint-disable-line no-console
-    console.log('Update book (_id) : ', _id);        // eslint-disable-line no-console
-    // Meteor.call('_books.update', data, _id, (err) => {
-    //   if (err) {
-    //     Lgr.error(err.message);
-    //     LocalState.set('_books.UPDATE_ERROR', err.message);
-    //     return;
-    //   }
-    //   FlowRouter.go('/books/' + _id);
-    // });
+    console.log('Update book (data) : ', book);        // eslint-disable-line no-console
+    console.log('Update book (_id) : ', book._id);        // eslint-disable-line no-console
+    mutate({
+      variables: {
+        id: book._id,
+        title: book.title,
+        content: book.content,
+        pages: book.pages,
+        authorId: book.author._id
+      }
+    }).then(function (result) {
+      const { errors, data } = result;
+      console.log('Update book result :: ', data); // eslint-disable-line no-console
+      console.log('Update book errors :: ', errors); // eslint-disable-line no-console
+      FlowRouter.go('/book/' + result.data.updateBook._id);
+    }).catch((error) => {
+      console.log('Book update error :: ', error); // eslint-disable-line no-console
+    });
   },
 
   hide({Meteor, LocalState, FlowRouter}, _id) {

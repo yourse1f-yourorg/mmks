@@ -1,5 +1,6 @@
 import { Author, Book } from './db-connectors';
 
+/* eslint-disable no-console */
 const resolvers = {
   Query: {
     book(_, args) {
@@ -20,13 +21,22 @@ const resolvers = {
 
   Book: {
     author(book) {
-      return book.getAuthor();
+      return Author.findById( book.authorId )
+        .then(theAuthor => {
+          if (!theAuthor) {
+            console.log('Unable to find author :: ', book.authorId);
+            return { message: 'Author not found' };
+          }
+          return theAuthor.dataValues;
+        })
+        .catch((error) => {
+          console.log('There was an error finding the author :: ', error);
+        });
     },
   },
 
   Mutations: {
 
-/* eslint-disable no-console */
     createAuthor: (_, args) => {
       console.log('Creating an Author ?', args);
       return Author.create(
@@ -34,14 +44,14 @@ const resolvers = {
       ).then( (sequelizeResult) => {
         const { errors, dataValues } = sequelizeResult;
         if (dataValues) {
-          console.log('got some GraphQL results', dataValues);
+          console.log('Author, "' + args.lastName + '", has data values :: ', dataValues);
           return dataValues;
         }
         if (errors) {
-          console.log('got some GraphQL execution errors', errors);
+          console.log('Sequelize error while retrieving the author, "' + args.lastName + '"', errors);
         }
       }).catch( (error) => {
-        console.log('There was an error sending the query', error);
+        console.log('Sequelize error while creating the author, "' + args.lastName + '"', error);
       });
     },
 
@@ -56,26 +66,73 @@ const resolvers = {
           authorId: args.authorId
         });
 
-      console.log('An Author looks like : ', Author);
-
       return aBook.save().then(
-        (sequelizeResult) => {
-          const { errors, dataValues } = sequelizeResult;
+        (saveResult) => {
+          const { errors, dataValues } = saveResult;
           if (dataValues) {
-            console.log('got some GraphQL results', dataValues);
-            return dataValues;
+            console.log('New book data values : ', dataValues);
+            return Book
+            .findById( dataValues._id )
+            .then(newBook => {
+              if (!newBook) {
+                console.log('Unable to find the newly created book :: ', dataValues._id);
+                return { message: 'New book <' + dataValues._id + '>  created, but not found!' };
+              }
+              return dataValues;
+            })
+            .catch((error) => {
+              console.log('Sequelize error while reloading the book, "' + args.title + '"', error);
+            });
           }
           if (errors) {
-            console.log('got some GraphQL execution errors', errors);
+            console.log('Sequelize error while finding the book, "' + args.title + '"', errors);
           }
         }
       ).catch( (error) => {
-        console.log('There was an error sending the query', error);
+        console.log('Sequelize error while saving the book, "' + args.title + '"', error);
       });
     },
-/* eslint-enable no-console */
-  },
 
+    updateBook: (_, args) => {
+      console.log('Uodating a Book :: ', args);
+      console.log('... id\'d by :: ', args._id);
+      console.log('... by Author :: ', args.authorId);
+
+      return Book
+        .findById( args._id )
+        .then(theBook => {
+          if (!theBook) {
+            console.log('Unable to find the book :: ', args._id);
+            return { message: 'Book not found' };
+          }
+          return theBook
+            .update({
+              title: args.title,
+              content: args.content,
+              pages: args.pages,
+              authorId: args.authorId
+            }).then(
+              (sequelizeResult) => {
+                console.log('**** updated ****', sequelizeResult.dataValues);
+                const { errors, dataValues } = sequelizeResult;
+                if (dataValues) {
+                  console.log('got some GraphQL results', dataValues);
+                  return dataValues;
+                }
+                if (errors) {
+                  console.log('got some GraphQL execution errors', errors);
+                }
+              }
+            ).catch( (error) => {
+              console.log('There was an error updating the book :: ', error);
+            });
+        })
+        .catch((error) => {
+          console.log('There was an error finding the book :: ', error);
+        });
+    },
+/* eslint-enable no-console */
+  }
 };
 
 export default resolvers;

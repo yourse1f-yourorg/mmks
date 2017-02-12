@@ -1,6 +1,6 @@
 module.exports = {
 
-  continuous_integration: {
+  continuousIntegration: {
     client: 'sqlite3',
     connection: {
       filename: '../../../.meteor/local/.db.sqlite'
@@ -17,4 +17,4 @@ module.exports = {
     }
   }
 
-}
+};

@@ -1,13 +1,15 @@
 /* eslint-disable no-undef   */
 
-const cukeBtnSubmit = '//button[@data-cuke="save-item"]';
+const cukeBtnSubmit = '//section[@data-cuke="save-item"]/*[1]';
 
-const cukeInpNumPages = '//input[@data-cuke="pages"]';
-const cukeInpTitle = '//input[@data-cuke="title"]';
-const cukeInpContent = '//textarea[@data-cuke="content"]';
+const cukeInpTitle = '//div[@data-cuke="title"]/*/input';
+const cukeInpNumPages = '//div[@data-cuke="pages"]/*/input';
+const cukeInpAuthor = '//div[@data-cuke="author"]/*/select';
+const cukeInpContent = '//div[@data-cuke="content"]/*/textarea';
 
 const cukeNumPages = '//x-cuke[@id="pages"]';
 const cukeTitle = '//x-cuke[@id="title"]';
+const cukeAuthor = '//x-cuke[@id="author"]';
 const cukeContent = '//x-cuke[@id="content"]';
 
 /*
@@ -18,6 +20,7 @@ const cukeHrefDelete = '//a[@data-cuke="delete-item"]';
 const cukeInvalidNumPages = '//span[@class="help-block error-block"]';
 
 let pages = '';
+let author = '';
 let title = '';
 let content = '';
 module.exports = function () {
@@ -34,15 +37,21 @@ module.exports = function () {
     server.call('_books.wipe');
   });
 
-  this.When(/^I create a "([^"]*)" page "([^"]*)" book with text "([^"]*)",$/,
-    function (_pages, _title, _content) {
+  this.When(/^I create a "([^"]*)" page book, "([^"]*)", by "([^"]*)" with synopsis "([^"]*)",$/,
+    function (_pages, _title, _author, _content) {
 
-      pages = _pages;
       title = _title;
+      author = _author;
+      pages = _pages;
       content = _content;
 
       browser.waitForEnabled( cukeBtnSubmit );
       browser.setValue(cukeInpTitle, title);
+
+      var selectBox = browser.$(cukeInpAuthor);
+      console.log('selectBox is ', selectBox); // returns "uno"
+      selectBox.selectByVisibleText(author);
+
       browser.setValue(cukeInpNumPages, pages);
       browser.setValue(cukeInpContent, content);
 
@@ -50,11 +59,14 @@ module.exports = function () {
 
     });
 
-  this.Then(/^I see a new record with the same title, number of pages and contents\.$/, function () {
-    expect(browser.getText(cukeNumPages)).toEqual(pages + ' pages.');
-    expect(browser.getText(cukeTitle)).toEqual(title);
-    expect(browser.getText(cukeContent)).toEqual(content);
-  });
+  this.Then(/^I see a new record with the same title, author, number of pages and contents\.$/,
+    function () {
+      expect(browser.getText(cukeNumPages)).toEqual(pages);
+      expect(browser.getText(cukeAuthor)).toEqual(author);
+      expect(browser.getText(cukeTitle)).toEqual(title);
+      expect(browser.getText(cukeContent)).toEqual(content);
+    }
+  );
 
 // =======================================================================
 
@@ -147,34 +159,4 @@ module.exports = function () {
     browser.url(_url);
   });
 
-/*
-  this.Then(/^I see the warning "([^"]*)"$/, function (_warning) {
-    expect(_warning).toEqual(browser.getText(cukeWarning));
-  });
-*/
-// =======================================================================
-
-
-//   Scenario: Hide book
-// ------------------------------------------------------------------------
-/*
-  this.Given(/^I have elected to "([^"]*)" the "([^"]*)" item\.$/, function (_cmd, _book) {
-    link = '//a[@data-cuke="' + _book + '"]';
-    browser.waitForEnabled( link );
-    browser.click(link);
-    let cukeHrefCmd = '//a[@data-cuke="' + _cmd + '-book"]';
-
-    browser.waitForEnabled( cukeHrefCmd );
-    browser.click( cukeHrefCmd );
-
-  });
-*/
-
-/*
-  this.Then(/^I no longer see that book record\.$/, function () {
-    browser.waitForEnabled( cukeBooksList );
-    let item = browser.elements(link);
-    expect(item.value.length).toEqual(0);
-  });
-*/
 };

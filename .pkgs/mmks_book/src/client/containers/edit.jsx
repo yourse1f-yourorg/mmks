@@ -14,12 +14,10 @@ export default class extends React.Component {
 
   constructor(props) {
     super(props);
-
-    const { API_AST } = props.context();
-    console.log('API_AST : ', API_AST.getType('Book'));  // eslint-disable-line no-console
-
     Container = Composer(Component);
+
     Authorized = Utils.Authorized;
+
   }
 
 /* ***************************************
@@ -33,6 +31,7 @@ export default class extends React.Component {
     const accPnts = [ apEdit ];
 
     const {_id} = this.props;
+
     return (
       <div className="bs-docs-section clearfix">
         <div className="row">
