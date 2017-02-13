@@ -4,10 +4,18 @@ import { Author, Book } from './db-connectors';
 const resolvers = {
   Query: {
     book(_, args) {
+
+      // to select deleted and undeleted records use pass in :
+      // args.deleted = { $like: '%' };
+
+      args.deleted = args.deleted || { $not: true };
+      // console.log('####### Book.findAll({ where: args }); ', args);
+
       let res = Book.findAll({ where: args });
       return res;
     },
     author(_, args) {
+      args.deleted = { $not: true };
       let res = Author.findAll({ where: args });
       return res;
     },
@@ -93,8 +101,43 @@ const resolvers = {
       });
     },
 
+    hideBook: (_, args) => {
+      console.log('Hiding a Book :: ', args);
+
+      return Book
+        .findById( args._id )
+        .then(theBook => {
+          if (!theBook) {
+            console.log('Unable to find the book :: ', args._id);
+            return { message: 'Book not found' };
+          }
+          return theBook
+            .update({
+              deleted: true,
+              deletedAt: Date.now()
+            }).then(
+              (sequelizeResult) => {
+                console.log('**** hidden ****', sequelizeResult);
+                // const { errors, dataValues } = sequelizeResult;
+                // if (dataValues) {
+                //   console.log('got some GraphQL results', dataValues);
+                //   return dataValues;
+                // }
+                // if (errors) {
+                //   console.log('got some GraphQL execution errors', errors);
+                // }
+              }
+            ).catch( (error) => {
+              console.log('There was an error updating the book :: ', error);
+            });
+        })
+        .catch((error) => {
+          console.log('There was an error hiding the book :: ', error);
+        });
+    },
+
     updateBook: (_, args) => {
-      console.log('Uodating a Book :: ', args);
+      console.log('Updating book :: ', args);
       console.log('... id\'d by :: ', args._id);
       console.log('... by Author :: ', args.authorId);
 

@@ -17,3 +17,12 @@ export const UPDATE_BOOK_MUTATION = gql`
       _id title content pages author{ _id, lastName, firstName }
     }
   }`;
+
+export const HIDE_BOOK_MUTATION = gql`
+  mutation bookHide( $id: Int! )
+  {
+    hideBook( _id: $id )
+    {
+      deleted, deletedAt
+    }
+  }`;

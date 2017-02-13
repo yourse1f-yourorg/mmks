@@ -1,6 +1,6 @@
 /* eslint-disable no-undef   */
 
-const cukeBtnSubmit = '//section[@data-cuke="save-item"]/*[1]';
+const cukeBtnSubmit = '//div[@data-cuke="save-item"]/*[1]';
 
 const cukeInpTitle = '//div[@data-cuke="title"]/*/input';
 const cukeInpNumPages = '//div[@data-cuke="pages"]/*/input';
@@ -49,10 +49,10 @@ module.exports = function () {
       browser.setValue(cukeInpTitle, title);
 
       var selectBox = browser.$(cukeInpAuthor);
-      console.log('selectBox is ', selectBox); // returns "uno"
       selectBox.selectByVisibleText(author);
 
       browser.setValue(cukeInpNumPages, pages);
+
       browser.setValue(cukeInpContent, content);
 
       browser.click(cukeBtnSubmit);

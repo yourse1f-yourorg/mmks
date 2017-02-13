@@ -15,10 +15,13 @@
     "qtst": "mocha .scripts/mocha_boot.js client/access_control/tests/**/*.js --compilers js:babel-core/register",
     "qtw": "npm run qtst -- --watch --watch-extensions js,jsx",
     "dsstore": "find . -name '*.DS_Store' -type f -delete",
-    "knex_roll": "cd server/api/.knex && knex migrate:rollback --env production;",
-    "knex_make": "cd server/api/.knex && knex migrate:latest --env production; ",
-    "knex_seed": "cd server/api/.knex && knex seed:run --env production; ",
-    "doit": "./.scripts/free.sh; export HOST_SERVER_NAME=\"http://moon.planet.sun:3000/\"; export ROOT_URL=\"${HOST_SERVER_NAME}\"; export YOUR_FULLNAME=\"You Yourself\"; export GITHUB_ORGANIZATION_NAME=\"YourOrg\"; meteor run --mobile-server=${HOST_SERVER_NAME} --verbose --no-lint --no-release-check --settings=settings.json;"
+    "knex_prod": "export T=production; npm run knex_roll && npm run knex_make && npm run knex_seed;",
+    "knex_cont": "export T=continuousIntegration; npm run knex_roll && npm run knex_make && npm run knex_seed;",
+    "knex_roll": "cd server/api/.knex && knex migrate:rollback --env ${T};",
+    "knex_make": "cd server/api/.knex && knex migrate:latest --env ${T};",
+    "knex_seed": "cd server/api/.knex && knex seed:run --env ${T};",
+    "runp": "./.scripts/free.sh; export HOST_SERVER_NAME=\"http://moon.planet.sun:3000/\"; export ROOT_URL=\"${HOST_SERVER_NAME}\"; export YOUR_FULLNAME=\"You Yourself\"; export GITHUB_ORGANIZATION_NAME=\"YourOrg\"; meteor run --mobile-server=${HOST_SERVER_NAME} --production --verbose --no-lint --no-release-check --settings=settings.json;",
+    "rund": "./.scripts/free.sh; export HOST_SERVER_NAME=\"http://moon.planet.sun:3000/\"; export ROOT_URL=\"${HOST_SERVER_NAME}\"; export YOUR_FULLNAME=\"You Yourself\"; export GITHUB_ORGANIZATION_NAME=\"YourOrg\"; meteor run --mobile-server=${HOST_SERVER_NAME}              --verbose --no-lint --no-release-check --settings=settings.json;"
   },
   "devDependencies": {
     "babel-core": "6.22.1",

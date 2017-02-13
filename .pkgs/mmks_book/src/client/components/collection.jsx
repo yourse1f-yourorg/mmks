@@ -10,7 +10,7 @@ const BookList = ({book}) => (
     <ul>
       {book.map(aBook => (
         <li key={aBook._id}>
-          <a href={`/book/${aBook._id}`}>{aBook.title} </a>
+          <a data-cuke={aBook.title} href={`/book/${aBook._id}`}>{aBook.title} </a>
             written by
           <a href={`/books/${aBook.author._id}`}>&nbsp;
              {aBook.author.lastName}, {aBook.author.firstName}</a>
@@ -21,4 +21,3 @@ const BookList = ({book}) => (
 );
 
 export default BookList;
-

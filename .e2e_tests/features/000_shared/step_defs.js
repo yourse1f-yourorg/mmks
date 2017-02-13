@@ -15,6 +15,7 @@ const cukeAccountPage = '//x-cuke[@id="account-page"]';
 const cukeAcctEmail = '//x-cuke[@id="acct-email"]';
 
 const cukeBtnSubmit = '//button[@data-cuke="save-item"]';
+const cukeDivSubmit = '//div[@data-cuke="save-item"]';
 const cukeInpContent = '//textarea[@data-cuke="content"]';
 
 const cukeTitle = '//x-cuke[@id="title"]';
@@ -105,6 +106,10 @@ module.exports = function () {
     browser.click(cukeBtnSubmit);
   });
 
+  this.When(/^I submit the item,$/, function () {
+    browser.click(cukeDivSubmit);
+  });
+
   this.When(/^I save the item with new content "([^"]*)",$/, function (_content) {
     content = _content;
     browser.setValue(cukeInpContent, content);
@@ -154,7 +159,7 @@ module.exports = function () {
     expect(_warning).toEqual(browser.getText(cukeWarning));
   });
 
-  let cnt = 0;
+//  let cnt = 0;
 //  let itm = '';
   this.Given(/^I have elected to "([^"]*)" the "([^"]*)" item\.$/, function (_cmd, _item) {
 //    itm = _item;
@@ -182,7 +187,7 @@ module.exports = function () {
 // console.log("Got list item" + listItem);
 // console.log("Got list item.value " + listItem.value);
 // console.log("Got list item.value.length " + listItem.value.length);
-      return 1 > listItem.value.length;
+      return ( listItem.value.length < 1 );
     }, 10000, ' what the?', 2000);
     expect(listItem.value.length).toEqual(0);
   });

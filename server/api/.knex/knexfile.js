@@ -3,9 +3,10 @@ module.exports = {
   continuousIntegration: {
     client: 'sqlite3',
     connection: {
-      filename: '../../../.meteor/local/.db.sqlite'
+      filename: '/tmp/db/mmks.sqlite'
     }
   },
+
   production: {
     client: 'postgresql',
     connection: {
@@ -18,3 +19,4 @@ module.exports = {
   }
 
 };
+//       filename: '../../../.meteor/local/build/programs/server/mmks.sqlite'

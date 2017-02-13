@@ -55,16 +55,34 @@ export default {
     });
   },
 
-  hide({Meteor, LocalState, FlowRouter}, _id) {
+  // hide
+  hide({Meteor, LocalState, FlowRouter}, _id, mutate) {
     Lgr.a = 'hide';
-    Meteor.call('_books.hide', _id, (err) => {
-      if (err) {
-        return LocalState.set('_books.HIDE_ERROR', err.message);
+    console.log('Hide book (_id) : ', _id);        // eslint-disable-line no-console
+    mutate({
+      variables: {
+        id: _id,
       }
-      FlowRouter.go('/books/');
-
+    }).then(function (result) {
+      const { errors, data } = result;
+      console.log('Hide book result :: ', data); // eslint-disable-line no-console
+      console.log('Hide book errors :: ', errors); // eslint-disable-line no-console
+      FlowRouter.go('/books');
+    }).catch((error) => {
+      console.log('Book hide error :: ', error); // eslint-disable-line no-console
     });
   },
+
+  // hide({Meteor, LocalState, FlowRouter}, _id) {
+  //   Lgr.a = 'hide';
+  //   Meteor.call('_books.hide', _id, (err) => {
+  //     if (err) {
+  //       return LocalState.set('_books.HIDE_ERROR', err.message);
+  //     }
+  //     FlowRouter.go('/books/');
+
+  //   });
+  // },
 
   // clearError
   clearErrors({LocalState}) {

@@ -1,7 +1,10 @@
 import {useDeps} from 'react-simple-di';
 import { composeAll, composeWithTracker } from 'mantra-core';
+import { graphql } from 'react-apollo';
 
-import loadBook from '../api/loadBook.js';
+import loadBook from '../api/loadBook';
+
+import { HIDE_BOOK_MUTATION } from '../api/mutationsBooks';
 
 export const singleComposer = ({context, _id, accesspoints, clearErrors}, onData) => {
 
@@ -27,6 +30,7 @@ export const depsMapper = (context, actions) => ({
 });
 
 export default (component, _authComposer) => composeAll(
+    graphql(HIDE_BOOK_MUTATION),
     composeWithTracker(_authComposer),
     composeWithTracker(singleComposer),
     useDeps(depsMapper)

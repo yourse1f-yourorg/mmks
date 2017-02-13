@@ -20,13 +20,13 @@ Feature: Manage books
     When I create a "122" page book, "Ringworld", by "Niven, Larry" with synopsis "Imagination on a vast scale",
     Then I see a new record with the same title, author, number of pages and contents.
 
-  @~watch
+  @watch
   Scenario: Verify field validation
     Given I have opened the books list page : "http://localhost:3000/books"
-    And I have elected to edit the "SciFi" item,
-    When I set 'Number of Pages' to "85"
-    And I save the item,
-    Then I see the number of pages validation hint "Nope. 85 pages is too small, SciFi Minimum : 90".
+    And I have elected to edit the "Marketing Manager" item,
+    When I set 'Number of Pages' to "55"
+    And I submit the item,
+    Then I see the number of pages validation hint "Pages count cannot be less than 60!".
 
   @~watch
   Scenario: Update book
@@ -89,7 +89,7 @@ Feature: Manage books
     When I attempt to edit the item,
     Then I see it is disabled.
 
-  @watch
+  @~watch
   Scenario: Log in as an administrator
     Given I have opened the login page : "http://localhost:3000/login"
     When I provide my email "administrator@example.com" and password "apple_01"
@@ -103,7 +103,7 @@ Feature: Manage books
     Then I no longer see that record.
 
 
-  @watch
+  @~watch
   Scenario: Logout administrator
     Given I am at the user account page, "http://localhost:3000/account"
     When I logout,

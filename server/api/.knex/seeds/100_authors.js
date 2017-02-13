@@ -7,16 +7,16 @@ exports.seed = function (knex, Promise) {
     knex('author').del(),
 
     //  Generated from https://www.mockaroo.com/schemas/53829
-    knex('author').insert({firstName: 'Naéva',lastName: 'Gardner'}),
-    knex('author').insert({firstName: 'Torbjörn',lastName: 'Vasquez'}),
-    knex('author').insert({firstName: 'Bérengère',lastName: 'Thomas'}),
-    knex('author').insert({firstName: 'Méghane',lastName: 'Long'}),
-    knex('author').insert({firstName: 'Larry',lastName: 'Niven'}),
-    knex('author').insert({firstName: 'Eugénie',lastName: 'Chapman'}),
-    knex('author').insert({firstName: 'Mélys',lastName: 'Rice'}),
-    knex('author').insert({firstName: 'Athéna',lastName: 'Nelson'}),
-    knex('author').insert({firstName: 'Anaël',lastName: 'Watkins'}),
-    knex('author').insert({firstName: 'Mahélie',lastName: 'Lee'})
+    knex('author').insert({deleted: false, firstName: 'Naéva',lastName: 'Gardner'}),
+    knex('author').insert({deleted: false, firstName: 'Torbjörn',lastName: 'Vasquez'}),
+    knex('author').insert({deleted: false, firstName: 'Bérengère',lastName: 'Thomas'}),
+    knex('author').insert({deleted: false, firstName: 'Méghane',lastName: 'Long'}),
+    knex('author').insert({deleted: false, firstName: 'Larry',lastName: 'Niven'}),
+    knex('author').insert({deleted: false, firstName: 'Eugénie',lastName: 'Chapman'}),
+    knex('author').insert({deleted: false, firstName: 'Mélys',lastName: 'Rice'}),
+    knex('author').insert({deleted: false, firstName: 'Athéna',lastName: 'Nelson'}),
+    knex('author').insert({deleted: false, firstName: 'Anaël',lastName: 'Watkins'}),
+    knex('author').insert({deleted: false, firstName: 'Mahélie',lastName: 'Lee'})
 
   );
 };

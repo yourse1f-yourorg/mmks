@@ -49,3 +49,4 @@ let Book = _book.new({
 app.loadModule(Book);
 
 app.init();
+console.log('App initialized');

@@ -51,18 +51,28 @@ const BookForm = class extends React.Component {
     this.schemaType = API_AST.getType(nameModule);
     this.model = this.props.record || { author: {} };
     this.schemaData = this.props.schemaData || { };
+    this.exception = 'CRAP!';
 
-    this.schemaValidator = (model) => {
+    this.schemaValidator = (model, error, callback) => {
       const details = [];
 
-      console.log('Validator :: Model = ', model);        // eslint-disable-line no-console
+      console.log('Validator :: Model = ', model);                 // eslint-disable-line no-console
+      console.log('Validator :: Error = ', error);                 // eslint-disable-line no-console
+      console.log('Validator :: CBack = ', callback);              // eslint-disable-line no-console
+      console.log('Validator ::  THIs = ', this.props);  // eslint-disable-line no-console
 
-      if ( model.pages < 1 ) {
-        details.push({name: 'pages', message: '"pages" cannot be less than 1!'});
+      let minPageCount = 60;
+      if ( model.pages < minPageCount ) {
+        details.push({
+          name: 'pages',
+          message: 'Pages count cannot be less than ' + minPageCount + '!'
+        });
       }
 
       if (details.length) {
-        throw ValidationException(details);
+        console.log('Invalid! Throwing :: Model = ', details);   // eslint-disable-line no-console
+        this.props.exception = 'Pages count cannot be less than ' + minPageCount + '!';
+//        throw ValidationException(details);
       }
 
     };
@@ -102,6 +112,8 @@ const BookForm = class extends React.Component {
 
   render() {
 
+    const { exception } = this.props;
+
     console.log('Rendering model : ', this.model);        // eslint-disable-line no-console
 
     const title = this.props._id ? 'Edit: ' + this.model.title : 'Add a book :';
@@ -109,6 +121,13 @@ const BookForm = class extends React.Component {
     return (
       <div>
           <h3>{title}</h3>
+
+          {exception ?
+          <div data-cuke="bad-content" className="alert alert-danger" onClick="">
+            <span className="unicon fatal icon-white icon-24" ></span>
+            {exception}
+          </div> : null }
+
           <AutoForm
                schema={this.bridge}
                onSubmit={doc => this.submitForm(doc)}
