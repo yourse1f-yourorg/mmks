@@ -15,8 +15,11 @@ const cukeAccountPage = '//x-cuke[@id="account-page"]';
 const cukeAcctEmail = '//x-cuke[@id="acct-email"]';
 
 const cukeBtnSubmit = '//button[@data-cuke="save-item"]';
-const cukeDivSubmit = '//div[@data-cuke="save-item"]';
 const cukeInpContent = '//textarea[@data-cuke="content"]';
+
+const cukeDivSubmit = '//div[@data-cuke="save-item"]/input';
+const cukeDivContent = '//div[@data-cuke="content"]/*/textarea';
+const cukeErrorMessage = '//div[@data-cuke="errorMessage"]/*/div';
 
 const cukeTitle = '//x-cuke[@id="title"]';
 const cukeContent = '//x-cuke[@id="content"]';
@@ -116,6 +119,12 @@ module.exports = function () {
     browser.click(cukeBtnSubmit);
   });
 
+  this.When(/^I submit the item with new content "([^"]*)",$/, function (_content) {
+    content = _content;
+    browser.setValue(cukeDivContent, content);
+    browser.click(cukeDivSubmit);
+  });
+
   this.Then(/^I see the record with the new content\.$/, function () {
     browser.waitForEnabled( cukeTitle );
     expect(browser.getText(cukeContent)).toEqual(content);
@@ -128,6 +137,16 @@ module.exports = function () {
 
     const msg = browser.getText(cukeBadContent);
     expect( msg ).toEqual(_msg);
+  });
+
+  this.Then(/^I see the error message, "([^"]*)"\.$/, function (_msg) {
+    browser.waitUntil(function () {
+      return browser.getText(cukeErrorMessage).length > 0;
+    }, 5000, 'expected text to be there after 5s');
+
+    const msg = browser.getText(cukeErrorMessage);
+    expect( msg ).toEqual(_msg);
+
   });
 
   this.Given(/^I have elected to edit the "([^"]*)" item,$/, function (_item) {
@@ -176,17 +195,21 @@ module.exports = function () {
   this.Then(/^I no longer see that record\.$/, function () {
 // console.log("Waiting for ", cukeItemsList);
     browser.waitForEnabled( cukeItemsList );
+    browser.refresh();
+
+// console.log("Waiting for ", cukeItemsList);
+    browser.waitForEnabled( cukeItemsList );
     browser.timeouts('implicit', 1000);
 //    browser.saveScreenshot('/tmp/logs/meteor/' + cnt++ + itm + '.png');
-// console.log("Getting " + link);
+// console.log("Getting ", link);
     let listItem = browser.elements(link);
     browser.waitUntil(function () {
 // console.log(link + ' still there?');
 //      browser.saveScreenshot('/tmp/logs/meteor/' + cnt++ + itm + '.png');
       listItem = browser.elements(link);
-// console.log("Got list item" + listItem);
-// console.log("Got list item.value " + listItem.value);
-// console.log("Got list item.value.length " + listItem.value.length);
+// console.log("Got list item ", listItem);
+// console.log("Got list item.value ", listItem.value);
+// console.log("Got list item.value.length ", listItem.value.length);
       return ( listItem.value.length < 1 );
     }, 10000, ' what the?', 2000);
     expect(listItem.value.length).toEqual(0);

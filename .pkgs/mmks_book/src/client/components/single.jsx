@@ -11,7 +11,7 @@ export default class extends React.Component {
   }
 
   hideRecord() {
-    console.log('--------- Hiding : props', this.PROPS);
+//    console.log('--------- Hiding : props', this.PROPS);
     this.props.hideAction(this.props._id, this.props.mutate);
   }
 

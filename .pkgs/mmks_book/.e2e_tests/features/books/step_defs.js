@@ -1,6 +1,7 @@
 /* eslint-disable no-undef   */
 
 const cukeBtnSubmit = '//div[@data-cuke="save-item"]/*[1]';
+const cukeDivSubmit = '//div[@data-cuke="save-item"]/input';
 
 const cukeInpTitle = '//div[@data-cuke="title"]/*/input';
 const cukeInpNumPages = '//div[@data-cuke="pages"]/*/input';
@@ -17,7 +18,8 @@ const cukeHrefEdit = '//a[@data-cuke="edit-ite"]';
 const cukeHrefDelete = '//a[@data-cuke="delete-item"]';
 */
 
-const cukeInvalidNumPages = '//span[@class="help-block error-block"]';
+const cukeErrorMessage = '//div[@data-cuke="errorMessage"]/*/div';
+// const cukeInvalidNumPages = '//span[@class="help-block error-block"]';
 
 let pages = '';
 let author = '';
@@ -45,7 +47,7 @@ module.exports = function () {
       pages = _pages;
       content = _content;
 
-      browser.waitForEnabled( cukeBtnSubmit );
+      browser.waitForEnabled( cukeDivSubmit );
       browser.setValue(cukeInpTitle, title);
 
       var selectBox = browser.$(cukeInpAuthor);
@@ -94,7 +96,7 @@ module.exports = function () {
   });
 
   this.Then(/^I see the number of pages validation hint "([^"]*)"\.$/, function (_message) {
-    expect(browser.getText(cukeInvalidNumPages)).toEqual(_message);
+    expect(browser.getText(cukeErrorMessage)).toEqual(_message);
   });
 
 // =======================================================================

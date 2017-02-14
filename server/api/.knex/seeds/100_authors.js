@@ -13,7 +13,7 @@ exports.seed = function (knex, Promise) {
     knex('author').insert({deleted: false, firstName: 'Méghane',lastName: 'Long'}),
     knex('author').insert({deleted: false, firstName: 'Larry',lastName: 'Niven'}),
     knex('author').insert({deleted: false, firstName: 'Eugénie',lastName: 'Chapman'}),
-    knex('author').insert({deleted: false, firstName: 'Mélys',lastName: 'Rice'}),
+    knex('author').insert({deleted: false, firstName: 'Poul',lastName: 'Anderson'}),
     knex('author').insert({deleted: false, firstName: 'Athéna',lastName: 'Nelson'}),
     knex('author').insert({deleted: false, firstName: 'Anaël',lastName: 'Watkins'}),
     knex('author').insert({deleted: false, firstName: 'Mahélie',lastName: 'Lee'})

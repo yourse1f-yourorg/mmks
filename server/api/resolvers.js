@@ -117,7 +117,7 @@ const resolvers = {
               deletedAt: Date.now()
             }).then(
               (sequelizeResult) => {
-                console.log('**** hidden ****', sequelizeResult);
+                console.log('Book hidden :: #', sequelizeResult.dataValues._id);
                 // const { errors, dataValues } = sequelizeResult;
                 // if (dataValues) {
                 //   console.log('got some GraphQL results', dataValues);

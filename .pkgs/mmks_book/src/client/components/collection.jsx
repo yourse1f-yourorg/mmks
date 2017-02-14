@@ -7,7 +7,7 @@ import React from 'react';
 const BookList = ({book}) => (
   <div className='bookList'>
     <h3>Books list</h3>
-    <ul>
+    <ul data-cuke="items-list">
       {book.map(aBook => (
         <li key={aBook._id}>
           <a data-cuke={aBook.title} href={`/book/${aBook._id}`}>{aBook.title} </a>

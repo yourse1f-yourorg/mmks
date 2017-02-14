@@ -7,17 +7,19 @@ import {
   TextField,
   SelectField,
   LongTextField,
+  ErrorsField,
   SubmitField,
   NumField
 } from 'uniforms-bootstrap3';
 
+
 const nameModule = 'Book';
 
-const ValidationException = (aryErrors) => {
-  this.message = 'Form has errors';
-  this.name = nameModule + ' -- ValidationException';
-  this.errors = aryErrors;
-};
+// const ValidationException = (aryErrors) => {
+//   this.message = 'Form has errors';
+//   this.name = nameModule + ' -- ValidationException';
+//   this.errors = aryErrors;
+// };
 
 
 const BookForm = class extends React.Component {
@@ -46,20 +48,8 @@ const BookForm = class extends React.Component {
       }
     };
 
-    const { API_AST } = this.props.context();
-    console.log('API_AST : ', API_AST);        // eslint-disable-line no-console
-    this.schemaType = API_AST.getType(nameModule);
-    this.model = this.props.record || { author: {} };
-    this.schemaData = this.props.schemaData || { };
-    this.exception = 'CRAP!';
-
-    this.schemaValidator = (model, error, callback) => {
+    this.schemaValidator = (model) => {
       const details = [];
-
-      console.log('Validator :: Model = ', model);                 // eslint-disable-line no-console
-      console.log('Validator :: Error = ', error);                 // eslint-disable-line no-console
-      console.log('Validator :: CBack = ', callback);              // eslint-disable-line no-console
-      console.log('Validator ::  THIs = ', this.props);  // eslint-disable-line no-console
 
       let minPageCount = 60;
       if ( model.pages < minPageCount ) {
@@ -69,13 +59,25 @@ const BookForm = class extends React.Component {
         });
       }
 
-      if (details.length) {
-        console.log('Invalid! Throwing :: Model = ', details);   // eslint-disable-line no-console
-        this.props.exception = 'Pages count cannot be less than ' + minPageCount + '!';
-//        throw ValidationException(details);
+      if ( model.content && model.content.includes('crap')) {
+        details.push({
+          name: 'content',
+          message: 'Net-nanny says, “Don\'t be wude! \'Cwap\' is weewee weewee cwude.”!'
+        });
       }
 
+      if (details.length) {
+        throw {details};         // eslint-disable-line no-throw-literal
+      }
     };
+
+    const { API_AST } = this.props.context();
+    console.log('API_AST : ', API_AST);        // eslint-disable-line no-console
+    this.schemaType = API_AST.getType(nameModule);
+
+    this.model = this.props.record || { author: {} };
+    this.schemaData = this.props.schemaData || { };
+    this.exception = 'CRAP!';
 
     /* eslint-disable no-console */
     console.log('Book model record : ', this.props.record);
@@ -95,7 +97,6 @@ const BookForm = class extends React.Component {
                          , this.schemaData
     );
 
-
     console.log('The bridge : ', this.bridge);        // eslint-disable-line no-console
 
     this.state = {model: this.model};
@@ -112,8 +113,6 @@ const BookForm = class extends React.Component {
 
   render() {
 
-    const { exception } = this.props;
-
     console.log('Rendering model : ', this.model);        // eslint-disable-line no-console
 
     const title = this.props._id ? 'Edit: ' + this.model.title : 'Add a book :';
@@ -122,16 +121,11 @@ const BookForm = class extends React.Component {
       <div>
           <h3>{title}</h3>
 
-          {exception ?
-          <div data-cuke="bad-content" className="alert alert-danger" onClick="">
-            <span className="unicon fatal icon-white icon-24" ></span>
-            {exception}
-          </div> : null }
-
           <AutoForm
                schema={this.bridge}
                onSubmit={doc => this.submitForm(doc)}
                model={this.model}
+               validate="onChange"
           >
             <div className="row-fluid">
               <div data-cuke="title" className="col-md-4">
@@ -149,6 +143,14 @@ const BookForm = class extends React.Component {
               <LongTextField name="content" label="Content"
                 placeholder="Brief synopsis" />
             </div>
+
+            <ErrorsField data-cuke="errorMessage"/>
+
+            {this.props.errorMessage ? (
+              <span children={this.props.errorMessage} />
+            ) : (
+              <br />
+            )}
 
             <SubmitField data-cuke="save-item"/>
 
