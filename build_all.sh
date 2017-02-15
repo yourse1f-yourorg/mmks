@@ -31,7 +31,9 @@ echo -e "
       Launch server for mobile
       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-        Terminal #1 : meteor run --mobile-server=\${HOST_SERVER_NAME}  --settings=settings.json;
+        Terminal #1 : One of ...
+           - .scripts/startInDevMode.sh
+           - .scripts/startInProdMode.sh # (requires PostgreSQL)
         Terminal #2 : meteor npm run acceptance
      Android device : http://\${HOST_SERVER_NAME}:3000/
 ";

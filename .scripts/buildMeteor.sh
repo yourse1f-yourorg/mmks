@@ -68,6 +68,8 @@ function buildMeteor()
     tar zcf ${APP_NAME}.tar.gz ${APP_NAME};
   popd >/dev/null;
 
+  mkdir -p /tmp/db; touch /tmp/db/mmks.sqlite
+
 }
 
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then

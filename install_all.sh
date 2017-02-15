@@ -80,7 +80,9 @@ if [ -f ./settings.json ]; then
       Sanity check
       ~~~~~~~~~~~~
 
-        Terminal #1 : meteor --settings=settings.json
+        Terminal #1 : One of ...
+           - .scripts/startInDevMode.sh
+           - .scripts/startInProdMode.sh # (requires PostgreSQL)
         Terminal #2 : meteor npm run acceptance
 
 *OR*
@@ -94,8 +96,10 @@ if [ -f ./settings.json ]; then
         export YOUR_FULLNAME=\"You Yourself\";
         export GITHUB_ORGANIZATION_NAME=\"YourOrg\";
         ./build_all.sh;
-        meteor run --mobile-server=\${HOST_SERVER_NAME}  --settings=settings.json;
-   ";
+        #
+        #  Then run one of these ....
+        .scripts/startInDevMode.sh
+        # .scripts/startInProdMode.sh # (requires PostgreSQL)   ";
 
   fi;
 else

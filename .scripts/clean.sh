@@ -6,6 +6,7 @@ function CleanAllInstalledPackages() {
   rm -fr .meteor/local/;
   rm -fr .meteor/version;
   rm -fr .habitat/results;
+  rm -fr public/mobile/android/*.apk*;
   rm -fr .pkgs/mmks_widget/node_modules;
   rm -fr .pkgs/mmks_widget/dist;
   rm -fr .pkgs/mmks_book/node_modules;

@@ -37,6 +37,7 @@ function installMeteorApp()
   ${METEOR_CMD} npm -y install;
   # yarn install;
 
+  mkdir -p /tmp/db; touch /tmp/db/mmks.sqlite;
 }
 
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
