@@ -169,6 +169,22 @@ If you are in a disposable virtual machine with a recent fresh Ubuntu installati
 
     To see how to debug an Android app between two virtual machines watch [Meteor / CircleCI Tutorial -- Bonus - Debug your Android App in a Virtual Machine](https://www.youtube.com/watch?v=xB3wWvK5YT0&index=12&list=PLq7op4J183lXpGr79hjfQVQHB-saVqLBL)
 
+    Set up server IP address in KitKat machine from the server ...
+
+    ```
+    you@yours:~$ ifconfig                           # Grab IP address to clipboard
+    you@yours:~$ adb connect 192.168.122.174        # Start a connection to KitKat host (as shown in video)
+    you@yours:~$ adb devices -l                     # Make sure the host is listed
+    you@yours:~$ adb shell                          # Get into the Android terminal shell
+    uid=2000(shell)@x86:/ $ su                      ## Get root privileges
+    uid=0(root)@x86:/ $ mount -o remount,rw /system ## Allow to write
+    uid=0(root)@x86:/ $ vi /system/etc/hosts        ### Edit to add the server (paste in IP addresss and whatever you used for ${HOST_SERVER_NAME})
+    uid=0(root)@x86:/ $ mount -o remount,ro /system ## Go back to read-only
+    uid=0(root)@x86:/ $ exit                        ## Get out
+    uid=2000(shell)@x86:/ $ ping moon.planet.sun    # See if it worked
+
+    ```
+
 
 ### Other Notes
 
@@ -207,3 +223,6 @@ For my own use, I keep open at least 4 terminal windows, with these commands, re
 
 I tend to use the above commands daily.
 To get quickly ready to work, I open this README page, open the four terminal windows and cut and paste into them.
+
+
+
