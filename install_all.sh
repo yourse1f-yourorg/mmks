@@ -14,6 +14,7 @@ source .scripts/android/installAndBuildTools.sh;
 source .scripts/installMeteorApp.sh;
 # source .pkgs/install_local_packages.sh;
 
+
 storage;
 export MINFREE=7000
 # export FREESPACE=$(($(stat -f --format="%a*%S" ${HOME})/1000000));
@@ -57,7 +58,7 @@ Press any key to continue or <ctrl-c> to quit.
 ";
 read -n 1 -s;
 
-if [[ -z ${CI} ]]; then
+if [[ "${CI:-false}" == "false" ]]; then
   refreshApt;
   installJava;
   installNodeJs;
