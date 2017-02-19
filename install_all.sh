@@ -48,15 +48,17 @@ if echo ${FREEMEM} ${NEEDMEM} | awk '{exit $1 < $2 ? 0 : 1}'; then
   read -n 1 -s;
 fi;
 
-[ -f settings.json ] || cp settings.json.example settings.json;
-echo -e "
+if [ ! -f settings.json ]; then
+  cp settings.json.example settings.json;
+  echo -e "
   While the system builds, you should prepare your settings:
 
        nano $(pwd)/settings.json;
 
-Press any key to continue or <ctrl-c> to quit.
-";
-read -n 1 -s;
+  Press any key to continue or <ctrl-c> to quit.
+  ";
+  read -n 1 -s;
+fi;
 
 if [[ "${CI:-false}" == "false" ]]; then
   refreshApt;

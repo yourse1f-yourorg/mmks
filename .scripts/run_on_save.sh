@@ -8,6 +8,8 @@ shift;
 
 IGNORE_PATHS="$@";
 
+echo "Will execute : '${EVENT_TASK}'";
+
 while true #run indefinitely
 do
 inotifywait -qqr -e close_write,move,create,delete ${IGNORE_PATHS} ${WATCH_DIRECTORY} && ${EVENT_TASK};
