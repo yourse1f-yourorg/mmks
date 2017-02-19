@@ -2,6 +2,7 @@
   "name": "meteor-mantra-kickstarter",
   "version": "0.2.1",
   "scripts": {
+    "install": "./install_all.sh",
     "lint": "npm run lint_pkgs && npm run lint_main",
     "lint_main": "eslint . --ext .js --ext .jsx",
     "lint_pkgs": "./.pkgs/lint_each_package.sh",
