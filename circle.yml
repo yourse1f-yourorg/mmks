@@ -33,7 +33,7 @@ dependencies:
 
   override:
     - cp settings.json.example settings.json
-    - source .pkgs/install_local_packages.sh; install_local_packages;
+#    - source .pkgs/install_local_packages.sh; install_local_packages;
     - ${METEOR_CMD} npm install
     - ${METEOR_CMD} npm run knex_cont
 

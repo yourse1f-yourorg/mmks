@@ -57,12 +57,14 @@ Press any key to continue or <ctrl-c> to quit.
 ";
 read -n 1 -s;
 
-refreshApt;
-installJava;
-installNodeJs;
-installChimp;
-installMeteorFramework;
-installAndroid;
+if [[ -z ${CI} ]]; then
+  refreshApt;
+  installJava;
+  installNodeJs;
+  installChimp;
+  installMeteorFramework;
+  installAndroid;
+fi;
 installMeteorApp;
 
 declare MSG="";
