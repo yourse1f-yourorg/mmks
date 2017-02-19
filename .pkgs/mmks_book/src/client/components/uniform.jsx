@@ -15,80 +15,39 @@ import {
 
 const nameModule = 'Book';
 
-// const ValidationException = (aryErrors) => {
-//   this.message = 'Form has errors';
-//   this.name = nameModule + ' -- ValidationException';
-//   this.errors = aryErrors;
-// };
-
-
 const BookForm = class extends React.Component {
 
   constructor(props) {
     super(props);
 
-    this.onChange = () => {
-//      let vals = this.refs.form.getValue(); // <- validate on every change
-//      this.info( ' @ onChange ', JSON.stringify(vals) );
-    };
-
     this.submitForm = (values) => {
-      /* eslint-disable no-console */
-      console.log('--------- Submit Action : props', props);
-      console.log('--------- Submit Action : doc ', values);
-      /* eslint-enable no-console */
-
       if (values) {
         this.props.clearErrors();
-        if (this.props._id) {
-          this.props.submitAction(values, this.props._id, this.props.mutate);
-        } else {
-          this.props.submitAction(values, this.props.mutate);
-        }
+        this.props.submitAction(values, this.props.mutate);
       }
     };
 
     this.schemaValidator = (model) => {
-      const details = [];
-
-      let minPageCount = 60;
-      if ( model.pages < minPageCount ) {
-        details.push({
-          name: 'pages',
-          message: 'Pages count cannot be less than ' + minPageCount + '!'
-        });
-      }
-
-      if ( model.content && model.content.includes('crap')) {
-        details.push({
-          name: 'content',
-          message: 'Net-nanny says, “Don\'t be wude! \'Cwap\' is weewee weewee cwude.”!'
-        });
-      }
-
-      if (details.length) {
-        throw {details};         // eslint-disable-line no-throw-literal
-      }
+      this.props.validateAction(model);
     };
 
     const { API_AST } = this.props.context();
-    console.log('API_AST : ', API_AST);        // eslint-disable-line no-console
-    this.schemaType = API_AST.getType(nameModule);
 
     this.model = this.props.record || { author: {} };
-    this.schemaData = this.props.schemaData || { };
-    this.exception = 'CRAP!';
+    this.state = {model: this.model};
 
-    /* eslint-disable no-console */
-    console.log('Book model record : ', this.props.record);
-    console.log('Book schema : ', this.schemaType);
-    console.log('Schema validator : ', this.schemaValidator);
-    console.log('Schema author options : ', this.props.authorOptions);
+    this.schemaType = API_AST.getType(nameModule);
+    this.schemaData = this.props.schemaData || { };
     this.schemaData.author = {
       options: this.props.authorOptions,
       value: this.model.author._id,
     };
 
+    /* eslint-disable no-console */
+    console.log('Book model record : ', this.props.record);
+    console.log('Schema author options : ', this.props.authorOptions);
+    console.log('Book schema : ', this.schemaType);
+    console.log('Schema validator : ', this.schemaValidator);
     console.log('Schema data : ', this.schemaData);
     /* eslint-enable no-console */
     this.bridge = new GraphQLBridge(
@@ -96,19 +55,6 @@ const BookForm = class extends React.Component {
                          , this.schemaValidator
                          , this.schemaData
     );
-
-    console.log('The bridge : ', this.bridge);        // eslint-disable-line no-console
-
-    this.state = {model: this.model};
-
-    this.onModel = this.onModel.bind(this);
-
-  }
-
-
-  onModel(model) {
-    this.setState({model: JSON.stringify(model, null, 4)});
-    console.log('Our model is now : ', model);        // eslint-disable-line no-console
   }
 
   render() {
@@ -160,29 +106,4 @@ const BookForm = class extends React.Component {
   }
 };
 
-/*
-    <div>
-      <h4>Author</h4>
-
-      <section>
-        <TextField name="title" />
-        <SwapField fieldA="title" fieldB="content">
-            <Icon name="refresh" />
-        </SwapField>
-        <TextField name="content" />
-      </section>
-    </div>
-
-*/
-
-// const bookMutation = gql`
-//   mutation createBook( $title: String! $content: String! $pages: Int! $authorId: Int! )
-//   {
-//     createBook( title: $title, content: $content, pages: $pages authorId: $authorId )
-//     {
-//       _id title content pages
-//     }
-//   }`;
-
-// export default graphql(bookMutation)(BookForm);
 export default BookForm;

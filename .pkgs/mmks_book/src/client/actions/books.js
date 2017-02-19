@@ -1,4 +1,5 @@
 import { Utils } from '../index';
+import { LOAD_BOOK_QUERY, LOAD_BOOKS_QUERY } from '../api/queriesBooks.js';
 
 let Lgr = null;
 
@@ -9,18 +10,48 @@ export default {
     Lgr.a = 'getLogger';
   },
 
-  log() {
-    Lgr.a = 'getLogger';
-    Lgr.error(' Testing!  ');
-    return 'Logger initialized in child';
+  validate(_, model) {
+
+    const details = [];
+
+    let minPageCount = 60;
+    if ( model.pages < minPageCount ) {
+      details.push({
+        name: 'pages',
+        message: 'Pages count cannot be less than ' + minPageCount + '!'
+      });
+    }
+
+    if ( model.content && model.content.includes('crap')) {
+      details.push({
+        name: 'content',
+        message: 'Net-nanny says, “Don\'t be wude! \'Cwap\' is weewee weewee cwude.”!'
+      });
+    }
+
+    if (details.length) {
+      throw {details};         // eslint-disable-line no-throw-literal
+    }
+
   },
 
+  // log() {
+  //   Lgr.a = 'getLogger';
+  //   Lgr.error(' Testing!  ');
+  //   return 'Logger initialized in child';
+  // },
+
   // create
-  create({Meteor, LocalState, FlowRouter}, book, mutate) {
+  create({ FlowRouter }, book, mutate) {
     Lgr.a = 'create';
     Lgr.info('Create book with :: ', book.title);
     console.log('Book.create.  With : ', book);        // eslint-disable-line no-console
     mutate({
+
+      refetchQueries: [ {
+        query: LOAD_BOOKS_QUERY,
+      } ],
+
       variables: {
         title: book.title,
         content: book.content,
@@ -33,7 +64,7 @@ export default {
   },
 
   // update
-  update({Meteor, LocalState, FlowRouter}, book, _id, mutate) {
+  update({Meteor, LocalState, FlowRouter}, book, mutate) {
     Lgr.a = 'update';
     console.log('Update book (data) : ', book);        // eslint-disable-line no-console
     console.log('Update book (_id) : ', book._id);        // eslint-disable-line no-console
@@ -60,9 +91,13 @@ export default {
     Lgr.a = 'hide';
     console.log('Hide book (_id) : ', _id);        // eslint-disable-line no-console
     mutate({
-      variables: {
-        id: _id,
-      }
+
+      refetchQueries: [ {
+        query: LOAD_BOOK_QUERY, LOAD_BOOKS_QUERY,
+        variables: { idBook: _id, },
+      } ],
+
+      variables: { id: _id, },
     }).then(function (result) {
       const { errors, data } = result;
       console.log('Hide book result :: ', data); // eslint-disable-line no-console

@@ -32,8 +32,9 @@ export default function () {
 
     API_AST,
     ApolloClient,
-    GQL,
-    MeteorClientConfig
+    GQL
+    // ,
+    // MeteorClientConfig
 
   };
 }

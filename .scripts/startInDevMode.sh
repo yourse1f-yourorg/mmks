@@ -20,10 +20,10 @@ cd ${PROJECT_ROOT};
 
 export KEYSTORE_PWD="obscuregobbledygook";
 export HOST_SERVER_PORT=3000;
-export HOST_SERVER_URL="3bbb529d.ngrok.io";
+export HOST_SERVER_URL="moon.planet.sun";
 export HOST_SERVER_NAME="http://${HOST_SERVER_URL}:${HOST_SERVER_PORT}/";
 
-export ROOT_PORT=80;
+export ROOT_PORT=3000;
 export ROOT_URL="http://${HOST_SERVER_URL}:${ROOT_PORT}/"
 export YOUR_FULLNAME="You Yourself";
 export GITHUB_ORGANIZATION_NAME="YourOrg";

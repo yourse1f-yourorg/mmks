@@ -19,6 +19,7 @@ export const authorSelectListOptions = ({context}, onData) => {
    ***************************************/
 
 export const depsMapper = (context, actions) => ({
+  validateAction: actions._books.validate,
   submitAction: actions._books.create,
   clearErrors: actions._books.clearErrors,
   context: () => context

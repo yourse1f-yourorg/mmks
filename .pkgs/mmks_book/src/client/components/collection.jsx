@@ -4,11 +4,11 @@ import React from 'react';
              BookList Component
    ***************************************/
 
-const BookList = ({book}) => (
+const BookList = ({books}) => (
   <div className='bookList'>
     <h3>Books list</h3>
     <ul data-cuke="items-list">
-      {book.map(aBook => (
+      {books.map(aBook => (
         <li key={aBook._id}>
           <a data-cuke={aBook.title} href={`/book/${aBook._id}`}>{aBook.title} </a>
             written by

@@ -16,3 +16,19 @@ export const LOAD_BOOK_QUERY = gql`
       }
     }`;
 
+export const LOAD_BOOKS_QUERY = gql`
+    query booksQuery {
+      book
+      {
+        _id
+        title
+        content
+        pages
+        deleted
+        author {
+          _id
+          firstName
+          lastName
+        }
+      }
+    }`;
