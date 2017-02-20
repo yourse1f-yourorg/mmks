@@ -143,7 +143,7 @@ If you are in a disposable virtual machine with a recent fresh Ubuntu installati
 1. Open another terminal window and run acceptance tests :
 
     ```
-    source ~/.profile; # if you have not yet logged out since running './install_all.sh'
+    source ~/.profile; # if you haven't logged out since running 'install_all'
     cd ~/projects/meteor-mantra-kickstarter;
     meteor npm run acceptance;
 
@@ -184,6 +184,62 @@ If you are in a disposable virtual machine with a recent fresh Ubuntu installati
     uid=2000(shell)@x86:/ $ ping moon.planet.sun    # See if it worked
 
     ```
+
+1. Serve up occasional public demos directly from your developer machine via [NGrok](https://ngrok.com/):
+
+    If you want to see an Android phone running the app from a server on the web, without having to go through all the server setup effort, [ngrok](https://ngrok.com/) makes it easy:
+
+    1. Use you GitHub gredentials to log in through [NGrok's login/sign-up page](https://dashboard.ngrok.com/user/login)
+    1. [Download NGrok](https://ngrok.com/download)
+    1. Install it somewhere
+        ```
+        cd ~;
+        mkdir -p utilities;
+        cd utilities;
+        unzip ~/Downloads/ngrok.zip;
+        ```
+    1. Copy **Your Tunnel Authtoken** from the [Auth tab](https://dashboard.ngrok.com/auth)
+    1. Install your token :
+
+        ```
+        ./ngrok authtoken 2RCuUd7C8Qi5qMJJQAmD6_25xo9VDPpfiZXgTk2kY8X;
+        ```
+    1. Start an http tunnel to port 3000 :
+
+        ```
+        ./ngrok http 3000;
+        ```
+    1. Return to your project root and build for Android, specifying the `ngrok` "forwarding" address for the *HOST_SERVER_NAME* to which remote mobile devices should connect :
+
+        ```
+        export EXTERNAL_DOMAIN="a9a18d90.ngrok.io";
+        export HOST_SERVER_NAME="http://${EXTERNAL_DOMAIN}/";
+
+        ./build_all.sh;
+        ```
+    1.  Start up meteor on `localhost:3000` as usual, but specify *ROOT_URL* to match *HOST_SERVER_NAME*.
+
+        ```
+        export ROOT_URL="${HOST_SERVER_NAME}";
+        meteor --settings=settings.json;
+        ```
+
+        You should see :
+
+        ```
+        [[[[[ ~/projects/mmks ]]]]]
+
+        => Started proxy.
+        => Started MongoDB.
+        => Started your app.
+        => App running at: http://a9a18d90.ngrok.io/
+        ```
+
+
+        You can then tap on the little ![android robot icon](https://github.com/yourse1f-yourorg/mmks/blob/apollo/public/mobile/android/Android_robot.svg) to download the app version for installation in the device.
+
+
+        **Note :** You can still access the app [locally](http://localhost:3000) as before.
 
 
 ### Other Notes
