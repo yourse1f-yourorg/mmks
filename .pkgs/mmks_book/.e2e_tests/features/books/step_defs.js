@@ -13,13 +13,7 @@ const cukeTitle = '//x-cuke[@id="title"]';
 const cukeAuthor = '//x-cuke[@id="author"]';
 const cukeContent = '//x-cuke[@id="content"]';
 
-/*
-const cukeHrefEdit = '//a[@data-cuke="edit-ite"]';
-const cukeHrefDelete = '//a[@data-cuke="delete-item"]';
-*/
-
 const cukeErrorMessage = '//div[@data-cuke="errorMessage"]/*/div';
-// const cukeInvalidNumPages = '//span[@class="help-block error-block"]';
 
 let pages = '';
 let author = '';
@@ -81,16 +75,6 @@ module.exports = function () {
     browser.url(_url);
   });
 
-/*
-  let link = '';
-  this.Given(/^I decide to edit the "([^"]*)" item,$/, function (_book) {
-    link = '//a[@data-cuke="' + _book + '"]';
-    browser.waitForExist( link );
-    browser.click(link);
-    browser.waitForEnabled( cukeHrefEdit );
-    browser.click(cukeHrefEdit);
-  });
-*/
   this.When(/^I set 'Number of Pages' to "([^"]*)"$/, function (_pages) {
     browser.setValue(cukeInpNumPages, _pages);
   });
@@ -101,9 +85,12 @@ module.exports = function () {
 
 // =======================================================================
 
-
-//   Scenario: Fail to delete book
-// ------------------------------------------------------------------------
+  let link = '';
+  this.Then(/^I see the book "([^"]*)"\.$/, function ( _item ) {
+    link = '//a[@data-cuke="' + _item + '"]';
+    browser.waitForExist( link );
+    expect(browser.getText(link)).toEqual(_item);
+  });
 
   let book = '';
   this.Given(/^I decide to view the "([^"]*)" book,$/, function (_book) {
@@ -114,40 +101,6 @@ module.exports = function () {
     browser.click( cukeHrefBook );
 
   });
-
-/*
-  let href = null;
-  this.When(/^I decide to delete the item,$/, function () {
-    href = cukeHrefDelete;
-
-    browser.waitForExist( href );
-
-  });
-
-  this.Then(/^I see it is disabled\.$/, function () {
-    expect(browser.isEnabled( href )).toBe(true);
-  });
-*/
-
-// =======================================================================
-
-
-
-
-//   Scenario: Unable to update book
-// ------------------------------------------------------------------------
-
-/*
-  this.When(/^I attempt to edit the item,$/, function () {
-    href = cukeHrefEdit;
-    browser.waitForExist( href );
-  });
-*/
-
-// =======================================================================
-
-
-
 
 //   Scenario: Prohibited from add and from update
 // ------------------------------------------------------------------------

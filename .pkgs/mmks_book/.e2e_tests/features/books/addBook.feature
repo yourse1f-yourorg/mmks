@@ -7,20 +7,20 @@ Feature: Manage books
     Given I have opened the main page : "http://localhost:3000/"
     Then I see the navigation header.
 
-  @watch
+  @~watch
   Scenario: Log in as a staff member
     Given I have opened the login page : "http://localhost:3000/login"
     When I provide my email "staff@example.com" and password "apple_01"
     And I submit the form
     Then I see my user drop-down menu.
 
-  @watch
+  @~watch
   Scenario: Create a new book
     Given I have opened the 'add books' page : "http://localhost:3000/books/add"
     When I create a "122" page book, "Ringworld", by "Niven, Larry" with synopsis "Imagination on a vast scale",
     Then I see a new record with the same title, author, number of pages and contents.
 
-  @watch
+  @~watch
   Scenario: Verify field validation
     Given I have opened the books list page : "http://localhost:3000/books"
     And I have elected to edit the "Marketing Manager" item,
@@ -28,7 +28,7 @@ Feature: Manage books
     And I submit the item,
     Then I see the number of pages validation hint "Pages count cannot be less than 60!".
 
-  @watch
+  @~watch
   Scenario: Update book
     Given I have opened the books list page : "http://localhost:3000/books"
     And I have elected to edit the "Marketing Manager" item,
@@ -36,35 +36,35 @@ Feature: Manage books
     And I submit the item with new content "SciFi is the new ---> Religion!",
     Then I see the record with the new content.
 
-  @watch
+  @~watch
   Scenario: Fail to update book
     Given I have opened the books list page : "http://localhost:3000/books"
     And I have elected to edit the "Marketing Manager" item,
     When I submit the item with new content "SciFi is the new ---> crap!",
     Then I see the error message, "Net-nanny says, “Don't be wude! 'Cwap' is weewee weewee cwude.”!".
 
-  @watch
+  @~watch
   Scenario: Fail to delete book
     Given I have opened the books list page : "http://localhost:3000/books"
     And I decide to view the "Ringworld" book,
     When I elect to delete the item,
     Then I see it is disabled.
 
-  @watch
+  @~watch
   Scenario: Log in as a registered member
     Given I have opened the login page : "http://localhost:3000/login"
     When I provide my email "registered@example.com" and password "apple_01"
     And I submit the form
     Then I see my user drop-down menu.
 
-  @watch
+  @~watch
   Scenario: Unable to update book
     Given I have opened the books list page : "http://localhost:3000/books"
     And I decide to view the "Ringworld" book,
     And I attempt to edit the item,
     Then I see it is disabled.
 
-  @watch
+  @~watch
   Scenario: Forbidden to create a new book
     Given I have opened the books editor page : "http://localhost:3000/books/add"
     Then I see the warning "You haven't been authorized to access this page."
@@ -83,6 +83,13 @@ Feature: Manage books
     Then I see a new record with the same title, author, number of pages and contents.
 
   @watch
+  Scenario: Create a new book
+    Given I have opened the 'add books' page : "http://localhost:3000/books/add"
+    When I create a "239" page book, "The Ringworld Engineers", by "Niven, Larry" with synopsis "For a wheel good time.",
+    And I have opened the books list page : "http://localhost:3000/books"
+    Then I see the book "The Ringworld Engineers".
+
+  @~watch
   Scenario: Unable to update book
     Given I have opened the books list page : "http://localhost:3000/books"
     And I decide to view the "Ringworld" book,
@@ -99,7 +106,7 @@ Feature: Manage books
   @watch
   Scenario: Hide book
     Given I have opened the books list page : "http://localhost:3000/books"
-    And I have elected to "delete" the "Ringworld" item.
+    And I have elected to "delete" the "The Ringworld Engineers" item.
     Then I no longer see that record.
 
   @watch
