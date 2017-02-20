@@ -7,7 +7,8 @@ export default ( args ) => {
 /* eslint-disable no-console */
   ApolloClient.query({
     query: LOAD_BOOKS_QUERY,
-    forceFetch: false,
+    variables: { deletion: false },
+    forceFetch: true,
   }).then((graphQLResult) => {
 
     const { errors, data } = graphQLResult;

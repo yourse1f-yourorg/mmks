@@ -8,7 +8,7 @@ const resolvers = {
       // to select deleted and undeleted records use pass in :
       // args.deleted = { $like: '%' };
 
-      args.deleted = args.deleted || { $not: true };
+//      args.deleted = args.deleted || { $not: true };
       // console.log('####### Book.findAll({ where: args }); ', args);
 
       let res = Book.findAll({ where: args });
@@ -71,7 +71,8 @@ const resolvers = {
           title: args.title,
           content: args.content,
           pages: args.pages,
-          authorId: args.authorId
+          authorId: args.authorId,
+          deleted: args.deleted
         });
 
       return aBook.save().then(
@@ -118,14 +119,14 @@ const resolvers = {
             }).then(
               (sequelizeResult) => {
                 console.log('Book hidden :: #', sequelizeResult.dataValues._id);
-                // const { errors, dataValues } = sequelizeResult;
-                // if (dataValues) {
-                //   console.log('got some GraphQL results', dataValues);
-                //   return dataValues;
-                // }
-                // if (errors) {
-                //   console.log('got some GraphQL execution errors', errors);
-                // }
+                const { errors, dataValues } = sequelizeResult;
+                if (dataValues) {
+                  console.log('got some GraphQL results', dataValues);
+                  return dataValues;
+                }
+                if (errors) {
+                  console.log('got some GraphQL execution errors', errors);
+                }
               }
             ).catch( (error) => {
               console.log('There was an error updating the book :: ', error);

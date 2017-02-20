@@ -50,13 +50,15 @@ export default {
 
       refetchQueries: [ {
         query: LOAD_BOOKS_QUERY,
+        variables: { deletion: false, },
       } ],
 
       variables: {
         title: book.title,
         content: book.content,
         pages: book.pages,
-        authorId: book.author
+        authorId: book.author,
+        deletion: false
       }
     }).then(function (result) {
       FlowRouter.go('/book/' + result.data.createBook._id);
@@ -93,11 +95,15 @@ export default {
     mutate({
 
       refetchQueries: [ {
-        query: LOAD_BOOK_QUERY, LOAD_BOOKS_QUERY,
-        variables: { idBook: _id, },
+        query: LOAD_BOOK_QUERY,
+        variables: { idBook: _id },
+      }, {
+        query: LOAD_BOOKS_QUERY,
+        variables: { deletion: false },
       } ],
 
-      variables: { id: _id, },
+      variables: { id: _id, deletion: false },
+
     }).then(function (result) {
       const { errors, data } = result;
       console.log('Hide book result :: ', data); // eslint-disable-line no-console
@@ -107,17 +113,6 @@ export default {
       console.log('Book hide error :: ', error); // eslint-disable-line no-console
     });
   },
-
-  // hide({Meteor, LocalState, FlowRouter}, _id) {
-  //   Lgr.a = 'hide';
-  //   Meteor.call('_books.hide', _id, (err) => {
-  //     if (err) {
-  //       return LocalState.set('_books.HIDE_ERROR', err.message);
-  //     }
-  //     FlowRouter.go('/books/');
-
-  //   });
-  // },
 
   // clearError
   clearErrors({LocalState}) {
