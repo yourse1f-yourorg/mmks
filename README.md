@@ -236,7 +236,7 @@ If you are in a disposable virtual machine with a recent fresh Ubuntu installati
         ```
 
 
-        You can then tap on the little ![android robot icon](https://github.com/yourse1f-yourorg/mmks/blob/apollo/public/mobile/android/Android_robot.svg) to download the app version for installation in the device.
+        You can then tap on the little android robot icon in the menu bar to download the app version for installation in the device.
 
 
         **Note :** You can still access the app [locally](http://localhost:3000) as before.

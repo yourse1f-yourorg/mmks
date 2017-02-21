@@ -28,4 +28,4 @@ meteor npm run knex_cont;
 #     --no-lint \
 #     --allow-superuser \
 #     --no-release-check
-meteor run --settings=settings.json
+meteor run --settings=settings.json;

@@ -1,5 +1,3 @@
-
-
 import {Colors, _Colors, AccessControl} from '../../lib/collections';
 
 import App from '/lib/app';
