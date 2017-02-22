@@ -4,7 +4,7 @@ pushd `dirname $0` > /dev/null; SCRIPTPATH=`pwd`; popd > /dev/null;
 PROJECT_ROOT=${SCRIPTPATH%/android};
 PROJECT_ROOT=${PROJECT_ROOT%/.scripts};
 
-source ${PROJECT_ROOT}/.scripts/trap.sh;
+# source ${PROJECT_ROOT}/.scripts/trap.sh;
 source ${PROJECT_ROOT}/.pkgs/install_local_packages.sh;
 
 declare METEOR_CMD=""; : ${METEOR_CMD:=meteor};
