@@ -33,8 +33,8 @@ dependencies:
     - mkdir -p /tmp/db; touch /tmp/db/mmks.sqlite
 
   override:
-    - cp settings.json.example settings.json
-    - ${METEOR_CMD} npm run install_all
+    - cp settings.json.example settings.json;
+    - ./install_all.sh;
     - ${METEOR_CMD} npm run knex_cont
 
   post:
