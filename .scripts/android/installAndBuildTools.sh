@@ -40,6 +40,8 @@ declare YOUR_ORGANIZATION_NAME=${YOUR_ORGANIZATION_NAME:-null};
 
 export TMP_DIRECTORY=${TMP_DIRECTORY:-/dev/shm/android_build};
 
+echo "Initialized 'installAndBuildTools'";
+
 function getPluginNumber() {
 
   if [[ ! -f ${TMP_PLUGIN_LIST} ]]; then
@@ -105,7 +107,7 @@ function installAndroid() {
 
   popd >/dev/null;
 
-  echo -e "Correcting ANDROID_HOME in '${ENV_FILE}' variables.";
+  echo -e "*** Correcting ANDROID_HOME in '${ENV_FILE}' variables...";
   if [[ $(grep -c "export ANDROID_HOME=${ANDROID_HOME}"  ${ENV_FILE}) -lt 1 ]];
   then
     while [[ $(grep -c ANDROID_HOME ${ENV_FILE}) -gt 0 ]]; do
@@ -247,7 +249,23 @@ function PrepareToBuildAndroidAPK() {
   set -e;
   local KTEXISTS=0;
   [ -f ${HOME}/.keystore ] && KTEXISTS=$(keytool -list -v  -storepass ${KEYSTORE_PWD} | grep "Alias name" | grep -c "${APP_NAME}");
-  CCODE=$(curl -s ipinfo.io | jq '.country');
+  declare CCODE="";
+  echo "### ~   ~   ~  H  "
+  if ping -c 1 -w 5 ip-api.com; then 
+    echo "### ~   ~   ~  I  "
+    CCODE=$(curl -s ip-api.com/json | jq '.country');
+  else
+    echo -e "
+            *** Problem ***
+    Networking problems prohibit identifying your country
+    Use the following command to generate a key pair manually and try again : 
+
+       keytool -genkeypair -dname "cn=${YOUR_FULLNAME}, ou=IT, o=${YOUR_ORGANIZATION_NAME}, c=${CCODE}" \
+               -alias ${APP_NAME} -keypass ${KEYSTORE_PWD} -storepass ${KEYSTORE_PWD} -validity 3650;
+    ";
+    exit 1;
+  fi;
+
   if [[ ${KTEXISTS} -lt 1 ]]; then
     echo "Creating key pair for '${APP_NAME}'.";
     until keytool -genkeypair -dname "cn=${YOUR_FULLNAME}, ou=IT, o=${YOUR_ORGANIZATION_NAME}, c=${CCODE}" \

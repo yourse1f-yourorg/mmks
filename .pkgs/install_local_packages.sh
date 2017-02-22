@@ -4,7 +4,8 @@ declare METEOR_CMD="${METEOR_CMD:=${HOME}/.meteor/meteor}";
 
 function install_local_packages() {
   echo -e "### Installing included npm packages for Meteor";
-  ls -l ${METEOR_CMD};
+
+  if [[ "${METEOR_CMD}" != "meteor" ]]; then ls -l ${METEOR_CMD}; fi;
   echo -e "###";
   ls -l ${HOME}/.meteor/;
   echo -e "###";

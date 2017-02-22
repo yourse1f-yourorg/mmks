@@ -16,7 +16,7 @@ function installNodeJs()
   fi
 
   mkdir -p ${HOME}/.npm-global;
-  if [ -z $(cat ~/.profile | grep ".npm-global") ]; then
+  if (( $(cat ~/.profile | grep -c '.npm-global') < 1 )); then
     echo -e "
 if [ -d "\${HOME}/.npm-global/bin" ]; then
   export PATH=\${HOME}/.npm-global/bin:\$PATH
