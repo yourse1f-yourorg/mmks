@@ -24,10 +24,10 @@
     "clean_all": "./clean_all.sh",
     "install_all": "meteor npm run envchk && . ~/.userVars.sh && ./install_all.sh;",
     "build_all": "meteor npm run envchk && . ~/.userVars.sh && ./build_all.sh;",
-    "rund": "meteor npm run envchk && . ~/.userVars.sh && ./.scripts/startInDevMode.sh",
-    "runp": "meteor npm run envchk && . ~/.userVars.sh && ./.scripts/startInProdMode.sh",
-    "fullp": "meteor npm run clean_all && meteor npm run install_all && meteor npm run build_all && meteor npm run runp",
-    "fulld": "meteor npm run clean_all && meteor npm run install_all && meteor npm run build_all && meteor npm run rund"
+    "run_development": "meteor npm run envchk && . ~/.userVars.sh && ./.scripts/startInDevMode.sh",
+    "run_production": "meteor npm run envchk && . ~/.userVars.sh && ./.scripts/startInProdMode.sh",
+    "fullp": "meteor npm run clean_all && meteor npm run install_all && meteor npm run build_all && meteor npm run run_production",
+    "fulld": "meteor npm run clean_all && meteor npm run install_all && meteor npm run build_all && meteor npm run run_development"
   },
   "devDependencies": {
     "babel-core": "6.23.1",

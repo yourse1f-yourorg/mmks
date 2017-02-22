@@ -163,7 +163,7 @@ If you are in a disposable virtual machine with a recent fresh Ubuntu installati
     export YOUR_ORGANIZATION_NAME="YourOrg";
 
     meteor npm run build_all;
-    meteor npm run rund;
+    meteor npm run run_development;
 
     ```
 
