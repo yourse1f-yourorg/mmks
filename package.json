@@ -1,6 +1,8 @@
 {
-  "name": "meteor-mantra-kickstarter",
-  "version": "0.2.1",
+  "name": "mmks",
+  "version": "0.2.29",
+  "license": "MIT",
+  "repository": "https://github.com/yourse1f-yourorg/mmks",
   "scripts": {
     "lint": "npm run lint_pkgs && npm run lint_main",
     "lint_main": "eslint . --ext .js --ext .jsx",
