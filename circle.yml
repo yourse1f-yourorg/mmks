@@ -34,10 +34,7 @@ dependencies:
 
   override:
     - cp settings.json.example settings.json
-    - echo ${METEOR_CMD}
-    - ls -l ${METEOR_HOME}
-#    - source .pkgs/install_local_packages.sh; install_local_packages;
-    - ./install_all.sh
+    - ${METEOR_CMD} npm run install_all
     - ${METEOR_CMD} npm run knex_cont
 
   post:

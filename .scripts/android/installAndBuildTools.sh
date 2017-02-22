@@ -250,15 +250,14 @@ function PrepareToBuildAndroidAPK() {
   local KTEXISTS=0;
   [ -f ${HOME}/.keystore ] && KTEXISTS=$(keytool -list -v  -storepass ${KEYSTORE_PWD} | grep "Alias name" | grep -c "${APP_NAME}");
   declare CCODE="";
-  echo "### ~   ~   ~  H  "
-  if ping -c 1 -w 5 ip-api.com; then 
-    echo "### ~   ~   ~  I  "
-    CCODE=$(curl -s ip-api.com/json | jq '.country');
+  if ping -c 1 -w 5 ip-api.com; then
+    CCODE=$(curl -s ip-api.com/json | jq '.countryCdoe');
+    echo "### Will set key pair country code to '${CCODE}'.";
   else
     echo -e "
             *** Problem ***
     Networking problems prohibit identifying your country
-    Use the following command to generate a key pair manually and try again : 
+    Use the following command to generate a key pair manually and try again :
 
        keytool -genkeypair -dname "cn=${YOUR_FULLNAME}, ou=IT, o=${YOUR_ORGANIZATION_NAME}, c=${CCODE}" \
                -alias ${APP_NAME} -keypass ${KEYSTORE_PWD} -storepass ${KEYSTORE_PWD} -validity 3650;
