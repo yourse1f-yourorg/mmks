@@ -1,5 +1,5 @@
 {
-  "HOST_URI": "localhost:3000",
+  "HOST_SERVER_NAME": "localhost:3000",
   "MAILGUN_DOMAIN": "yourpublic.work",
   "MAILGUN_KEY": "(As if I'm gonna to leave THAT lying around.)  A valid key has 36 characters and begins with 'key-'.",
   "LOGGLY_SUBDOMAIN": "yourwork",

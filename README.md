@@ -18,6 +18,8 @@ You get :
 * a thoroughly tested application from which to launch your application development
 * [single command installation](https://github.com/yourse1f-yourorg/mmks/blob/apollo/install_all.sh) of all dependencies and support services
 * [single command build](https://github.com/yourse1f-yourorg/mmks/blob/apollo/build_all.sh) of Android APK, with download from app menu bar.
+* [database flexibility](https://github.com/yourse1f-yourorg/mmks/blob/apollo/server/api/db-connectors.js#L5) ready for SQLite for development and PostgreSQL for production, thanks to [Sequelize](http://docs.sequelizejs.com/en/v3/) and [Apollo](http://www.apollodata.com/).
+* [database migration](https://github.com/yourse1f-yourorg/mmks/blob/apollo/server/api/.knex) with [knex](http://knexjs.org/)
 * full [end to end, functional testing](https://github.com/yourse1f-yourorg/mmks/blob/apollo/.e2e_tests/features/002_colors/addColor.feature) with [Chimp](https://chimp.readme.io/) and [Cucumber](https://cucumber.io/)
 * continuous integration and test in [CircleCI](https://circleci.com/gh/yourse1f-yourorg/mmks).  (Latest build result :: [![CircleCI](https://circleci.com/gh/yourse1f-yourorg/mmks/tree/apollo.svg?style=svg)](https://circleci.com/gh/yourse1f-yourorg/mmks/tree/apollo))
 * [unit testing](https://github.com/yourse1f-yourorg/mmks/blob/apollo/client/modules/core/containers/tests/post.js) with Mocha, Chai, Sinon
@@ -35,9 +37,10 @@ You get :
 * uses [mantra-core](https://github.com/mantrajs/mantra-core) modularization, with application wide state, composed in pure React JS components with [react-komposer](https://github.com/kadirahq/react-komposer) (Blaze is not used at all)
 * [Astronomy v2](https://github.com/jagi/meteor-astronomy) model schema
 * forms based development examples with:
-    * [tcomb-form](https://github.com/gcanti/tcomb-form): for CRUD modules
+    * [uniforms](https://github.com/vazco/uniforms): in the 'books' module
+    * [tcomb-form](https://github.com/gcanti/tcomb-form): for most of the CRUD modules
     * [formsy-react](https://github.com/christianalfoni/formsy-react): for user login, registration and password forms. Also [formsy-react-components](https://github.com/twisty/formsy-react-components)
-* [Flatly](https://bootswatch.com/flatly/) bootstrap theme module
+* [Switchable Bootstrap Swatches](https://bootswatch.com/) bootstrap theme modules can be switched in and out.
 * completely linted with eslint, with specs available to editors such as Sublime Text 3
 
 ### Getting started
@@ -86,7 +89,7 @@ If you are in a disposable virtual machine with a recent fresh Ubuntu installati
 
     ```
     git clone git@github.com:yourse1f-yourorg/mmks.git;
-    cd meteor-mantra-kickstarter;
+    cd mmks;
 
     ```
 
@@ -101,11 +104,11 @@ If you are in a disposable virtual machine with a recent fresh Ubuntu installati
 1. Run the script to set up for development and testing (installs Java, NodeJS, Chimp, Meteor and the project's NodeJS package dependencies) :
 
     ```
-    ./install_all.sh;
+    meteor npm run install_all;
 
     ```
 
-1. Prepare our `settings.json` :
+1. Prepare your `settings.json` :
 
     ```
     cp settings.json.example settings.json;
@@ -114,7 +117,7 @@ If you are in a disposable virtual machine with a recent fresh Ubuntu installati
     ```
     You'll need to go [get your Mailgun API key.](https://mailgun.com/app/dashboard) and [your Loggly domain token](https://www.loggly.com/),  then correct these settings :
     ```
-    >   "HOST_URI": "localhost:3000",
+    >   "HOST_SERVER_NAME": "localhost:3000",
     >   "MAILGUN_DOMAIN": "yourhost.yourpublic.work",
     >   "MAILGUN_KEY": "(As if I'm gonna to leave THAT lying around.)  A valid key has 36 characters and begins with 'key-'.",
     >   "LOGGLY_SUBDOMAIN": "yourwork",
@@ -157,11 +160,10 @@ If you are in a disposable virtual machine with a recent fresh Ubuntu installati
     export HOST_SERVER_NAME="http://moon.planet.sun:3000/";
     export ROOT_URL="${HOST_SERVER_NAME}";
     export YOUR_FULLNAME="You Yourself";
-    export GITHUB_ORGANIZATION_NAME="YourOrg";
+    export YOUR_ORGANIZATION_NAME="YourOrg";
 
-    ./build_all.sh;
-
-    meteor run --mobile-server=${HOST_SERVER_NAME}  --settings=settings.json;
+    meteor npm run build_all;
+    meteor npm run rund;
 
     ```
 
@@ -191,12 +193,13 @@ If you are in a disposable virtual machine with a recent fresh Ubuntu installati
 
     1. Use you GitHub gredentials to log in through [NGrok's login/sign-up page](https://dashboard.ngrok.com/user/login)
     1. [Download NGrok](https://ngrok.com/download)
-    1. Install it somewhere
+    1. Install it somewhere...
+
         ```
         cd ~;
         mkdir -p utilities;
         cd utilities;
-        unzip ~/Downloads/ngrok.zip;
+        unzip ~/Downloads/ngrok*.zip;
         ```
     1. Copy **Your Tunnel Authtoken** from the [Auth tab](https://dashboard.ngrok.com/auth)
     1. Install your token :

@@ -32,9 +32,11 @@ export ZIPALIGN_BOUNDARY=4;
 
 declare BUILD_DIRECTORY=${BUILD_DIRECTORY:-${PROJECT_ROOT}};
 declare KEYSTORE_PWD=${KEYSTORE_PWD:-null};
+declare HOST_SERVER_PROTOCOL=${HOST_SERVER_PROTOCOL:-null};
 declare HOST_SERVER_NAME=${HOST_SERVER_NAME:-null};
+declare HOST_SERVER_PORT=${HOST_SERVER_PORT:-null};
 declare YOUR_FULLNAME=${YOUR_FULLNAME:-null};
-declare GITHUB_ORGANIZATION_NAME=${GITHUB_ORGANIZATION_NAME:-null};
+declare YOUR_ORGANIZATION_NAME=${YOUR_ORGANIZATION_NAME:-null};
 
 export TMP_DIRECTORY=${TMP_DIRECTORY:-/dev/shm/android_build};
 
@@ -168,6 +170,16 @@ function checkKeyToolPassword() {
 }
 
 
+function checkHostProtocol() {
+
+  [ "${HOST_SERVER_PROTOCOL}" = "null" ] || return 0 &&  echo -e "
+     * * * You have not defined a target server access protocol * * *
+     Set the HOST_SERVER_PROTOCOL environment variable correctly.
+        eg; export HOST_SERVER_PROTOCOL=\"http\";
+     ";
+    return 1;
+}
+
 function checkHostName() {
 
   [ "${HOST_SERVER_NAME}" = "null" ] || return 0 &&  echo -e "
@@ -177,6 +189,17 @@ function checkHostName() {
      ";
     return 1;
 }
+
+function checkHostPort() {
+
+  [ "${HOST_SERVER_PORT}" = "null" ] || return 0 &&  echo -e "
+     * * * You have not defined a target server access port * * *
+     Set the HOST_SERVER_PORT environment variable correctly.
+        eg; export HOST_SERVER_PORT=\"moon.planet.sun\";
+     ";
+    return 1;
+}
+
 
 function checkAuthorName() {
 
@@ -190,29 +213,32 @@ function checkAuthorName() {
 
 function checkOrgName() {
 
-  [ "${GITHUB_ORGANIZATION_NAME}" = "null"  ] || return 0 &&  echo -e "
+  [ "${YOUR_ORGANIZATION_NAME}" = "null"  ] || return 0 &&  echo -e "
      * * * You have not defined a valid organization name * * *
-     Set the GITHUB_ORGANIZATION_NAME environment variable correctly.
-        eg; export GITHUB_ORGANIZATION_NAME=\"YourOrg\";
+     Set the YOUR_ORGANIZATION_NAME environment variable correctly.
+        eg; export YOUR_ORGANIZATION_NAME=\"YourOrg\";
      ";
     return 1;
 }
 
-
+export HOST_SERVER_URI="";
 function PrepareToBuildAndroidAPK() {
 
   local GOOD=0;
 
   checkKeyToolPassword || GOOD=1;
+  checkHostProtocol || GOOD=1;
   checkHostName || GOOD=1;
+  checkHostPort || GOOD=1;
   checkAuthorName || GOOD=1;
   checkOrgName || GOOD=1;
   [ ${GOOD} = 1 ] && { echo "Undefined parameter(s)" >&2; return 1; }
 
+  HOST_SERVER_URI="${HOST_SERVER_PROTOCOL}://${HOST_SERVER_NAME}:${HOST_SERVER_PORT}/";
   echo "### Configuration for your '"${APP_NAME}"' project is :"
-  echo "   ~                                      Target Server is  : " ${HOST_SERVER_NAME}
+  echo "   ~                                      Target Server is  : " ${HOST_SERVER_URI}
   echo "   ~                                               You are  : " ${YOUR_FULLNAME}
-  echo "   ~                                  Your organization is  : " ${GITHUB_ORGANIZATION_NAME}
+  echo "   ~                                  Your organization is  : " ${YOUR_ORGANIZATION_NAME}
   echo "   ~ Align android-sdk bundle on "${ZIPALIGN_BOUNDARY}"-byte boundary when using : " ${ZIPALIGN_PATH}/zipalign
   echo "   ~                              Temporary build directory : " ${TMP_DIRECTORY}
   echo "### ~   ~   ~    "
@@ -224,7 +250,7 @@ function PrepareToBuildAndroidAPK() {
   CCODE=$(curl -s ipinfo.io | jq '.country');
   if [[ ${KTEXISTS} -lt 1 ]]; then
     echo "Creating key pair for '${APP_NAME}'.";
-    until keytool -genkeypair -dname "cn=${YOUR_FULLNAME}, ou=IT, o=${GITHUB_ORGANIZATION_NAME}, c=${CCODE}" \
+    until keytool -genkeypair -dname "cn=${YOUR_FULLNAME}, ou=IT, o=${YOUR_ORGANIZATION_NAME}, c=${CCODE}" \
                -alias ${APP_NAME} -keypass ${KEYSTORE_PWD} -storepass ${KEYSTORE_PWD} -validity 3650;
     do
       echo -e "
@@ -249,12 +275,12 @@ function BuildAndroidAPK() {
 
   pushd ${BUILD_DIRECTORY} >/dev/null;
 
-    echo -e "\nBuilding project : meteor build ${TARGET_DIRECTORY}         --server=${HOST_SERVER_NAME};\n\n";
-    meteor build ${TARGET_DIRECTORY}         --server=${HOST_SERVER_NAME};
-    echo "Built project : ${BUILD_DIRECTORY} in ${TARGET_DIRECTORY} for server ${HOST_SERVER_NAME}";
+    echo -e "\nBuilding project : meteor build ${TARGET_DIRECTORY}         --server=${HOST_SERVER_URI};\n\n";
+    meteor build ${TARGET_DIRECTORY}         --server=${HOST_SERVER_URI};
+    echo "Built project : ${BUILD_DIRECTORY} in ${TARGET_DIRECTORY} for server ${HOST_SERVER_URI}";
     mv ${TARGET_DIRECTORY}/android/release-unsigned.apk ${TARGET_DIRECTORY}/android/${APP_NAME}_unaligned.apk
     # echo "Stashed plain version.  Building debug version ...";
-    # meteor build ${TARGET_DIRECTORY} --debug --server=${HOST_SERVER_NAME};
+    # meteor build ${TARGET_DIRECTORY} --debug --server=${HOST_SERVER_URI};
     echo "Built APK.";
 
   popd >/dev/null;

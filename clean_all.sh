@@ -13,6 +13,7 @@ function CleanAllInstalledPackages() {
   rm -fr .pkgs/mmks_book/dist;
   rm -fr npm-debug.log;
 
+  sed -i '/NON_STOP/s/.*/export NON_STOP=no;/' ~/.userVars.sh;
   echo "Cleaned.";
 }
 

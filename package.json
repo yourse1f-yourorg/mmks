@@ -20,8 +20,14 @@
     "knex_roll": "cd server/api/.knex && knex migrate:rollback --env ${T};",
     "knex_make": "cd server/api/.knex && knex migrate:latest --env ${T};",
     "knex_seed": "cd server/api/.knex && knex seed:run --env ${T};",
-    "runp": "./.scripts/free.sh; export HOST_SERVER_NAME=\"http://moon.planet.sun:3000/\"; export ROOT_URL=\"${HOST_SERVER_NAME}\"; export YOUR_FULLNAME=\"You Yourself\"; export GITHUB_ORGANIZATION_NAME=\"YourOrg\"; meteor run --mobile-server=${HOST_SERVER_NAME} --production --verbose --no-lint --no-release-check --settings=settings.json;",
-    "rund": "./.scripts/free.sh; export HOST_SERVER_NAME=\"http://moon.planet.sun:3000/\"; export ROOT_URL=\"${HOST_SERVER_NAME}\"; export YOUR_FULLNAME=\"You Yourself\"; export GITHUB_ORGANIZATION_NAME=\"YourOrg\"; meteor run --mobile-server=${HOST_SERVER_NAME}              --verbose --no-lint --no-release-check --settings=settings.json;"
+    "envchk": ".scripts/preFlightCheck.sh",
+    "clean_all": "./clean_all.sh",
+    "install_all": "meteor npm run envchk && . ~/.userVars.sh && ./install_all.sh;",
+    "build_all": "meteor npm run envchk && . ~/.userVars.sh && ./build_all.sh;",
+    "rund": "meteor npm run envchk && . ~/.userVars.sh && ./.scripts/startInDevMode.sh",
+    "runp": "meteor npm run envchk && . ~/.userVars.sh && ./.scripts/startInProdMode.sh",
+    "fullp": "meteor npm run clean_all && meteor npm run install_all && meteor npm run build_all && meteor npm run runp",
+    "fulld": "meteor npm run clean_all && meteor npm run install_all && meteor npm run build_all && meteor npm run rund"
   },
   "devDependencies": {
     "babel-core": "6.23.1",

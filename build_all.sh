@@ -35,7 +35,7 @@ echo -e "
            - .scripts/startInDevMode.sh
            - .scripts/startInProdMode.sh # (requires PostgreSQL)
         Terminal #2 : meteor npm run acceptance
-     Android device : http://\${HOST_SERVER_NAME}:3000/
+     Android device : ${HOST_SERVER_PROTOCOL}://${HOST_SERVER_NAME}:${HOST_SERVER_PORT}/
 ";
 
 # echo -e "     FOR HABITAT VERSION
