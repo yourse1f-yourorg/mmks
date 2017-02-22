@@ -12,6 +12,7 @@ notify:
 machine:
   environment:
     _JAVA_OPTIONS: "-Xms512m -Xmx1024m"
+    METEOR_HOME: ${HOME}/.meteor
     METEOR_CMD: ${HOME}/.meteor/meteor
     CHIMP_PATH: ./node_modules/.bin/
     CHIMP_CMD: ./node_modules/.bin/chimp
@@ -21,11 +22,11 @@ machine:
 
 dependencies:
   cache_directories:
-    - ~/.meteor
+    - ${METEOR_HOME}
     - /opt/circleci/nodejs/v4.4.7/lib/node_modules
 
   pre:
-    - mkdir -p ~/.meteor
+    - mkdir -p ${METEOR_HOME}
     - if [ ! -e ${METEOR_CMD} ]; then curl https://install.meteor.com | /bin/sh 2>&1 | cat; fi
     - ls -l /opt/circleci/nodejs/v4.4.7/lib/node_modules
     - .e2e_tests/installChimp.sh
@@ -33,6 +34,8 @@ dependencies:
 
   override:
     - cp settings.json.example settings.json
+    - echo ${METEOR_CMD}
+    - ls -l ${METEOR_HOME}
 #    - source .pkgs/install_local_packages.sh; install_local_packages;
     - ./install_all.sh
     - ${METEOR_CMD} npm run knex_cont
