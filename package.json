@@ -1,6 +1,6 @@
 {
   "name": "mmks",
-  "version": "0.2.38",
+  "version": "0.2.40",
   "license": "MIT",
   "repository": "https://github.com/yourse1f-yourorg/mmks",
   "scripts": {
@@ -26,6 +26,7 @@
     "clean_all": "./clean_all.sh",
     "install_all": "meteor npm run envchk && . ~/.userVars.sh && ./install_all.sh;",
     "build_all": "meteor npm run envchk && . ~/.userVars.sh && ./build_all.sh;",
+    "sanity_check": "./.scripts/startInDevMode.sh",
     "run_development": "meteor npm run envchk && . ~/.userVars.sh && ./.scripts/startInDevMode.sh",
     "run_production": "meteor npm run envchk && . ~/.userVars.sh && ./.scripts/startInProdMode.sh",
     "fullp": "meteor npm run clean_all && meteor npm run install_all && meteor npm run build_all && meteor npm run run_production",

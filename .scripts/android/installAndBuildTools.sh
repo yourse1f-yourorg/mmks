@@ -251,7 +251,7 @@ function PrepareToBuildAndroidAPK() {
   [ -f ${HOME}/.keystore ] && KTEXISTS=$(keytool -list -v  -storepass ${KEYSTORE_PWD} | grep "Alias name" | grep -c "${APP_NAME}");
   declare CCODE="";
   if ping -c 1 -w 5 ip-api.com; then
-    CCODE=$(curl -s ip-api.com/json | jq '.countryCdoe');
+    CCODE=$(curl -s ip-api.com/json | jq '.countryCode');
     echo "### Will set key pair country code to '${CCODE}'.";
   else
     echo -e "
