@@ -51,8 +51,8 @@ addShellVar 'HOST_SERVER_NAME' \
 
 export X=${HOST_SERVER_PORT:=3000}
 addShellVar 'HOST_SERVER_PORT' \
-            'The app server access port ( 3000? 80? )   :: ' \
-            'Server port ( 3000? 80? ) : ${HOST_SERVER_PORT};' \
+            'The app server access port ( 3000, 80, 443 or ? )   :: ' \
+            'Server port ( 3000, 80, 443 or ? ) : ${HOST_SERVER_PORT};' \
             '5';
 
 export X=${KEYSTORE_PWD:="obscuregobbledygook"}
