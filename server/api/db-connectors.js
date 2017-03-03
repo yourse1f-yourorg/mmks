@@ -1,17 +1,33 @@
 import Sequelize from 'sequelize';
 
+console.log(' Sanity Check -- Can we see settings?'); // eslint-disable-line no-console
+console.log(' Is "LOGGLY_SUBDOMAIN" = "yourwork" --> ', Meteor.settings.LOGGLY_SUBDOMAIN ); // eslint-disable-line no-console
+
 let sequelize = null;
 if ( Meteor.isProduction ) {
+
   console.log(' Meteor mode -- "Production" using PostgreSQL'); // eslint-disable-line no-console
+
+/* var sequelize = new Sequelize('database', 'username', 'password', {options})  */
+  // sequelize = new Sequelize(
+  //   'apollo',
+  //   'apollo',
+  //   'okmmpl,,',
+    // {
+    //   host: 'pgdb',
+    //   dialect: 'postgres'
+    // }
+
   sequelize = new Sequelize(
-    'apollo',
-    'apollo',
-    'okmmpl,,',
+    'postgres',
+    'hab',
+    'memorablecacaphony',
     {
-      host: 'pgdb',
+      host: 'localhost',
       dialect: 'postgres'
     }
   );
+
 } else {
   console.log(' Meteor mode -- NOT "Production"; using SQLite'); // eslint-disable-line no-console
   sequelize = new Sequelize('mmks', null, null, {
