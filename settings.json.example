@@ -4,6 +4,10 @@
   "MAILGUN_KEY": "(As if I'm gonna to leave THAT lying around.)  A valid key has 36 characters and begins with 'key-'.",
   "LOGGLY_SUBDOMAIN": "yourwork",
   "LOGGLY_TOKEN": " ( not this either ) ",
+  "PG_DB": "postgres",
+  "PG_UID": "hab",
+  "PG_PWD": "memorablecacaphony",
+  "PG_HST": "localhost",
   "public": {
     "PASSWORD_RESET": {
       "Route": "/prrq/",

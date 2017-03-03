@@ -1,7 +1,12 @@
 import Sequelize from 'sequelize';
 
-console.log(' Sanity Check -- Can we see settings?'); // eslint-disable-line no-console
-console.log(' Is "LOGGLY_SUBDOMAIN" = "yourwork" --> ', Meteor.settings.LOGGLY_SUBDOMAIN ); // eslint-disable-line no-console
+/* eslint-disable no-console */
+console.log(' Sanity Check -- Can we see settings?');
+console.log(' PG  DB --> ', Meteor.settings.PG_DB );
+console.log(' PG UID --> ', Meteor.settings.PG_UID );
+console.log(' PG PWD --> ', Meteor.settings.PG_PWD );
+console.log(' PG HST --> ', Meteor.settings.PG_HST );
+/* eslint-enable no-console */
 
 let sequelize = null;
 if ( Meteor.isProduction ) {
@@ -19,11 +24,11 @@ if ( Meteor.isProduction ) {
     // }
 
   sequelize = new Sequelize(
-    'postgres',
-    'hab',
-    'memorablecacaphony',
+    Meteor.settings.PG_DB,
+    Meteor.settings.PG_UID,
+    Meteor.settings.PG_PWD,
     {
-      host: 'localhost',
+      host: Meteor.settings.PG_HST,
       dialect: 'postgres'
     }
   );
