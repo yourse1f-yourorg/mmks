@@ -1,3 +1,2 @@
-0.2.52_note.txt
-This is release 0.2.52.
-Bug (test): Test directory gets created in preflight check.
+0.2.51_note.txt
+This is release 0.2.51
