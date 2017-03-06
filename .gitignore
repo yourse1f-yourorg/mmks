@@ -5,3 +5,4 @@ settings.json
 README.html
 *.log
 nohup.*
+/home/you/.ssh/hab_vault/settings.json

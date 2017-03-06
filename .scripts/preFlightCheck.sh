@@ -30,10 +30,12 @@ function preFlightCheck()
 	  echo -e "${PRTY} Environment variables seem ready.";
 	fi;
 
-	declare SQLITE_DB_DIR='/tmp/dd';
+	declare SQLITE_DB_DIR='/tmp/db';
 	[ ! -d ${SQLITE_DB_DIR} ] \
 	    && echo -e "${PRTY} Creating SQLite database directory." \
 	    && mkdir ${SQLITE_DB_DIR};
+
+  echo -e "${PRTY} Done preflight.";
 
 }
 
