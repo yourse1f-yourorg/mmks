@@ -8,6 +8,7 @@
   "PG_UID": "hab",
   "PG_PWD": "memorablecacaphony",
   "PG_HST": "localhost",
+  "PG_BKP": "http://bit.ly/-------",
   "public": {
     "PASSWORD_RESET": {
       "Route": "/prrq/",
