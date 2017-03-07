@@ -9,22 +9,19 @@ function preFlightCheck()
 {
 	echo -e "${PRTY} Configure environment variables?";
 	declare USER_VARS="${HOME}/.userVars.sh";
-  [ -f ${USER_VARS} ] && source ${USER_VARS};
-
 	declare SVs="false";
+  [ -f ${USER_VARS} ] && source ${USER_VARS} || SVs="true";
+
 	[ "$(echo ${NON_STOP} | tr '[a-z]' '[A-Z]')" = "YES" ] || SVs="true";
-#  [ -f ${USER_VARS} ] || SVs="true";
 
-#  INITIALIZED=$( cat ~/.userVars.sh 2>/dev/null | grep HOST_SERVER_NAME | cut -d "'" -f 2 );
-#  [ ${#INITIALIZED} -lt 4 ] && SVs="true";
-
-#  echo SVs ${SVs};
 	if [[ "${SVs}" = "true" ]]; then
-	  echo -e "${PRTY} Environment variables need to be set...";
-	  . ${PROJECT_ROOT}/.scripts/ManageShellVars.sh ".scripts/";
-	  loadShellVars;
-	  PARM_NAMES=( "YOUR_FULLNAME" "YOUR_ORGANIZATION_NAME" "HOST_SERVER_PROTOCOL" "HOST_SERVER_NAME" "HOST_SERVER_PORT" "KEYSTORE_PWD" "NON_STOP" );
-	  askUserForParameters PARM_NAMES[@];
+    pushd ${PROJECT_ROOT}/.scripts >/dev/null;
+	    echo -e "${PRTY} Environment variables need to be set...";
+	    source ./ManageShellVars.sh "";
+	    loadShellVars;
+	    PARM_NAMES=( "YOUR_FULLNAME" "YOUR_ORGANIZATION_NAME" "HOST_SERVER_PROTOCOL" "HOST_SERVER_NAME" "HOST_SERVER_PORT" "KEYSTORE_PWD" "NON_STOP" );
+	    askUserForParameters PARM_NAMES[@];
+    popd >/dev/null;
 
 	else
 	  echo -e "${PRTY} Environment variables seem ready.";
