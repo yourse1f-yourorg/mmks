@@ -2,7 +2,7 @@
 #
 RUN_IT=${1:-null};
 
-source .scripts/trap.sh;
+# source .scripts/trap.sh;
 source .scripts/free.sh;
 
 source .scripts/refreshApt.sh;
