@@ -11,7 +11,10 @@ import { makeExecutableSchema } from 'graphql-tools';
 import typeDefs from '../lib/api/typeDefs';
 import resolvers from './api/resolvers';
 
-const executableSchema = makeExecutableSchema({ typeDefs, resolvers, });
+const executableSchema = makeExecutableSchema({
+  typeDefs,
+  resolvers,
+});
 
 createApolloServer({
   graphiql: true,

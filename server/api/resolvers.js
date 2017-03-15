@@ -2,7 +2,7 @@ import { Author, Book } from './db-connectors';
 
 /* eslint-disable no-console */
 const resolvers = {
-  Query: {
+  Queries: {
     book(_, args) {
 
       // to select deleted and undeleted records use pass in :
