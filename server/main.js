@@ -1,3 +1,4 @@
+import { merge } from 'lodash';
 
 import publications from './publications';
 import methods from './methods';
@@ -8,8 +9,12 @@ import { WebApp } from 'meteor/webapp';
 import { createApolloServer } from 'meteor/apollo';
 import { makeExecutableSchema } from 'graphql-tools';
 
+
 import typeDefs from '../lib/api/typeDefs';
-import resolvers from './api/resolvers';
+
+import bookResolvers from './api/bookResolvers';
+import authorResolvers from './api/authorResolvers';
+const resolvers = merge( bookResolvers, authorResolvers );
 
 const executableSchema = makeExecutableSchema({
   typeDefs,
@@ -21,6 +26,7 @@ createApolloServer({
   pretty: true,
   schema: executableSchema
 });
+
 
 var haveLogglyToken = () => {
 
