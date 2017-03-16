@@ -12,7 +12,9 @@ function installMeteorFramework()
 
   if [[ "${INSTALL_METEOR}" == "yes" ]]; then
     echo "### Installing Meteor";
-    curl https://install.meteor.com/ | sh;
+    local release_num=$(cat .meteor/release | cut -d "@" -f 2);
+    echo "Obtaining release number : ${release_num}";
+    curl https://install.meteor.com/?release=${release_num} | sh;
   fi
 
   echo "### Meteor Installed";
