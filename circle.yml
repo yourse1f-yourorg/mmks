@@ -27,7 +27,7 @@ dependencies:
 
   pre:
     - mkdir -p ${METEOR_HOME}
-    - if [ ! -e ${METEOR_CMD} ]; then curl https://install.meteor.com/release=1.4.2.7 | /bin/sh 2>&1 | cat; fi
+    - if [ ! -e ${METEOR_CMD} ]; then curl https://install.meteor.com/?release=1.4.2.7 | /bin/sh 2>&1 | cat; fi
     - ls -l /opt/circleci/nodejs/v4.4.7/lib/node_modules
     - .e2e_tests/installChimp.sh
     - mkdir -p /tmp/db; touch /tmp/db/mmks.sqlite
