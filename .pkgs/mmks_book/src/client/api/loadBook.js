@@ -8,7 +8,7 @@ export default ( args ) => {
   ApolloClient.query({
     query: LOAD_BOOK_QUERY,
     variables: {idBook: _id},
-    forceFetch: false,
+    fetchPolicy: false,
   }).then((graphQLResult) => {
 
     const { errors, data } = graphQLResult;

@@ -15,6 +15,12 @@ GetProjectName ${PROJECT_ROOT}/package.json;
 export ANDROID_PLACE="${HOME}/.android";
 export ANDROID_SDK="android-sdk-linux";
 export ANDROID_HOME="${ANDROID_PLACE}/${ANDROID_SDK}";
+export ANDROID_TOOLS_BIN="${ANDROID_HOME}/tools/bin";
+export SDK_MANAGER="${ANDROID_TOOLS_BIN}/sdkmanager";
+export ANDROID_LICENSES="${ANDROID_HOME}/licenses";
+export SDK_LICENSE="${ANDROID_LICENSES}/android-sdk-license";
+
+
 export ENV_FILE="${HOME}/.profile";
 
 UpdateEnvVars ${ENV_FILE} ANDROID_HOME ${ANDROID_HOME};
@@ -23,9 +29,15 @@ export TMP_PLUGIN_LIST="/tmp/plugins.txt";
 export PLUGIN_NAME="";
 export PLUGIN_NUM="";
 
-export SDK_TOOLS_ZIP="tools_r24.4.1-linux.zip";
+export SDK_TOOLS_ZIP="tools_r25.2.3-linux.zip";
 export BUILD_TOOLS_VERSION=25.0.2;
 export PLATFORM_TOOLS_VERSION=25.0.3;
+
+export SDK_PLATFORM_TOOLS="platform-tools";
+export SDK_BUILD_TOOLS="build-tools;25.0.2";
+export SDK_PLATFORM_ANDROID_6_API_23="sources;android-23";
+export SDK_PLATFORM_ANDROID_6_API_22="sources;android-22";
+
 export ZIPALIGN_PATH=${ANDROID_HOME}/build-tools/${BUILD_TOOLS_VERSION};
 
 export ZIPALIGN_BOUNDARY=4;
@@ -40,6 +52,9 @@ declare YOUR_ORGANIZATION_NAME=${YOUR_ORGANIZATION_NAME:-null};
 
 export TMP_DIRECTORY=${TMP_DIRECTORY:-/dev/shm/android_build};
 
+export METEOR_VERSION=$(cat ${PROJECT_ROOT}/.meteor/release);
+METEOR_VERSION=${METEOR_VERSION#METEOR@};
+
 echo "Initialized 'installAndBuildTools'";
 
 function getPluginNumber() {
@@ -49,23 +64,41 @@ function getPluginNumber() {
     ${ANDROID_HOME}/tools/android list sdk -u -a > ${TMP_PLUGIN_LIST};
   fi;
 
+  echo "@@@ ${TMP_PLUGIN_LIST} -- ${PLUGIN_NAME} ";
   PLUGIN_NAME=$1; # "Android SDK Platform-tools, revision 23.0.3";
+  echo "@@@";
   PLGN_REC=$(cat ${TMP_PLUGIN_LIST} | grep "${PLUGIN_NAME}");
+  echo "@@@";
   PLGN_REC_L=$(echo "${PLGN_REC%%- ${PLUGIN_NAME}}");
+  echo "@@@";
   PLUGIN_NUM=$(echo "${PLGN_REC_L}"  | tr -d '[[:space:]]');
+  echo "@@@";
 
 }
 
 function getPlugin() {
 
-  getPluginNumber "$1";
-
   if [[ -f "$2" ]]; then
-    echo -e "Seem to have Plugin '#${PLUGIN_NUM} - ${PLUGIN_NAME}' already.";
+    echo -e "Seem to have Plugin '#${1} at ${2}' already.";
   else
-    echo -e "Calling for Plugin '#${PLUGIN_NUM} - ${PLUGIN_NAME}'.";
-    echo "Y" | ${ANDROID_HOME}/tools/android update sdk -u -a --filter ${PLUGIN_NUM};
-    echo -e "Called for Plugin #${PLUGIN_NUM} - ${PLUGIN_NAME}.";
+    if [[ "${METEOR_VERSION}" > "1.4.2.7" ]]; then
+      echo -e "\nGetting -- ${1} into ${2}";
+      echo "y" | ${SDK_MANAGER} $1 >/dev/null;
+      echo -e "Installed -- ${1}";
+      return 0;
+
+    else
+      getPluginNumber "$1";
+
+      echo -e "Calling for Plugin '#${PLUGIN_NUM} - ${PLUGIN_NAME}'.";
+      env | grep "25.0";
+      env | grep "1.4.3.2";
+      echo $?;
+      exit 1;
+      echo "Y" | ${ANDROID_HOME}/tools/android update sdk -u -a --filter ${PLUGIN_NUM};
+      echo "Y" | ${ANDROID_HOME}/tools/android update sdk -u -a --filter ${PLUGIN_NUM};
+      echo -e "Called for Plugin #${PLUGIN_NUM} - ${PLUGIN_NAME}.";
+    fi;
   fi;
 
 }
@@ -103,7 +136,10 @@ function installAndroid() {
 
       chmod ug+rw -R .;
 
+
     popd >/dev/null;
+
+    touch repositories.cfg;
 
   popd >/dev/null;
 
@@ -129,23 +165,52 @@ function installAndroid() {
   source ${ENV_FILE};
 
   echo -e "Obtaining SDK plugins.";
+  set -e;
 
-  # 3
-  # echo -e "getPlugin \"Android SDK Platform-tools, revision ${PLATFORM_TOOLS_VERSION}\" ${ANDROID_HOME}/platform-tools/adb;";
-  getPlugin "Android SDK Platform-tools, revision ${PLATFORM_TOOLS_VERSION}" ${ANDROID_HOME}/platform-tools/adb;
+  #  We can get the list of identifier codes with the command...
+  #
+  #      android list sdk -a -u --extended
+  #
+  #   ...which shows identifiers, eg; build-tools-23.0.1
+  #        Note that the numeric identifiers are NOT reliable.
+  #          grep by name to get the numeric code
 
-  # 4
-  # echo -e "getPlugin \"Android SDK Build-tools, revision ${BUILD_TOOLS_VERSION}\" ${ZIPALIGN_PATH}/zipalign;";
-  getPlugin "Android SDK Build-tools, revision ${BUILD_TOOLS_VERSION}" ${ZIPALIGN_PATH}/zipalign;
+  if [[ "${METEOR_VERSION}" > "1.4.2.7" ]]; then
 
-  # 25
-  getPlugin "SDK Platform Android 6.0, API 23, revision 3" ${ANDROID_HOME}/platforms/android-23/android.jar;
+    mkdir -p ${ANDROID_LICENSES};
+    echo -e "
 
-  # 26
-  getPlugin "SDK Platform Android 5.1.1, API 22, revision 2" ${ANDROID_HOME}/platforms/android-22/android.jar;
+8933bad161af4178b1185d1a37fbf41ea5269c55" > ${SDK_LICENSE};
 
-  # 76
-#  getPlugin "Intel x86 Atom_64 System Image, Android API 22, revision 2" ${ANDROID_HOME}/system-images/android-22/default/x86_64/system.img;
+
+    getPlugin "${SDK_PLATFORM_TOOLS}" ${ANDROID_HOME}/platform-tools/adb;
+
+    getPlugin "${SDK_BUILD_TOOLS}"  ${ZIPALIGN_PATH}/zipalign;
+
+    getPlugin "${SDK_PLATFORM_ANDROID_6_API_23}" ${ANDROID_HOME}/sources/android-23/package.xml;
+
+    getPlugin "${SDK_PLATFORM_ANDROID_6_API_22}" ${ANDROID_HOME}/sources/android-22/package.xml;
+    echo -e "------------------";
+
+  else
+
+    # 3
+    # echo -e "getPlugin \"Android SDK Platform-tools, revision ${PLATFORM_TOOLS_VERSION}\" ${ANDROID_HOME}/platform-tools/adb;";
+    getPlugin "Android SDK Platform-tools, revision ${PLATFORM_TOOLS_VERSION}" ${ANDROID_HOME}/platform-tools/adb;
+
+    # 4
+    # echo -e "getPlugin \"Android SDK Build-tools, revision ${BUILD_TOOLS_VERSION}\" ${ZIPALIGN_PATH}/zipalign;";
+    getPlugin "Android SDK Build-tools, revision ${BUILD_TOOLS_VERSION}" ${ZIPALIGN_PATH}/zipalign;
+
+    # 25
+    getPlugin "SDK Platform Android 6.0, API 23, revision 3" ${ANDROID_HOME}/platforms/android-23/android.jar;
+
+    # 26
+    getPlugin "SDK Platform Android 5.1.1, API 22, revision 2" ${ANDROID_HOME}/platforms/android-22/android.jar;
+
+    # 76
+    #  getPlugin "Intel x86 Atom_64 System Image, Android API 22, revision 2" ${ANDROID_HOME}/system-images/android-22/default/x86_64/system.img;
+  fi;
 
   [ -z $(grep "android" .meteor/platforms) ] && meteor add-platform android;
 

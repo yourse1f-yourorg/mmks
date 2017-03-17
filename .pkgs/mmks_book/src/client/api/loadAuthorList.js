@@ -13,7 +13,7 @@ export default ( args ) => {
   ApolloClient.query({
     query: LOAD_AUTHORS_QUERY,
 
-    forceFetch: false,
+    fetchPolicy: false,
   }).then((rslt) => {
     console.log('Authors query result ', rslt);
     const { errors, data } = rslt;
