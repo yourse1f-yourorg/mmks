@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-set -eu;
+# set -eu;
 
 export DATABASE_NAME="circle_test";
 
@@ -112,7 +112,9 @@ function initialize_server()
   echo -e "\n${PRTY} Server initialized."  | tee -a ${LOG};
 }
 
-if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
+echo "${BASH_SOURCE[0]}";
+echo "${0}";
+if [[ ! -z ${CI} || "${BASH_SOURCE[0]}" == "${0}" ]]; then
 
   initialize_server;
 
