@@ -50,14 +50,16 @@ fi;
 
 if [ ! -f settings.json ]; then
   cp settings.json.example settings.json;
-  echo -e "
-  While the system builds, you should prepare your settings:
+  if [ -z ${CI} ]; then
+    echo -e "
+    While the system builds, you should prepare your settings:
 
-       nano $(pwd)/settings.json;
+         nano $(pwd)/settings.json;
 
-  Press any key to continue or <ctrl-c> to quit.
-  ";
-  read -n 1 -s;
+    Press any key to continue or <ctrl-c> to quit.
+    ";
+    read -n 1 -s;
+  fi;
 fi;
 
 if [[ "${CI:-false}" == "false" ]]; then
