@@ -14,18 +14,18 @@ function initialize_server() {
     touch ${LOG};
   fi;
 
-  local  pgDB="circle_test";
-  local pgUID="ubuntu";
-  local pgPWD="";
-  local pgHST="localhost";
-  local pgBKP="";
-
   if [[ -f ./settings.json ]]; then
     local  pgDB=$(cat ./settings.json | jq -r .PG_DB);
     local pgUID=$(cat ./settings.json | jq -r .PG_UID);
     local pgPWD=$(cat ./settings.json | jq -r .PG_PWD);
     local pgHST=$(cat ./settings.json | jq -r .PG_HST);
     local pgBKP=$(cat ./settings.json | jq -r .PG_BKP);
+  else
+    local  pgDB="circle_test";
+    local pgUID="ubuntu";
+    local pgPWD="memorablecacaphony";
+    local pgHST="localhost";
+    local pgBKP="http://bit.ly/mmks170306";
   fi;
 
   local  PG_DB="${PG_DB:-$pgDB}";
@@ -114,9 +114,7 @@ function initialize_server() {
 
 };
 
-echo "${BASH_SOURCE[0]}";
-echo "${0}";
-if [[ ! -z ${CI} || "${BASH_SOURCE[0]}" == "${0}" ]]; then
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
 
   initialize_server;
 
