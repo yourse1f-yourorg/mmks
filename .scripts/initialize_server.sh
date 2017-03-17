@@ -5,8 +5,8 @@
 export DATABASE_NAME="circle_test";
 
 declare PRTY=" DBINI  --> ";
-function initialize_server()
-{
+function initialize_server() {
+
   export LOG=/tmp/databaseInit.log;
   if [[ -f ${LOG} ]]; then
     chmod ugo+rw ${LOG};
@@ -110,7 +110,8 @@ function initialize_server()
   fi;
 
   echo -e "\n${PRTY} Server initialized."  | tee -a ${LOG};
-}
+
+};
 
 echo "${BASH_SOURCE[0]}";
 echo "${0}";
