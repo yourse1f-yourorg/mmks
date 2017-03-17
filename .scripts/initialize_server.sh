@@ -26,6 +26,7 @@ function initialize_server() {
     local pgPWD=$(cat ./settings.json | jq -r .PG_PWD);
     local pgHST=$(cat ./settings.json | jq -r .PG_HST);
     local pgBKP=$(cat ./settings.json | jq -r .PG_BKP);
+  fi;
 
   local  PG_DB="${PG_DB:-$pgDB}";
   local PG_UID="${PG_UID:-$pgUID}";
