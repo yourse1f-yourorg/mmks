@@ -64,10 +64,10 @@ if [[ "${CI:-false}" == "false" ]]; then
   refreshApt;
   installJava;
   installNodeJs;
-  installChimp;
-  installMeteorFramework;
   installAndroid;
 fi;
+installChimp;
+installMeteorFramework;
 installMeteorApp;
 
 declare MSG="";
