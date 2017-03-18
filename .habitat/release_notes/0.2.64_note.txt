@@ -1,0 +1,4 @@
+0.2.64_note.txt
+This is release 0.2.64
+Bug (mobile):Corrected APK name in public HREF
+
