@@ -11,7 +11,7 @@ export RELEASE=$(cat ${PROJECT_ROOT}/.meteor/release | cut -d "@" -f 2);
 echo -e "Using meteor version : ${RELEASE}";
 #
 cd ${PROJECT_ROOT};
-meteor npm run knex_prod;
+# meteor npm run knex_prod;
 #
 export X=${HOST_SERVER_PROTOCOL:="http"};
 export X=${HOST_SERVER_NAME:="localhost"};

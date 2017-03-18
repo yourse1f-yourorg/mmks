@@ -94,7 +94,8 @@ function initialize_server() {
     else
       echo -e "${PRTY} Restoring PostgreSQL from seed file, '${SEED_FILE}'."  | tee -a ${LOG};
 
-      ${CIRCLE_PG} -qf ${SEED_FILE} &>/dev/null;
+        ${CIRCLE_PG} -qf ${SEED_FILE}
+        #  &>/dev/null;
 
       echo -e "${PRTY} Database sown ..."  | tee -a ${LOG};
     fi;
@@ -107,6 +108,7 @@ function initialize_server() {
 
     ${CIRCLE_PG} -tc "GRANT ALL PRIVILEGES ON DATABASE ${DATABASE_NAME} TO  ${PG_UID}";
     ${CIRCLE_PG} -tc "GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA ${SCHEMA_NAME} TO ${PG_UID}";
+    ${CIRCLE_PG} -tc "GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA ${SCHEMA_NAME} TO ${PG_UID}";
 
   fi;
 

@@ -34,7 +34,7 @@ dependencies:
 
   post:
     - date > ${CIRCLE_ARTIFACTS}/meteor.log
-    - ${METEOR_CMD} --settings=settings.json >> ${CIRCLE_ARTIFACTS}/meteor.log 2>&1 & :
+    - ${METEOR_CMD} --production --settings=settings.json >> ${CIRCLE_ARTIFACTS}/meteor.log 2>&1 & :
         background: true
 
 

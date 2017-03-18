@@ -2,6 +2,7 @@
 #
 function installMeteorFramework()
 {
+  local CI=${CI:-false};
   local INSTALL_METEOR="yes";
   if [[ -d "${HOME}/.meteor/packages/meteor-tool" ]]; then
     declare METEORVERSION=$(meteor --version  2>&1);
