@@ -22,7 +22,7 @@ machine:
 
 dependencies:
   cache_directories:
-    - ${METEOR_HOME}
+    - ${HOME}/.meteor
     - /opt/circleci/nodejs/v4.8.0/lib/node_modules
 
   pre:
