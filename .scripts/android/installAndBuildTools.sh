@@ -383,7 +383,7 @@ function BuildAndroidAPK() {
     echo -e "Aligned the APK file.";
 
     mv ${APP_NAME}.apk ${BUILD_DIRECTORY}/${APK_PUBLISH_DIR};
-    echo -e "SDK Platform Android 6.0, API 23, revision 3 : " > ${BUILD_DIRECTORY}/${APK_PUBLISH_DIR}/${APP_NAME}.apk.txt
+    echo -e "SDK Platform Android 6.0, API 25, revision 3 : " > ${BUILD_DIRECTORY}/${APK_PUBLISH_DIR}/${APP_NAME}.apk.txt
     echo -e "Placed signed and aligned APK file into project's public directory, '${BUILD_DIRECTORY}/${APK_PUBLISH_DIR}'.";
 
   popd  >/dev/null;
