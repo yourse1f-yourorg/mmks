@@ -355,12 +355,20 @@ function BuildAndroidAPK() {
   rm -fr ${TARGET_DIRECTORY};
   mkdir -p ${TARGET_DIRECTORY};
 
+  declare APK_PUBLISH_DIR="public/mobile/android";
+  mkdir -p ${BUILD_DIRECTORY}/${APK_PUBLISH_DIR};
+
   pushd ${BUILD_DIRECTORY} >/dev/null;
+
+    echo -e "\nRemoving any '*.apk' left in public directory.";
+    rm ./${APK_PUBLISH_DIR}/${APP_NAME}.apk;
 
     echo -e "\nBuilding project : meteor build ${TARGET_DIRECTORY}         --server=${HOST_SERVER_URI};\n\n";
     meteor build ${TARGET_DIRECTORY}         --server=${HOST_SERVER_URI};
+
     echo "Built project : ${BUILD_DIRECTORY} in ${TARGET_DIRECTORY} for server ${HOST_SERVER_URI}";
-    mv ${TARGET_DIRECTORY}/android/release-unsigned.apk ${TARGET_DIRECTORY}/android/${APP_NAME}_unaligned.apk
+    mv ${TARGET_DIRECTORY}/android/release-unsigned.apk ${TARGET_DIRECTORY}/android/${APP_NAME}_unaligned.apk;
+
     # echo "Stashed plain version.  Building debug version ...";
     # meteor build ${TARGET_DIRECTORY} --debug --server=${HOST_SERVER_URI};
     echo "Built APK.";
@@ -374,8 +382,6 @@ function BuildAndroidAPK() {
     ${ZIPALIGN_PATH}/zipalign -f ${ZIPALIGN_BOUNDARY} ${APP_NAME}_unaligned.apk ${APP_NAME}.apk;
     echo -e "Aligned the APK file.";
 
-    declare APK_PUBLISH_DIR="public/mobile/android";
-    mkdir -p ${BUILD_DIRECTORY}/${APK_PUBLISH_DIR};
     mv ${APP_NAME}.apk ${BUILD_DIRECTORY}/${APK_PUBLISH_DIR};
     echo -e "SDK Platform Android 6.0, API 23, revision 3 : " > ${BUILD_DIRECTORY}/${APK_PUBLISH_DIR}/${APP_NAME}.apk.txt
     echo -e "Placed signed and aligned APK file into project's public directory, '${BUILD_DIRECTORY}/${APK_PUBLISH_DIR}'.";
