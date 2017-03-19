@@ -22,7 +22,7 @@ machine:
 
 dependencies:
   cache_directories:
-    - ${HOME}/.meteor
+    - /home/ubuntu/.meteor # absolute only!
     - /opt/circleci/nodejs/v4.8.0/lib/node_modules
 
   pre:

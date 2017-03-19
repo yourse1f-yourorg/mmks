@@ -1,0 +1,8 @@
+0.2.66_note.txt
+This is release 0.2.66
+Bug (ci): Cache directory for Meteor
+Also :
+ - preflight check can be run explicitly
+ - settings refer to latest test database back up -- http://bit.ly/mmks170317G
+
+

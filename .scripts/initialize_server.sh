@@ -25,7 +25,7 @@ function initialize_server() {
     local pgUID="ubuntu";
     local pgPWD="memorablecacaphony";
     local pgHST="localhost";
-    local pgBKP="http://bit.ly/mmks170306";
+    local pgBKP="http://bit.ly/mmks170317G";
   fi;
 
   local  PG_DB="${PG_DB:-$pgDB}";

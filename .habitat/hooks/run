@@ -19,10 +19,10 @@ export MONGO_URL={{cfg.mongo_url}};
 export ROOT_URL={{cfg.root_url}};
 export PORT={{cfg.port}};
 
-# `exec` makes it so the process that the Habitat supervisor uses is 
+# `exec` makes it so the process that the Habitat supervisor uses is
 # 'node main.js`, rather than the run hook itself.
 
-# `2>&1` makes it so both standard output and standard error go to the standard 
-# output stream, so all the logs from the application go to the same place.
-
-exec node main.js 2>&1
+mkdir -p {{pkg.svc_var_path}}/logs
+touch {{pkg.svc_var_path}}/logs/stdout.log
+touch {{pkg.svc_var_path}}/logs/stderr.log
+exec node main.js >{{pkg.svc_var_path}}/logs/stdout.log 2>{{pkg.svc_var_path}}/logs/stderr.log
