@@ -1,14 +1,18 @@
+#!/bin/bash
+#
+cat <<EOF
 {
   "HOST_SERVER_NAME": "localhost:3000",
-  "MAILGUN_DOMAIN": "yourpublic.work",
-  "MAILGUN_KEY": "(As if I'm gonna to leave THAT lying around.)  A valid key has 36 characters and begins with 'key-'.",
-  "LOGGLY_SUBDOMAIN": "yourwork",
-  "LOGGLY_TOKEN": " ( not this either ) ",
-  "PG_DB": "circle_test",
-  "PG_UID": "ubuntu",
-  "PG_PWD": "",
-  "PG_HST": "localhost",
-  "PG_BKP": "http://bit.ly/mmks170317G",
+  "MAILGUN_DOMAIN": "${MAILGUN_DOMAIN}",
+  "MAILGUN_KEY": "${MAILGUN_KEY}",
+  "LOGGLY_SUBDOMAIN": "${LOGGLY_SUBDOMAIN}",
+  "LOGGLY_TOKEN": "${LOGGLY_TOKEN}",
+
+  "PG_DB": "${PG_DB}",
+  "PG_UID": "${PG_UID}",
+  "PG_PWD": "${PG_PWD}",
+  "PG_HST": "${PG_HST}",
+  "PG_BKP": "${PG_BKP}",
   "public": {
     "PASSWORD_RESET": {
       "Route": "/prrq/",
@@ -21,3 +25,4 @@
     }
   }
 }
+EOF

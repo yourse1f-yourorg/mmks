@@ -7,6 +7,27 @@ PRTY=" Env Vars ::";
 
 function preFlightCheck()
 {
+
+
+  echo -e "${PRTY} Verify settings.json";
+  if [ -z ${CI} ]; then
+    ./template.settings.json.sh > settings.json;
+  else
+    if [ ! -f settings.json ]; then
+      if [ -f ${HOME}/.ssh/secrets.sh; ]; then
+        source ${HOME}/.ssh/secrets.sh;
+        ./template.settings.json.sh > settings.json;
+      else
+        echo -e "
+        Your settings secrets, were not found at :
+
+             ${HOME}/.ssh/secrets.sh;\n";
+        exit 1;
+      fi;
+    fi;
+
+  fi;
+
   echo -e "${PRTY} Configure environment variables?";
   declare USER_VARS="${HOME}/.userVars.sh";
   declare SVs="false";

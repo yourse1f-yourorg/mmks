@@ -48,18 +48,25 @@ if echo ${FREEMEM} ${NEEDMEM} | awk '{exit $1 < $2 ? 0 : 1}'; then
   read -n 1 -s;
 fi;
 
-if [ ! -f settings.json ]; then
-  cp settings.json.example settings.json;
-  if [ -z ${CI} ]; then
-    echo -e "
-    While the system builds, you should prepare your settings:
+if [ -z ${CI} ]; then
+  ./template.settings.json.sh > settings.json;
+else
+  if [ ! -f settings.json ]; then
+    if [ -f ${HOME}/.ssh/secrets.sh; ]; then
+      source ${HOME}/.ssh/secrets.sh;
+      ./template.settings.json.sh > settings.json;
+    else
+      echo -e "
+      While the system builds, you should prepare your settings secrets:
 
-         nano $(pwd)/settings.json;
+           nano ${HOME}/.ssh/secrets.sh;
 
-    Press any key to continue or <ctrl-c> to quit.
-    ";
-    read -n 1 -s;
+      Press any key to continue or <ctrl-c> to quit.
+      ";
+      read -n 1 -s;
+    fi;
   fi;
+
 fi;
 
 if [[ "${CI:-false}" == "false" ]]; then
@@ -113,9 +120,10 @@ else
   MSG="
 
   Next steps :
-     1) cp settings.json.example settings.json
-     2) # Correctly configure 'settings.json'
-     3) meteor --settings=settings.json
+     1) # Correctly configure '${HOME}/.ssh/secrets.sh;'
+     2) source ${HOME}/.ssh/secrets.sh;
+     3) ./template.settings.json.sh > settings.json;
+     4) meteor --settings=settings.json
      ";
 fi;
 
