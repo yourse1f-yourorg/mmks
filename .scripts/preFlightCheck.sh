@@ -31,43 +31,45 @@ function preFlightCheck()
     echo -e "${PRTY} Environment variables seem ready.";
   fi;
 
-  declare SECRETS_FILE="${HOME}/.ssh/hab_vault/${HOST_SERVER_NAME}/secrets.sh";
-  echo -e "${PRTY} Verify 'settings.json' or generate from ${SECRETS_FILE}";
-  if [[ "${CI}" = "true" ]]; then
-    ./template.settings.json.sh > settings.json;
-  else
-    if [ ! -f settings.json ]; then
-      if [ -f ${SECRETS_FILE} ]; then
-        source ${SECRETS_FILE};
-        ./template.settings.json.sh > settings.json;
-      else
-        echo -e "
-        Your secret settings were not found at :
+  source ./.scripts/utils.sh;
+  validateMeteorSettings;
 
-             ${SECRETS_FILE};\n";
-        exit 1;
-      fi;
-    fi;
-  fi;
+  # declare SECRETS_FILE="${HOME}/.ssh/hab_vault/${HOST_SERVER_NAME}/secrets.sh";
+  # echo -e "${PRTY} Verify 'settings.json' or generate from ${SECRETS_FILE}";
+  # if [[ "${CI}" = "true" ]]; then
+  #   ./template.settings.json.sh > settings.json;
+  # else
+  #   if [ ! -f settings.json ]; then
+  #     if [ -f ${SECRETS_FILE} ]; then
+  #       source ${SECRETS_FILE};
+  #       ./template.settings.json.sh > settings.json;
+  #     else
+  #       echo -e "
+  #       Your secret settings were not found at :
 
-  if [ -f settings.json ]; then
-    echo "DD";
-    if [[ -z $(jq -r .LOGGLY_SUBDOMAIN settings.json) ]]; then
-      echo -e "
-      Your secret settings file, '${SECRETS_FILE}', is incomplete.
-      'LOGGLY_SUBDOMAIN' is required\n";
-      exit 1;
-    fi;
-    echo -e "Result : ";
-    grep "LOGGLY_SUBDOMAIN" settings.json;
-  fi;
+  #            ${SECRETS_FILE};\n";
+  #       exit 1;
+  #     fi;
+  #   fi;
+  # fi;
+
+  # if [ -f settings.json ]; then
+  #   if [[ -z $(jq -r .LOGGLY_SUBDOMAIN settings.json) ]]; then
+  #     echo -e "
+  #     Your secret settings file, '${SECRETS_FILE}', is incomplete.
+  #     'LOGGLY_SUBDOMAIN' is required\n";
+  #     exit 1;
+  #   fi;
+  #   echo -e "Result : ";
+  #   grep "LOGGLY_SUBDOMAIN" settings.json;
+  # fi;
 
   declare SQLITE_DB_DIR='/tmp/db';
   [ ! -d ${SQLITE_DB_DIR} ] \
       && echo -e "${PRTY} Creating SQLite database directory." \
       && mkdir ${SQLITE_DB_DIR};
 
-  echo -e "${PRTY} Done preflight.";
+  echo -e "${PRTY} Done preflight.\n\n";
 
 }
 

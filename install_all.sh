@@ -31,7 +31,7 @@ else
 fi;
 
 memory;
-NEEDMEM=1.0;
+NEEDMEM=0.4;
 # FREEMEM=$(awk '/MemFree/ { printf "%.3f \n", $2/1024/1024 }' /proc/meminfo);
 # echo "Fail if free:${FREEMEM} -lt  needed:${NEEDMEM}";
 if echo ${FREEMEM} ${NEEDMEM} | awk '{exit $1 < $2 ? 0 : 1}'; then
@@ -73,36 +73,49 @@ fi;
 #   ./template.settings.json.sh > settings.json;
 # fi;
 
-declare SECRETS_FILE="${HOME}/.ssh/hab_vault/${HOST_SERVER_NAME}/secrets.sh";
-echo -e "${PRTY} Verify 'settings.json' or generate from ${SECRETS_FILE}";
-if [[ "${CI}" = "true" ]]; then
-  ./template.settings.json.sh > settings.json;
-else
-  if [ ! -f settings.json ]; then
-    if [ -f ${SECRETS_FILE} ]; then
-      echo "CC";
-      source ${SECRETS_FILE};
-      ./template.settings.json.sh > settings.json;
-    else
-      echo -e "
-      Your secret settings were not found at :
+# haveUtils;
+validateMeteorSettings;
 
-           ${SECRETS_FILE};\n";
-      exit 1;
-    fi;
-  fi;
-fi;
+# declare SECRETS_FILE="${HOME}/.ssh/hab_vault/${HOST_SERVER_NAME}/secrets.sh";
+# echo -e "${PRTY} Verify 'settings.json' or generate from ${SECRETS_FILE}";
+# pwd;
+# if [[ "${CI}" = "true" ]]; then
+#   echo "A";
+#   ./template.settings.json.sh > settings.json;
+# else
+#   echo "B";
+#   if [ ! -f settings.json ]; then
+#   echo "C";
+#     if [ -f ${SECRETS_FILE} ]; then
+#   echo "D";
+#       source ${SECRETS_FILE};
+#       ./template.settings.json.sh > settings.json;
+#     else
+#       echo -e "
+#       Your secret settings were not found at :
 
-if [ -f settings.json ]; then
-  if [[ -z $(jq -r .LOGGLY_SUBDOMAIN settings.json) ]]; then
-    echo -e "
-    Your secret settings file, '${SECRETS_FILE}', is incomplete.
-    'LOGGLY_SUBDOMAIN' is required\n";
-    exit 1;
-  fi;
-  echo -e "Result : ";
-  grep "LOGGLY_SUBDOMAIN" settings.json;
-fi;
+#            ${SECRETS_FILE};\n";
+#       exit 1;
+#     fi;
+#   echo "E";
+#   fi;
+#   echo "F";
+# fi;
+
+# if [ -f settings.json ]; then
+#   LG_DOM=$(jq -r .LOGGLY_SUBDOMAIN settings.json);
+#   echo ${LG_DOM};
+#   if [[ -z ${LG_DOM} || "${LG_DOM}" = "null" ]]; then
+#     echo -e "
+#     Your secret settings file, '${SECRETS_FILE}', is incomplete.
+#     'LOGGLY_SUBDOMAIN' is required\n";
+#     cat ${SECRETS_FILE};
+#     exit 1;
+#   fi;
+#   echo -e "Result : ";
+#   pwd;
+#   grep "LOGGLY_SUBDOMAIN" settings.json;
+# fi;
 
 if [[ "${CI:-false}" == "false" ]]; then
   refreshApt;

@@ -18,7 +18,7 @@ pkg_origin=yourse1f-yourorg
 pkg_name=mmks
 
 #       Package formal release version.  E.g. --  pkg_version=0.1.1
-pkg_version=0.2.70
+pkg_version=0.2.71
 
 #        How you wish to be identified.  E.g. --  pkg_maintainer="Yourself <yourse1f.yourorg@gmail.com>"
 pkg_maintainer="You Yourself <yourse1f-yourorg@gmail.com>"
@@ -106,7 +106,7 @@ do_build() {
 
   # mkdir -p ./results/meteor
   # meteor build ./results/meteor --directory --server-only
-  build_line "do_build. Done.";
+  build_line "Build. Done.";
 
 }
 
@@ -114,13 +114,6 @@ do_install() {
   build_line "Install. Start...";
   cp -fr ${PLAN_CONTEXT}/results/bundle/* ${pkg_prefix};
   build_line "Install. Moved to ${pkg_prefix}";
-  build_line "do_install. Done.";
+  build_line "Install. Done.";
 
-}
-
-do_end() {
-  build_line "******************************";
-  build_line "*     MMKS plan is done.     *";
-  build_line "******************************";
-  build_line "do_end(). Done.";
 }
