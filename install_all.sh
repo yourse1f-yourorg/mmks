@@ -48,34 +48,60 @@ if echo ${FREEMEM} ${NEEDMEM} | awk '{exit $1 < $2 ? 0 : 1}'; then
   read -n 1 -s;
 fi;
 
-if [ -z ${CI} ]; then
-  echo -e "
-      Running in development environment.";
+# if [ -z ${CI} ]; then
+#   echo -e "
+#       Running in development environment.";
+#   if [ ! -f settings.json ]; then
+#     if [ -f ${HOME}/.ssh/secrets.sh ]; then
+#       echo -e "      Generating 'settings.json' from template";
+#       source ${HOME}/.ssh/secrets.sh;
+#       ./template.settings.json.sh > settings.json;
+#     else
+#       echo -e "
+#       While the system builds, you should prepare your settings secrets:
+
+#            nano ${HOME}/.ssh/secrets.sh;
+
+#       Press any key to continue or <ctrl-c> to quit.
+#       ";
+#       read -n 1 -s;
+#     fi;
+#   fi;
+# else
+#   echo -e "
+#       Running in CircleCI.  Generating 'settings.json' from template";
+#   ./template.settings.json.sh > settings.json;
+# fi;
+
+declare SECRETS_FILE="${HOME}/.ssh/hab_vault/${HOST_SERVER_NAME}/secrets.sh";
+echo -e "${PRTY} Verify 'settings.json' or generate from ${SECRETS_FILE}";
+if [[ "${CI}" = "true" ]]; then
+  ./template.settings.json.sh > settings.json;
+else
   if [ ! -f settings.json ]; then
-    if [ -f ${HOME}/.ssh/secrets.sh ]; then
-      echo -e "      Generating 'settings.json' from template";
-      source ${HOME}/.ssh/secrets.sh;
+    if [ -f ${SECRETS_FILE} ]; then
+      echo "CC";
+      source ${SECRETS_FILE};
       ./template.settings.json.sh > settings.json;
     else
       echo -e "
-      While the system builds, you should prepare your settings secrets:
+      Your secret settings were not found at :
 
-           nano ${HOME}/.ssh/secrets.sh;
-
-      Press any key to continue or <ctrl-c> to quit.
-      ";
-      read -n 1 -s;
+           ${SECRETS_FILE};\n";
+      exit 1;
     fi;
   fi;
-else
-  echo -e "
-      Running in CircleCI.  Generating 'settings.json' from template";
-  ./template.settings.json.sh > settings.json;
 fi;
 
 if [ -f settings.json ]; then
+  if [[ -z $(jq -r .LOGGLY_SUBDOMAIN settings.json) ]]; then
+    echo -e "
+    Your secret settings file, '${SECRETS_FILE}', is incomplete.
+    'LOGGLY_SUBDOMAIN' is required\n";
+    exit 1;
+  fi;
   echo -e "Result : ";
-  grep "MAILGUN_DOMAIN" settings.json;
+  grep "LOGGLY_SUBDOMAIN" settings.json;
 fi;
 
 if [[ "${CI:-false}" == "false" ]]; then

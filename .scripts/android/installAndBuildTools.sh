@@ -361,7 +361,7 @@ function BuildAndroidAPK() {
   pushd ${BUILD_DIRECTORY} >/dev/null;
 
     echo -e "\nRemoving any '*.apk' left in public directory.";
-    rm -f./${APK_PUBLISH_DIR}/${APP_NAME}.apk;
+    rm -f ./${APK_PUBLISH_DIR}/${APP_NAME}.apk;
 
     echo -e "\nBuilding project : meteor build ${TARGET_DIRECTORY}         --server=${HOST_SERVER_URI};\n\n";
     meteor build ${TARGET_DIRECTORY}         --server=${HOST_SERVER_URI};

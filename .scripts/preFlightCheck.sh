@@ -9,25 +9,6 @@ function preFlightCheck()
 {
 
 
-  echo -e "${PRTY} Verify settings.json";
-  if [ -z ${CI} ]; then
-    ./template.settings.json.sh > settings.json;
-  else
-    if [ ! -f settings.json ]; then
-      if [ -f ${HOME}/.ssh/secrets.sh; ]; then
-        source ${HOME}/.ssh/secrets.sh;
-        ./template.settings.json.sh > settings.json;
-      else
-        echo -e "
-        Your settings secrets, were not found at :
-
-             ${HOME}/.ssh/secrets.sh;\n";
-        exit 1;
-      fi;
-    fi;
-
-  fi;
-
   echo -e "${PRTY} Configure environment variables?";
   declare USER_VARS="${HOME}/.userVars.sh";
   declare SVs="false";
@@ -48,6 +29,37 @@ function preFlightCheck()
 
   else
     echo -e "${PRTY} Environment variables seem ready.";
+  fi;
+
+  declare SECRETS_FILE="${HOME}/.ssh/hab_vault/${HOST_SERVER_NAME}/secrets.sh";
+  echo -e "${PRTY} Verify 'settings.json' or generate from ${SECRETS_FILE}";
+  if [[ "${CI}" = "true" ]]; then
+    ./template.settings.json.sh > settings.json;
+  else
+    if [ ! -f settings.json ]; then
+      if [ -f ${SECRETS_FILE} ]; then
+        source ${SECRETS_FILE};
+        ./template.settings.json.sh > settings.json;
+      else
+        echo -e "
+        Your secret settings were not found at :
+
+             ${SECRETS_FILE};\n";
+        exit 1;
+      fi;
+    fi;
+  fi;
+
+  if [ -f settings.json ]; then
+    echo "DD";
+    if [[ -z $(jq -r .LOGGLY_SUBDOMAIN settings.json) ]]; then
+      echo -e "
+      Your secret settings file, '${SECRETS_FILE}', is incomplete.
+      'LOGGLY_SUBDOMAIN' is required\n";
+      exit 1;
+    fi;
+    echo -e "Result : ";
+    grep "LOGGLY_SUBDOMAIN" settings.json;
   fi;
 
   declare SQLITE_DB_DIR='/tmp/db';
