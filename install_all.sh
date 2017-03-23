@@ -49,10 +49,11 @@ if echo ${FREEMEM} ${NEEDMEM} | awk '{exit $1 < $2 ? 0 : 1}'; then
 fi;
 
 if [ -z ${CI} ]; then
-  ./template.settings.json.sh > settings.json;
-else
+  echo -e "
+      Running in development environment.";
   if [ ! -f settings.json ]; then
-    if [ -f ${HOME}/.ssh/secrets.sh; ]; then
+    if [ -f ${HOME}/.ssh/secrets.sh ]; then
+      echo -e "      Generating 'settings.json' from template";
       source ${HOME}/.ssh/secrets.sh;
       ./template.settings.json.sh > settings.json;
     else
@@ -66,7 +67,15 @@ else
       read -n 1 -s;
     fi;
   fi;
+else
+  echo -e "
+      Running in CircleCI.  Generating 'settings.json' from template";
+  ./template.settings.json.sh > settings.json;
+fi;
 
+if [ -f settings.json ]; then
+  echo -e "Result : ";
+  grep "MAILGUN_DOMAIN" settings.json;
 fi;
 
 if [[ "${CI:-false}" == "false" ]]; then
