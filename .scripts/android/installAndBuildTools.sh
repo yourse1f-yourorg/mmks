@@ -360,6 +360,9 @@ function BuildAndroidAPK() {
 
   pushd ${BUILD_DIRECTORY} >/dev/null;
 
+    export APP_RELEASE=$(jq -r .version package.json);
+    export APP_NAME=$(jq -r .name package.json);
+
     echo -e "\nRemoving any '*.apk' left in public directory.";
     rm -f ./${APK_PUBLISH_DIR}/${APP_NAME}.apk;
 
@@ -383,7 +386,11 @@ function BuildAndroidAPK() {
     echo -e "Aligned the APK file.";
 
     mv ${APP_NAME}.apk ${BUILD_DIRECTORY}/${APK_PUBLISH_DIR};
-    echo -e "SDK Platform Android 6.0, API 25, revision 3 : " > ${BUILD_DIRECTORY}/${APK_PUBLISH_DIR}/${APP_NAME}.apk.txt
+    echo -e "APK Note : " > ${BUILD_DIRECTORY}/${APK_PUBLISH_DIR}/${APP_NAME}.apk.txt
+    echo -e " - App '${APP_NAME}' release number : ${APP_RELEASE} " >> ${BUILD_DIRECTORY}/${APK_PUBLISH_DIR}/${APP_NAME}.apk.txt
+    echo -e " - Target server is " >> ${BUILD_DIRECTORY}/${APK_PUBLISH_DIR}/${APP_NAME}.apk.txt
+    echo -e " - SDK Platform Android 6.0, API 25, revision 3 : " >> ${BUILD_DIRECTORY}/${APK_PUBLISH_DIR}/${APP_NAME}.apk.txt
+
     echo -e "Placed signed and aligned APK file into project's public directory, '${BUILD_DIRECTORY}/${APK_PUBLISH_DIR}'.";
 
   popd  >/dev/null;
