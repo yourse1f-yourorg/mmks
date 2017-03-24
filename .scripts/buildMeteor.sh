@@ -3,8 +3,8 @@
 pushd `dirname $0` > /dev/null; SCRIPTPATH=`pwd`; popd > /dev/null;
 PROJECT_ROOT=${SCRIPTPATH%/.scripts};
 
-
-source ${PROJECT_ROOT}/.scripts/trap.sh;
+set -e;
+# source ${PROJECT_ROOT}/.scripts/trap.sh;
 source ${PROJECT_ROOT}/.scripts/installMeteorFramework.sh;
 source ${PROJECT_ROOT}/.scripts/installMeteorApp.sh;
 # source ${PROJECT_ROOT}/.scripts/android/buildAndroid.sh;

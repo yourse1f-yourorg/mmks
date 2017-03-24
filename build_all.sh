@@ -2,7 +2,8 @@
 #
 export APP_NAME="":
 
-source .scripts/trap.sh;
+set -e;
+# source .scripts/trap.sh;
 source .scripts/utils.sh;
 source .scripts/android/installAndBuildTools.sh;
 

@@ -2,7 +2,14 @@
 #
 cd {{pkg.svc_var_path}}
 
-export METEOR_SETTINGS="`cat settings.json`";
+export METEOR_SETTINGS_TEMPLATE_FILE="template.settings.json.sh";
+export METEOR_SETTINGS_FILE="settings.json";
+export SOURCE_SECRETS_FILE="/home/hab/.ssh/hab_vault/irid.blue/secrets.sh";
+
+# echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
+. ${SOURCE_SECRETS_FILE};
+sh ${METEOR_SETTINGS_TEMPLATE_FILE} > ${METEOR_SETTINGS_FILE};
+# echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
 
 echo "###########################################################";
 echo "########## Base directory     {{pkg.svc_path}} ";
@@ -11,7 +18,10 @@ echo "########## Config directory   {{pkg.svc_config_path}} ";
 echo "########## Mongo URL          {{cfg.mongo_url}}";
 echo "########## Meteor app URL     {{cfg.root_url}} ";
 echo "########## Meteor app port    {{cfg.port}} ";
-# echo "########## Meteor settings    ${METEOR_SETTINGS} ";
+echo "########## Settings template  ${METEOR_SETTINGS_TEMPLATE_FILE} ";
+echo "########## Meteor settings    ${METEOR_SETTINGS_FILE} ";
+echo "########## Secrets            ${SOURCE_SECRETS_FILE} ";
+echo "########## PG_BKP             >${PG_BKP}< ";
 echo "###########################################################";
 
 

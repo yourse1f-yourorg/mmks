@@ -386,10 +386,12 @@ function BuildAndroidAPK() {
     echo -e "Aligned the APK file.";
 
     mv ${APP_NAME}.apk ${BUILD_DIRECTORY}/${APK_PUBLISH_DIR};
-    echo -e "APK Note : " > ${BUILD_DIRECTORY}/${APK_PUBLISH_DIR}/${APP_NAME}.apk.txt
-    echo -e " - App '${APP_NAME}' release number : ${APP_RELEASE} " >> ${BUILD_DIRECTORY}/${APK_PUBLISH_DIR}/${APP_NAME}.apk.txt
-    echo -e " - Target server is " >> ${BUILD_DIRECTORY}/${APK_PUBLISH_DIR}/${APP_NAME}.apk.txt
-    echo -e " - SDK Platform Android 6.0, API 25, revision 3 : " >> ${BUILD_DIRECTORY}/${APK_PUBLISH_DIR}/${APP_NAME}.apk.txt
+
+    declare APK_NOTE_FILE="${BUILD_DIRECTORY}/${APK_PUBLISH_DIR}/${APP_NAME}.apk.txt";
+    echo -e "APK Note : "                                                > ${APK_NOTE_FILE};
+    echo -e " - App '${APP_NAME}' release number : ${APP_RELEASE} "     >> ${APK_NOTE_FILE};
+    echo -e " - Target server is : ${HOST_SERVER_URI} "                 >> ${APK_NOTE_FILE};
+    echo -e " - SDK Platform Android 6.0, API 25, revision 3 : "        >> ${APK_NOTE_FILE};
 
     echo -e "Placed signed and aligned APK file into project's public directory, '${BUILD_DIRECTORY}/${APK_PUBLISH_DIR}'.";
 
