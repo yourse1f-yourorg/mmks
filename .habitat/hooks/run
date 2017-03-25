@@ -9,6 +9,7 @@ export SOURCE_SECRETS_FILE="/home/hab/.ssh/hab_vault/irid.blue/secrets.sh";
 # echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
 . ${SOURCE_SECRETS_FILE};
 sh ${METEOR_SETTINGS_TEMPLATE_FILE} > ${METEOR_SETTINGS_FILE};
+export METEOR_SETTINGS="`cat ${METEOR_SETTINGS_FILE}`";
 # echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
 
 echo "###########################################################";
@@ -22,6 +23,7 @@ echo "########## Settings template  ${METEOR_SETTINGS_TEMPLATE_FILE} ";
 echo "########## Meteor settings    ${METEOR_SETTINGS_FILE} ";
 echo "########## Secrets            ${SOURCE_SECRETS_FILE} ";
 echo "########## PG_BKP             >${PG_BKP}< ";
+echo "########## LOGGLY_SUBDOMAIN   >$(cat settings.json | jq .LOGGLY_SUBDOMAIN)< ";
 echo "###########################################################";
 
 
@@ -29,10 +31,11 @@ export MONGO_URL={{cfg.mongo_url}};
 export ROOT_URL={{cfg.root_url}};
 export PORT={{cfg.port}};
 
+mkdir -p {{pkg.svc_var_path}}/logs;
+touch {{pkg.svc_var_path}}/logs/stdout.log;
+touch {{pkg.svc_var_path}}/logs/stderr.log;
+
 # `exec` makes it so the process that the Habitat supervisor uses is
 # 'node main.js`, rather than the run hook itself.
 
-mkdir -p {{pkg.svc_var_path}}/logs
-touch {{pkg.svc_var_path}}/logs/stdout.log
-touch {{pkg.svc_var_path}}/logs/stderr.log
 exec node main.js >{{pkg.svc_var_path}}/logs/stdout.log 2>{{pkg.svc_var_path}}/logs/stderr.log

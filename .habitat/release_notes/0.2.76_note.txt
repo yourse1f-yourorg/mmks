@@ -1,0 +1,5 @@
+0.2.76_note.txt
+This is release 0.2.76
+Bug (cd): 'settings.json' exported correctly.
+
+
