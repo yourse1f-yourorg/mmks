@@ -1,5 +1,6 @@
 #!/bin/sh
 #
+echo "~~~~~~~~~~  Habitat hook - run  »»»»»»»»»»»»»";
 cd {{pkg.svc_var_path}}
 
 export METEOR_SETTINGS_TEMPLATE_FILE="template.settings.json.sh";
@@ -39,3 +40,5 @@ touch {{pkg.svc_var_path}}/logs/stderr.log;
 # 'node main.js`, rather than the run hook itself.
 
 exec node main.js >{{pkg.svc_var_path}}/logs/stdout.log 2>{{pkg.svc_var_path}}/logs/stderr.log
+
+echo "«««««««««««  Habitat hook - run  ~~~~~~~~~~~~";
