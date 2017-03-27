@@ -24,7 +24,7 @@ function UpdateEnvVars() {
 
 }
 
-[ -z $(jq --version) ] && sudo apt -y install jq # || echo "found jq version «$(jq --version)»";
+[ -z $(jq --version &>/dev/null ) ] && sudo apt -y install jq # || echo "found jq version «$(jq --version)»";
 function GetProjectName() {
 
   local JSON_FILE=$1;
@@ -34,6 +34,16 @@ function GetProjectName() {
 }
 
 function validateMeteorSettings() {
+
+  if [[ "null" = "${HOST_SERVER_NAME}" || -z "${HOST_SERVER_NAME}" ]]; then
+    echo -e "
+     The environment variable 'HOST_SERVER_NAME' is undefined!
+         Secret settings under ...
+            '/home/$(whoami)/.ssh/hab_vault/\${HOST_SERVER_NAME}/secrets.sh;'
+                ... could not be read.
+    ";
+    exit 1;
+  fi;
 
   declare SECRETS_FILE="${HOME}/.ssh/hab_vault/${HOST_SERVER_NAME}/secrets.sh";
   echo -e "${PRTY} Verify 'settings.json' or generate from ${SECRETS_FILE}";

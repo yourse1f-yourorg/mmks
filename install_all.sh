@@ -14,7 +14,6 @@ source .scripts/android/installAndBuildTools.sh;
 source .scripts/installMeteorApp.sh;
 # source .pkgs/install_local_packages.sh;
 
-
 storage;
 export MINFREE=7000
 # export FREESPACE=$(($(stat -f --format="%a*%S" ${HOME})/1000000));
@@ -102,6 +101,7 @@ validateMeteorSettings;
 #   echo "F";
 # fi;
 
+
 # if [ -f settings.json ]; then
 #   LG_DOM=$(jq -r .LOGGLY_SUBDOMAIN settings.json);
 #   echo ${LG_DOM};
@@ -153,8 +153,8 @@ if [ -f ./settings.json ]; then
       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
         export KEYSTORE_PWD=\"obscuregobbledygook\";
-        export HOST_SERVER_NAME=\"http://moon.planet.sun:3000/\";
-        export ROOT_URL=\"\${HOST_SERVER_NAME}\";
+        export HOST_SERVER_NAME=\"moon.planet.sun/\";
+        export ROOT_URL==\"http://\${HOST_SERVER_NAME}:3000/\";
         export YOUR_FULLNAME=\"You Yourself\";
         export YOUR_ORGANIZATION_NAME=\"YourOrg\";
         ./build_all.sh;
@@ -168,8 +168,8 @@ else
   MSG="
 
   Next steps :
-     1) # Correctly configure '${HOME}/.ssh/secrets.sh;'
-     2) source ${HOME}/.ssh/secrets.sh;
+     1) # Correctly configure '${HOME}/.ssh/hab_vault/${HOST_SERVER_NAME}/secrets.sh;'
+     2) source ${HOME}/.ssh/hab_vault/${HOST_SERVER_NAME}/secrets.sh;
      3) ./template.settings.json.sh > settings.json;
      4) meteor --settings=settings.json
      ";
@@ -180,10 +180,10 @@ echo -e "${MSG}";
 exit 0;
 
 export KEYSTORE_PWD="obscuregobbledygook";
-export HOST_SERVER_NAME="http://moon.planet.sun:3000/";
-export ROOT_URL="${HOST_SERVER_NAME}";
+export HOST_SERVER_NAME="moon.planet.sun";
+export ROOT_URL="http://${ROOT_URL}:3000/";
 export YOUR_FULLNAME="You Yourself";
 export YOUR_ORGANIZATION_NAME="YourOrg";
-meteor run --mobile-server=${HOST_SERVER_NAME}  --settings=settings.json;
+meteor run --mobile-server=${ROOT_URL}  --settings=settings.json;
 #
 
