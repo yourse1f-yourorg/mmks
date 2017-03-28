@@ -137,11 +137,13 @@ book.then(function (result) {
   console.log('Sequelize error while finding books...', error); // eslint-disable-line no-console
 });
 
-let partner = Partner.findAll();
-partner.then(function (result) {
-  console.log(' We got the first partner -- ', result[0].name); // eslint-disable-line no-console
-}).catch( (error) => {
-  console.log('Sequelize error while finding partners...', error); // eslint-disable-line no-console
-});
+if ( Meteor.isProduction ) {
+  let partner = Partner.findAll();
+  partner.then(function (result) {
+    console.log(' We got the first partner -- ', result[0].name); // eslint-disable-line no-console
+  }).catch( (error) => {
+    console.log('Sequelize error while finding partners...', error); // eslint-disable-line no-console
+  });
+}
 
 export { Author, Book, Partner };
