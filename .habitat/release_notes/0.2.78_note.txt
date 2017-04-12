@@ -1,5 +1,0 @@
-This is release 0.2.78
-Admin (pkgs): Upgrades flagged by npm-check-updates
-Bug (install): Restore the "fs.inotify.max_user_watches" fix that got broken by checking ${CI}
-Bug (api): Ignore "Partner" object when using knex.
-Bug (install): Requires pre-defined ${HOST_SERVER_NAME} to select correct secrets.sh.

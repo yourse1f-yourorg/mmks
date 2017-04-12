@@ -1,3 +1,0 @@
-0.2.68_note.txt
-This is release 0.2.68
-Admin (release): Out of order release

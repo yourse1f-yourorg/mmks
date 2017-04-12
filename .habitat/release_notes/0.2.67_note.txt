@@ -1,5 +1,0 @@
-0.2.67_note.txt
-This is release 0.2.67
-Doc (android): APK correctly reported
-Also:
-Bug (android): Previous APK gets bundled into current APK

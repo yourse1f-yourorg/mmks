@@ -1,4 +1,0 @@
-0.2.74_note.txt
-This is release 0.2.74
-Enhancement (cd): Bundle 'template.settings.json.sh' instead of 'settings.json'.
-

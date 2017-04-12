@@ -1,3 +1,0 @@
-This is release 0.2.79
-Test (cd): Version bump [skip ci]
-

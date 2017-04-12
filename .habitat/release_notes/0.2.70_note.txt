@@ -1,3 +1,0 @@
-0.2.70_note.txt
-This is release 0.2.70
-Enhancement (scripts): Now 'settings.json' is generated from template and envvars

@@ -1,3 +1,0 @@
-0.2.65_note.txt
-This is release 0.2.65
-Bug (ci): Work around misbehaving circle.yml shell var

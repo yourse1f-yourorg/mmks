@@ -1,3 +1,0 @@
-0.2.53_note.txt
-This is release 0.2.53.
-Bug (git): Fix screwed up previous release.

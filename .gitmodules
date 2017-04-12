@@ -1,0 +1,3 @@
+[submodule "meteor-mantra-kickstarter"]
+	path = meteor-mantra-kickstarter
+	url = git@github.com:warehouseman/meteor-mantra-kickstarter.git
