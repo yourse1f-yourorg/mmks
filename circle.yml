@@ -24,6 +24,8 @@ dependencies:
   cache_directories:
     - /home/ubuntu/.meteor # absolute only!
     - /opt/circleci/nodejs/v4.8.0/lib/node_modules
+    - /usr/bin/jq
+    - /usr/local/bin/meteor
 
   pre:
     - .scripts/initialize_server.sh
