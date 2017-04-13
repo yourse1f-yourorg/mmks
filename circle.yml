@@ -1,0 +1,46 @@
+# This is the configuration file for continuous deployment of
+# your project in CircleCi.
+general:
+  branches:
+    only:
+      - AsSub
+
+notify:
+  webhooks:
+    - url: https://webhooks.gitter.im/e/8cde05a4fd00381fde46
+
+machine:
+  environment:
+    _JAVA_OPTIONS: "-Xms512m -Xmx1024m"
+    METEOR_HOME: ${HOME}/.meteor
+    METEOR_CMD: ${HOME}/.meteor/meteor
+    CHIMP_PATH: ./node_modules/.bin/
+    CHIMP_CMD: ./node_modules/.bin/chimp
+
+  node:
+    version: 4.8.0
+
+dependencies:
+  cache_directories:
+    - /home/ubuntu/.meteor # absolute only!
+    - /opt/circleci/nodejs/v4.8.0/lib/node_modules
+
+  pre:
+    - .scripts/initialize_server.sh
+
+  override:
+    - ./install_all.sh
+
+  post:
+    - date > ${CIRCLE_ARTIFACTS}/meteor.log
+    - .scripts/startInProdMode.sh :
+        background: true
+
+
+test:
+  pre:
+    - node --version; npm --version; java -version; ${METEOR_CMD} --version;
+    - export IDX=10; while printf "."; ! httping -qc1 http://localhost:3000 && ((IDX-- > 0)); do sleep 5 ; done;
+
+  post:
+    - .scripts/startAcceptanceTest.sh
