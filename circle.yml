@@ -32,7 +32,6 @@ dependencies:
     - ./install_all.sh
 
   post:
-    - date > ${CIRCLE_ARTIFACTS}/meteor.log
     - .scripts/startInProdMode.sh :
         background: true
 
