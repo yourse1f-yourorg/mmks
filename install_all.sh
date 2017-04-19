@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 #
+pushd `dirname $0` > /dev/null; SCRIPTPATH=`pwd`; popd > /dev/null;
+PROJECT_ROOT=${SCRIPTPATH%/.scripts};
 
-pwd;
-ls -la;
-pushd ./meteor-mantra-kickstarter >/dev/null;
+pushd ${PROJECT_ROOT}/meteor-mantra-kickstarter >/dev/null;
   ./install_all.sh;
 popd >/dev/null;
