@@ -9,13 +9,13 @@ function exportImplementationPackagesPaths() {
   echo -e "### Identifying available npm packages for user App";
   pushd ${PKGS_DIR} >/dev/null;
 
-    for mdl in ./*/
+    for MODULE_PATH in ./*/
     do
-      if touch ${mdl}package.json 2>/dev/null; then
-        if [[ "X$(cat ${mdl}package.json  | jq -r .name)X" != "XX" ]]; then
-          echo -e "~~~~~~~~~~  Link '${mdl}' into project ~~~~~~~~~~~~~~~~~~~~";
-          pushd ${mdl} >/dev/null;
-            echo "$(basename ${mdl})" >> ${LOCAL_NODEJS_PACKAGES_LIST};
+      if touch ${MODULE_PATH}package.json 2>/dev/null; then
+        if [[ "X$(cat ${MODULE_PATH}package.json  | jq -r .name)X" != "XX" ]]; then
+          echo -e "~~~~~~~~~~  Link '${MODULE_PATH}' into project ~~~~~~~~~~~~~~~~~~~~";
+          pushd ${MODULE_PATH} >/dev/null;
+            echo "$(basename ${MODULE_PATH})" >> ${LOCAL_NODEJS_PACKAGES_LIST};
             ${METEOR_CMD} npm link;
           popd >/dev/null;
         fi;
