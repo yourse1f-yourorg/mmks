@@ -1,6 +1,6 @@
-# mmks_book
+# mmks_books
 
-from [GitHub :: Warehouseman  --> Meteor Mantra Kickstarter / Packages / MMKS Book](https://github.com/warehouseman/meteor-mantra-kickstarter/tree/trunk/.pkgs/mmks_book)
+from [GitHub :: Warehouseman  --> Meteor Mantra Kickstarter / Packages / MMKS Book](https://github.com/warehouseman/meteor-mantra-kickstarter/tree/trunk/.pkgs/mmks_books)
 
 A kickstarter CRUD example module extracted to an NPM package.
 
