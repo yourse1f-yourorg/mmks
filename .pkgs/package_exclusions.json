@@ -1,0 +1,8 @@
+{
+   "packages_excluded_from_core":[
+   ],
+   "packages_excluded_from_wrapper":[
+      "mmks_layout",
+      "mmks_books"
+   ]
+}
