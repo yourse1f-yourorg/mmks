@@ -1,7 +1,7 @@
 {
    "packages_excluded_from_core":[
+      "mmks_book"
    ],
    "packages_excluded_from_wrapper":[
-      "mmks_books"
    ]
 }
