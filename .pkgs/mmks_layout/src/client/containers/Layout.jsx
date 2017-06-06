@@ -5,17 +5,18 @@ import composer from '../composers/Layout';
 import Component from '../components/Layout';
 const Container = composer(Component);
 
-import initContext from '/client/configs/context';
+import Utils from '../../utils';
 
 export default class extends React.Component {
 
   render() {
 
-    this.context = initContext();
+    // console.log(" Props : ", this.props);
+    // console.log("Utils.Context.ApolloClient ", Utils.Context.ApolloClient);
 
     return (
 
-      <ApolloProvider client={this.context.ApolloClient}>
+      <ApolloProvider client={ Utils.Context.ApolloClient }>
         <div>
           <div className="container">
               <Container { ...this.props }/>

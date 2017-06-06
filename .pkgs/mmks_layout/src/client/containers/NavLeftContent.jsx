@@ -2,9 +2,22 @@ import React from 'react';
 
 import composer from '../composers/NavLeftContent';
 import Component from '../components/NavLeftContent';
-const Container = composer(Component);
+
+import Utils from '../../utils';
+
+let Container = function dummy() { return <div></div>; };
 
 export default class extends React.Component {
+
+  constructor(props) {
+    super(props);
+    Container = composer(Component, Utils.AccessControlComposer);
+  }
+
+
+/* ***************************************
+             NavLeftContent Container
+   ***************************************/
 
   render() {
 
@@ -16,7 +29,7 @@ export default class extends React.Component {
     const accPnts = [ apAddPosts, apAddColors, apAddWidgets, apAddBooks ];
 
     return (
-            <Container accesspoints={accPnts}/>
+      <Container accesspoints={accPnts}/>
     );
   }
 }

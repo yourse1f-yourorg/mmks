@@ -1,13 +1,18 @@
 import React from 'react';
 
-import authComposer from '/client/modules/_users/composers/account/auth.jsx';
+import { Utils } from '../index';
 import _UserControls from './UserControls';
 
-const UserControls = authComposer(_UserControls);
+let UserControls = null;
 
 export default class extends React.Component {
 
   render() {
+
+    UserControls = Utils.UserComposer(_UserControls);
+
+    // console.log('mmks_layout NavRight -- UserControls', UserControls);
+
     return (
       <UserControls
         classVersion="navbar-nav"

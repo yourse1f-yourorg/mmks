@@ -11,6 +11,12 @@ class Logger {
   }
 }
 
+const Context = { ApolloClient: null };
+
+function UserComposer(_ref, onData) {
+  let ref = _ref;
+}
+
 function AccessControlComposer(_ref, onData) {
   let ref = _ref;
 }
@@ -19,7 +25,9 @@ function Authorized(props, context, updater) {
   let properties = props;
 }
 
-let Utils = { Logger, AccessControlComposer, Authorized };
+// console.log('mmks/utils -- UserComposer', UserComposer);
+
+let Utils = { Logger, Context, UserComposer, AccessControlComposer, Authorized };
 
 export default Utils;
 /* eslint-enable no-unused-vars, no-console */

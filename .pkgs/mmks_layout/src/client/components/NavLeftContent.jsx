@@ -2,20 +2,23 @@ import React from 'react';
 import DropDown from './DropDown';
 
 import MobileApps from '../containers/MobileApps';
+import { Utils } from '../index';
 
-import _lgr from '/lib/logging/client/clientLogger';
-const Lgr = new _lgr(__filename, 'info', true);
+let Lgr = null;
 
 export default class extends React.Component {
 
   constructor(props) {
     super(props);
+    Lgr = new Utils.Logger(__filename, 'warn', true);
   }
+
+/* ***************************************
+             NavLeftContent Component
+   ***************************************/
 
   render() {
     Lgr.a = 'render ';
-
-//    console.log( ' nav left component : permissions ', this.props.permissions );
 
     const enablePostsAdd = this.props.permissions['posts:add'];
     const enableColorsAdd = this.props.permissions['colors:add'];
