@@ -14,6 +14,7 @@ function copyPackagesToSubmodule() {
   echo -e "### Identifying available npm packages for user app.  ${SCRIPTPATH}";
   echo -e "### Will copy from '${CONTAINER_PKGS_DIR}' to '${SUBMODULE_PKGS_DIR}'";
 
+  local MODULE_TARGET_FULL_PATH='';
   pushd ${CONTAINER_PKGS_DIR} >/dev/null;
 
     declare EXCLUSIONS=$(jq -r .packages_excluded_from_wrapper ${PKG_EXCL_PATH});
@@ -30,12 +31,11 @@ function copyPackagesToSubmodule() {
           EXCLUDE=$(echo ${EXCLUSIONS} | jq ". | contains([\"${MDL}\"])");
           echo -e "~~~~~~~~~~  Exclude '${MDL}' from project? ${EXCLUDE} ~~~~~~~~~~~";
           if [[ "true" != "${EXCLUDE}" ]]; then
-            echo -e " Copying '${MDL}' to project .pkgs/${GITIG_PREFIX}$(basename ${MODULE_PATH})  ~~~~~~~~~~~";
+            MODULE_TARGET_FULL_PATH=${SUBMODULE_PKGS_DIR}/${GITIG_PREFIX}$(basename ${MODULE_PATH});
+            echo -e " Copying '${MODULE_PATH}' to project ${MODULE_TARGET_FULL_PATH}  ~~~~~~~~~~~";
 
-            # echo "${MDL} to list >>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
-            # echo "${MDL}" >> ${LOCAL_NODEJS_ PACKAGES_LIST};                DEPRECATED ????
-
-            cp -r ${MODULE_PATH} ${SUBMODULE_PKGS_DIR}/${GITIG_PREFIX}$(basename ${MODULE_PATH});
+            mkdir -p ${MODULE_TARGET_FULL_PATH};
+            cp -r ${MODULE_PATH}. ${MODULE_TARGET_FULL_PATH};
 
           fi;
         fi;

@@ -15,7 +15,7 @@ export default ( args ) => {
 
     if (data) {
       let record = data.book[0];
-      console.log(' >>  Book data :: ', record);
+      // console.log(' >>  Book data :: ', record);
       onData(null, { record, exception });
     }
     if (errors) {
