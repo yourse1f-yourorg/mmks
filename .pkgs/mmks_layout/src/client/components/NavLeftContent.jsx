@@ -13,7 +13,7 @@ export default class extends React.Component {
     Lgr = new Utils.Logger(__filename, 'warn', true);
   }
 
-/* ***************************************
+  /* ***************************************
              NavLeftContent Component
    ***************************************/
 

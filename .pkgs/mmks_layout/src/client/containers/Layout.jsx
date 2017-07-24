@@ -19,7 +19,7 @@ export default class extends React.Component {
       <ApolloProvider client={ Utils.Context.ApolloClient }>
         <div>
           <div className="container">
-              <Container { ...this.props }/>
+            <Container { ...this.props }/>
           </div>
         </div>
       </ApolloProvider>

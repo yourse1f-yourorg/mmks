@@ -16,7 +16,7 @@ export default class extends React.Component {
     return (
       <UserControls
         classVersion="navbar-nav"
-        />
+      />
     );
   }
 }
