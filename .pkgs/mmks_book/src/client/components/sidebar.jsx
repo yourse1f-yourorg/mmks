@@ -24,9 +24,9 @@ export default class extends React.Component {
       classAddBook = 'enabled';
     }
 
-/* ***************************************
+    /* ***************************************
              Side Bar Component
-   ***************************************/
+    ************************************** */
 
     return (
       <ul className="nav nav-pills nav-stacked">
