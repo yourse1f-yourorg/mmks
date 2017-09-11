@@ -6,6 +6,7 @@ import {
   AutoForm,
   TextField,
   SelectField,
+  RadioField,
   LongTextField,
   ErrorsField,
   SubmitField,
@@ -62,6 +63,7 @@ const BookForm = class extends React.Component {
     console.log('Book schema : ', this.schemaType);
     console.log('Schema validator : ', this.schemaValidator);
     console.log('Schema data : ', this.schemaData);
+
     /* eslint-enable no-console */
     this.bridge = new GraphQLBridge(
       this.schemaType
@@ -70,11 +72,16 @@ const BookForm = class extends React.Component {
     );
   }
 
+
   render() {
 
     console.log('Rendering model : ', this.state.model); // eslint-disable-line no-console
 
     const title = this.props._id ? 'Editing : ' + this.state.model.title : 'Add a book :';
+    const icon = '||||::';
+    const xform = (value) => {
+      return <div><span className="rotate270text">{icon}</span> {this.props.authorOptions[value-1].label}</div>;
+    };
 
     return (
       <div>
@@ -92,6 +99,10 @@ const BookForm = class extends React.Component {
               <TextField data-cuke="title" name="title" label="Title"
                 placeholder="The book's title."/>
             </div>
+            <div data-cuke="XauthorX" className="col-md-6">
+              <RadioField name="author" label="Author"
+                transform={xform} />
+            </div>
             <div data-cuke="author" className="col-md-6">
               <SelectField name="author" label="Author" />
             </div>
@@ -101,7 +112,7 @@ const BookForm = class extends React.Component {
           </div>
           <div data-cuke="content" className="row-fluid">
             <LongTextField name="content" label="Content"
-              placeholder="Brief synopsis" />
+              placeholder="Brief synopsis of book contents" />
           </div>
 
           <ErrorsField data-cuke="errorMessage"/>
