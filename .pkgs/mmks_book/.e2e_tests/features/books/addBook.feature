@@ -2,12 +2,12 @@ Feature: Manage books
   As a visitor
   I want to update or create a new book
 
-  @watch
+  @~watch
   Scenario: Open main page
     Given I have opened the main page : "http://localhost:3000/"
     Then I see the navigation header.
 
-  @watch
+  @~watch
   Scenario: Log in as a staff member
     Given I have opened the login page : "http://localhost:3000/login"
     When I provide my email "staff@example.com" and password "okok"
@@ -20,7 +20,7 @@ Feature: Manage books
     When I create a "122" page book, "Ringworld", by "Niven, Larry" with synopsis "Imagination on a vast scale",
     Then I see a new record with the same title, author, number of pages and contents.
 
-  @watch
+  @~watch
   Scenario: Verify field validation
     Given I have opened the books list page : "http://localhost:3000/books"
     And I have elected to edit the "Graphic Designer" item,
@@ -28,7 +28,7 @@ Feature: Manage books
     And I submit the item,
     Then I see the number of pages validation hint "Pages count cannot be less than 60!".
 
-  @watch
+  @~watch
   Scenario: Update book
     Given I have opened the books list page : "http://localhost:3000/books"
     And I have elected to edit the "Graphic Designer" item,
@@ -36,14 +36,14 @@ Feature: Manage books
     And I submit the item with new content "SciFi is the new ---> Religion!",
     Then I see the record with the new content.
 
-  @watch
+  @~watch
   Scenario: Update book
     Given I have opened the books list page : "http://localhost:3000/books"
     And I have elected to edit the "Graphic Designer" item,
     When I submit the item with new author "Chapman, Eugénie",
     Then I see the record with the new content.
 
-  @watch
+  @~watch
   Scenario: Fail to update book
     Given I have opened the books list page : "http://localhost:3000/books"
     And I have elected to edit the "Graphic Designer" item,
@@ -122,7 +122,7 @@ Feature: Manage books
     And I have elected to "delete" the "Tau Zero" item.
     Then I no longer see that record.
 
-  @watch
+  @~watch
   Scenario: Logout administrator
     Given I am at the user account page, "http://localhost:3000/account"
     When I logout,

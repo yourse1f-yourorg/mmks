@@ -6,7 +6,7 @@ import {
   AutoForm,
   TextField,
   SelectField,
-  RadioField,
+  // RadioField,
   LongTextField,
   ErrorsField,
   SubmitField,
@@ -78,10 +78,6 @@ const BookForm = class extends React.Component {
     console.log('Rendering model : ', this.state.model); // eslint-disable-line no-console
 
     const title = this.props._id ? 'Editing : ' + this.state.model.title : 'Add a book :';
-    const icon = '||||::';
-    const xform = (value) => {
-      return <div><span className="rotate270text">{icon}</span> {this.props.authorOptions[value-1].label}</div>;
-    };
 
     return (
       <div>
@@ -98,10 +94,6 @@ const BookForm = class extends React.Component {
             <div data-cuke="title" className="col-md-4">
               <TextField data-cuke="title" name="title" label="Title"
                 placeholder="The book's title."/>
-            </div>
-            <div data-cuke="XauthorX" className="col-md-6">
-              <RadioField name="author" label="Author"
-                transform={xform} />
             </div>
             <div data-cuke="author" className="col-md-6">
               <SelectField name="author" label="Author" />
