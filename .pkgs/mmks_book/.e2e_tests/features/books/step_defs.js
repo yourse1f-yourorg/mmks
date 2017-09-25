@@ -14,6 +14,7 @@ const cukeAuthor = '//x-cuke[@id="author"]';
 const cukeContent = '//x-cuke[@id="content"]';
 
 const cukeErrorMessage = '//div[@data-cuke="errorMessage"]/*/div';
+const cukeItemsList = '//ul[@data-cuke="items-list"]';
 
 let pages = '';
 let author = '';
@@ -87,6 +88,12 @@ module.exports = function () {
 
   let link = '';
   this.Then(/^I see the book "([^"]*)"\.$/, function ( _item ) {
+
+    console.log("waiting for cukeItemsList : %s ", cukeItemsList);
+    browser.waitUntil(function () { return browser.isExisting(cukeItemsList);
+    }, 3000, ' never saw list! ', 500);
+
+
     link = '//a[@data-cuke="' + _item + '"]';
     browser.waitForExist( link, 30000 );
     expect(browser.getText(link)).toEqual(_item);
@@ -94,9 +101,15 @@ module.exports = function () {
 
   let book = '';
   this.Given(/^I decide to view the "([^"]*)" book,$/, function (_book) {
+
+    // console.log("waiting for cukeItemsList : %s ", cukeItemsList);
+    browser.waitUntil(function () { return browser.isExisting(cukeItemsList);
+    }, 3000, ' never saw list! ', 500);
+
     book = _book;
     const cukeHrefBook = `//a[@data-cuke="${book}"]`;
 
+    // console.log("waiting for book : %s ", cukeHrefBook);
     browser.waitForEnabled( cukeHrefBook, 30000 );
     browser.click( cukeHrefBook );
 
