@@ -18,17 +18,12 @@ machine:
     CHIMP_CMD: ./node_modules/.bin/chimp
 
   node:
-    version: 4.8.0
-
-checkout:
-  post:
-    - git submodule sync --recursive
-    - git submodule update --recursive --init
+    version: 8.5.0
 
 dependencies:
   cache_directories:
     - /home/ubuntu/.meteor # absolute only!
-    - /opt/circleci/nodejs/v4.8.0/lib/node_modules
+    - /opt/circleci/nodejs/v8.5.0/lib/node_modules
 
   pre:
     - .scripts/initialize_server.sh
@@ -37,6 +32,7 @@ dependencies:
     - ./install_all.sh
 
   post:
+    - date > ${CIRCLE_ARTIFACTS}/meteor.log
     - .scripts/startInProdMode.sh :
         background: true
 
