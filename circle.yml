@@ -20,6 +20,11 @@ machine:
   node:
     version: 8.5.0
 
+checkout:
+  post:
+    - git submodule sync --recursive
+    - git submodule update --recursive --init
+
 dependencies:
   cache_directories:
     - /home/ubuntu/.meteor # absolute only!
