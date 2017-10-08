@@ -6,7 +6,6 @@ import {
   AutoForm,
   TextField,
   SelectField,
-  // RadioField,
   LongTextField,
   ErrorsField,
   SubmitField,
